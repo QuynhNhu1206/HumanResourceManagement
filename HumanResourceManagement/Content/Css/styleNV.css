@@ -1,0 +1,482 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #333;
+    display: flex;
+    min-height: 100vh;
+    height: calc(100vh-80px);
+    width: 100%;
+}
+
+.main-content {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    margin-left: 60px;
+    margin-top: 70px;
+    display: flex;
+    flex-grow: 1;
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--6, linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%));
+    transition: transform 0.3s ease;
+}
+
+
+.main-section {
+    min-height: 100vh;
+    flex: 1;
+    padding-right: 30px;
+    transition: margin-right 0.3s ease;
+}
+
+
+/* Phong cách Tiêu đề */
+.Tieude {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Thiết lập cho bảng */
+.tableds {
+    background: #FFFFFF;
+    overflow: hidden;
+    z-index: 1;
+    border-collapse: separate;
+    border-radius: 13.333px;
+    z-index: 1;
+}
+.truong {
+    justify-content: center;
+    align-items: center;
+}
+th, td {
+    vertical-align: middle;
+}
+
+    th:last-child, td:last-child {
+        text-align: center; 
+    }
+
+.three-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    cursor: pointer;
+    color: #007bff;
+}
+
+.dropdown-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ddd;
+    display: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+    .dropdown-menu li {
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+        .dropdown-menu li a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .dropdown-menu li:hover {
+            background-color: #f0f0f0;
+            background-color: #f1f1f1;
+        }
+td:empty .three-dots {
+    display: none;
+}
+.tableds th,
+.tableds td {
+    padding: 20px 20px;
+    border: 1px solid #ddd;
+    text-align: left;
+    line-height: 1.6;
+}
+
+.tableds tr {
+    background-color: #f9f9f9;
+}
+
+    .tableds tr:hover {
+        background-color: #f1f1f1;
+    }
+
+.right-tools {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Nút Thêm */
+.Them {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    background-color: white;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    cursor: pointer;
+    height: 40px;
+    z-index: 1;
+}
+
+    /* Icon trong nút Thêm */
+    .Them img {
+        width: 18px;
+        height: 18px;
+        background: none;
+        border-radius: 0;
+    }
+
+/* Nút Lọc */
+.loc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #FFF;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    cursor: pointer;
+    height: 40px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+    .loc img {
+        width: 20px;
+        height: 20px;
+        background: none;
+    }
+
+/* Icon Navigation */
+.icon-nav {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Them:hover {
+    background-color: #e0e0e0;
+    color: #333;
+    transform: scale(1.05);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Hover hiệu ứng cho nút "Lọc" */
+.loc:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Hover hiệu ứng cho icon trong nút "Lọc" */
+.loc img:hover {
+    filter: brightness(1.2);
+    transition: filter 0.3s;
+}
+
+/* Hover hiệu ứng cho icon trong nút "Thêm" */
+.Them img:hover {
+    filter: brightness(1.2);
+    transition: filter 0.3s;
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 20px;
+    justify-content: flex-end;
+}
+
+.main-section.panel-active {
+    margin-right: 350px;
+}
+
+.main-content.panel-active .main-section {
+    transform: translateX(-350px);
+}
+
+.right-panel {
+    position: absolute;
+    top: 0;
+    right: -350px;
+    width: 350px;
+    height: 600px;
+    background-color: white;
+    transition: right 0.3s ease;
+    transform: scale(0.8);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    border-radius: 20px;
+    margin-top: 36px;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+    .right-panel.show {
+        right: 0;
+        animation: bounceIn 0.5s ease-out;
+        transform: scale(1);
+    }
+
+.panel-header {
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .panel-header h3 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .panel-header .btn-close {
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+    }
+
+        .panel-header .btn-close i {
+            color: #333;
+            font-size: 20px; /* Giữ kích thước icon */
+        }
+
+/* Nội dung form */
+.panel-content {
+    padding: 16px;
+}
+
+.input-with-icon {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.select-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.datetime-icon {
+    position: absolute;
+    right: 10px;
+    margin-right: 10px;
+    top: 40%;
+    transform: translateY(-50%);
+    /* Để tránh icon bị click */
+    font-size: 16px;
+    color: #333;
+}
+
+.form-select {
+    width: 100%;
+    padding-right: 40px;
+    /* Chừa không gian cho icon */
+    height: 50px;
+    background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    -webkit-appearance: none;
+    /* Loại bỏ kiểu mặc định */
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.select-icon {
+    position: absolute;
+    right: 10px;
+    margin-right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    /* Để tránh icon bị click */
+    font-size: 16px;
+    color: #333;
+}
+
+/* Gán chiều cao consistent giữa các field */
+.form-control,
+.form-select {
+    height: 50px;
+    /* Tùy chỉnh chiều cao đồng nhất */
+}
+
+.panel-content .form-control,
+.panel-content .form-select {
+    margin-bottom: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
+    position: relative;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px; /* Khoảng cách giữa icon và text */
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 116.667px;
+    height: 36px;
+    margin-bottom: 20px;
+}
+/* Button Save */
+.btn-save {
+    background: linear-gradient(90deg, #6AE628 0%, #1EB500 100%);
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 10px 16px;
+    cursor: pointer;
+    height: 40px;
+    z-index: 1;
+    margin-left: 30px;
+}
+
+    .btn-save:hover {
+        background: linear-gradient(90deg, #5CA020 0%, #186E00 100%);
+    }
+
+
+.btn-delete {
+    background: linear-gradient(90deg, #FF3F3F 0%, #DE0000 100%);
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 10px 16px;
+    cursor: pointer;
+    height: 40px;
+    z-index: 1;
+    margin-right: 30px;
+}
+
+    .btn-delete:hover {
+        background: linear-gradient(90deg, #C82333 0%, #A30000 100%);
+    }
+
+.icon-btn {
+    padding-left: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.btn-save i,
+.btn-delete i {
+    font-size: 16px;
+}
+.icon-dot {
+    width: 20px;
+    height: 20px;
+}
+.ui-datepicker {
+    background: #fff; 
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: #333; 
+}
+ui-datepicker td a {
+    color: #007bff; 
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    border-radius: 4px;
+}
+
+.ui-datepicker td a:hover {
+    background-color: #007bff; 
+    color: #fff; 
+}
+
+
+.ui-datepicker .ui-state-active {
+    background-color: #007bff; 
+    color: #fff; 
+}
+
+
+.ui-datepicker-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+
+
+.ui-datepicker-prev, .ui-datepicker-next {
+    background-color: #007bff; 
+    border-radius: 50%;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 16px;
+    border: none;
+}
+
+    .ui-datepicker-prev:hover, .ui-datepicker-next:hover {
+        background-color: #0056b3; 
+    }
+/*Editpanel*/
+
+

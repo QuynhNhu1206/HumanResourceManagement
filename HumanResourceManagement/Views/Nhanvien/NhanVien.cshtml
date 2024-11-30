@@ -1,0 +1,274 @@
+﻿
+@{
+    ViewBag.Title = "NhanVien";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/Css/styleNV.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Thêm jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Thêm jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <title>HOÀNG DIỆU SCHOOL</title>
+</head>
+<section class="main-section">
+    <div class="Tieude">
+        <h2>Danh sách nhân viên</h2>
+        <div class="right-tools">
+            <button class="loc">
+                <img src="~/Content/img/Vectorloc.png" alt="loc" class="icon-nav">
+            </button>
+
+            <button class="Them" id="openPanel">
+                Thêm
+                <img src="~/Content/img/Vectorthem.png" alt="icon-them">
+            </button>
+
+        </div>
+    </div>
+    <div class="tableds">
+        <table class="table table-hover">
+            <thead class="truong">
+                <tr>
+                    <th scope="col">Họ và tên</th>
+                    <th scope="col">Trực thuộc bộ phận</th>
+                    <th scope="col">Vị trí</th>
+                    <th scope="col">Tình trạng</th>
+                    <th scope="col">Tùy chọn</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+</section>
+<aside class="right-panel" id="rightPanel">
+    <div class="panel-header d-flex justify-content-between align-items-center">
+        <h3>Thêm thông tin</h3>
+        <button id="closePanel" type="button" class="btn-close" aria-label="Close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <form class="panel-content">
+        <div class="row g-3 flex-column">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Họ và tên" aria-label="Họ và tên">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="CCCD" aria-label="CCCD">
+            </div>
+            <div class="col select-container">
+                <select class="form-select">
+                    <option selected>Phòng ban</option>
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+            <div class="col select-container">
+                <select class="form-select">
+                    <option selected>Giới tính</option>
+                    <option value="1">Nam</option>
+                    <option value="2">Nữ</option>
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+            <div class="col input-with-icon">
+                <input type="text" id="datepicker1"  class="form-control datepicker-input" placeholder="Ngày sinh"
+                       aria-label="Ngày sinh">
+                <span class="datetime-icon"><i class="fas fa-calendar-alt"></i></span>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Nơi sinh" aria-label="Nơi sinh">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Số điện thoại" aria-label="Số điện thoại">
+            </div>
+            <div class="col select-container">
+                <select class="form-select">
+                    <option selected>Dân tộc</option>
+                    <option value="1">Kinh</option>
+                    <option value="2">Tày</option>
+                    <option value="3">Ê đê</option>
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+            <div class="col input-with-icon">
+                <input type="text" id="datepicker2"  class="form-control datepicker-input" placeholder="Ngày bắt đầu làm"
+                       aria-label="Ngày bắt đầu làm">
+                <span class="datetime-icon"><i class="fas fa-calendar-alt"></i></span>
+            </div>
+            <div class="col select-container">
+
+                <select class="form-select">
+                    <option selected>Trình độ học vấn</option>
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+            <div class="col">
+                <select class="form-select">
+                    <option selected>Chức vụ</option>
+
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Email" aria-label="Email">
+            </div>
+        </div>
+    </form>
+
+    <div class="panel-footer d-flex justify-content-between">
+        <button class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+        <button class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+    </div>
+</aside>
+
+<script>
+
+    const data = [
+        { name: "Trần Lan Nhi", department: "Khoa ngoại ngữ", position: "Trưởng khoa", status: "Đang làm" },
+        { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" }
+
+    ];
+
+    // Hàm để tạo bảng dữ liệu động
+    function renderTable(data) {
+        const tableBody = document.getElementById('table-body');
+        tableBody.innerHTML = '';
+
+
+        if (data.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="5">Không có dữ liệu</td></tr>';
+        } else {
+
+            for (let i = 0; i < data.length; i++) {
+                const row = document.createElement('tr');
+
+                const cell1 = document.createElement('td');
+                cell1.textContent = data[i].name;
+                row.appendChild(cell1);
+
+                const cell2 = document.createElement('td');
+                cell2.textContent = data[i].department;
+                row.appendChild(cell2);
+
+                const cell3 = document.createElement('td');
+                cell3.textContent = data[i].position;
+                row.appendChild(cell3);
+
+                const cell4 = document.createElement('td');
+                cell4.textContent = data[i].status;
+                row.appendChild(cell4);
+
+                const cell5 = document.createElement('td');
+                cell5.innerHTML = `
+                    <span class="three-dots" onclick="toggleDropdown(event)">
+                        <img src="/Content/img/ri_more-2-fill.png" alt="3-dot" class="icon-dot">
+                    </span>
+                    <ul class="dropdown-menu" style="display: none;">
+                        <li><a href="#" class="edit-option" onclick="openEditPanel(event)">Sửa</a></li>
+                        <li><a href="#" class="delete-option">Xóa</a></li>
+                    </ul>`;
+
+                row.appendChild(cell5);
+
+                tableBody.appendChild(row);
+            }
+        }
+    }
+
+    function toggleDropdown(event) {
+        const dropdownToggle = event.target.closest('.three-dots');
+
+        const dropdownMenu = dropdownToggle ? dropdownToggle.nextElementSibling : null;
+
+       
+        if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+            
+            const allDropdowns = document.querySelectorAll('.dropdown-menu');
+            allDropdowns.forEach(menu => {
+                if (menu !== dropdownMenu) {
+                    menu.style.display = 'none'; 
+                }
+            });
+
+       
+            dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+        }
+    }
+
+    $(document).on('click', '.edit-option, .delete-option', function () {
+        
+        $('.dropdown-menu').hide();
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        renderTable(data); 
+    });
+
+    $(document).ready(function () {
+        $(".datetime-icon").on("click", function () {
+            var inputField = $(this).prev('input');
+
+          
+            inputField.datepicker('show');
+        });
+
+        // Khởi tạo datepicker cho các ô nhập liệu
+        $('#datepicker1').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        });
+
+        $('#datepicker2').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        });
+    });
+    $(document).ready(function () {
+        
+        var today = new Date();
+
+      
+        var day = today.getDate();
+        var month = today.getMonth() + 1; 
+        var year = today.getFullYear();
+
+        
+        day = day < 10 ? '0' + day : day;
+        month = month < 10 ? '0' + month : month;
+
+        
+        var formattedDate = day + '/' + month + '/' + year;
+
+        
+        $('#datepicker1').val(formattedDate);  
+        $('#datepicker2').val(formattedDate); 
+    });
+
+</script>
+
+
+
+
+
