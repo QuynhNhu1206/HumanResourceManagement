@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "UpdateInfo";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/Css/styleinfo.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+   
+    <title>HOÀNG DIỆU SCHOOL</title>
+</head>
+<div class="main-container">
+    
+    <section class="form-section">
+        <div class="header-illustration">
+            <h2>Cập nhật thông tin cá nhân</h2>
+        </div>
+        <form>
+            <div class="form-group">
+                <div class="form-left">
+                    <label for="manv">Mã nhân viên</label>
+                    <input type="text" id="manv">
+                    <label for="hoten">Họ và tên</label>
+                    <input type="text" id="hoten">
+                    <label for="cccd">CCCD</label>
+                    <input type="text" id="cccd">
+                    <label for="phongban">Phòng ban</label>
+                    <select id="phongban">
+                        <option>Khoa tự nhiên</option>
+                        <option>Khoa Ngoại ngữ</option>
+                    </select>
+                    <label for="gioitinh">Giới tính</label>
+                    <select id="gioitinh">
+                        <option>Nam</option>
+                        <option>Nữ</option>
+                    </select>
+                    <label for="noisinh">Nơi sinh</label>
+                    <input type="text" id="birthPlace">
+                    <label for="dantoc">Dân tộc</label>
+                    <input type="text" id="dantoc">
+                    <label for="trinhdo">Trình độ học vấn</label>
+                    <input type="text" id="trinhdo">
+                    <label for="email">Email</label>
+                    <input type="email" id="email">
+                </div>
+
+                <div class="form-right">
+                    <label for="photo">Ảnh hồ sơ (2x3)</label>
+                    <div class="image-frame">
+                        <img id="uploadedImage" src="path-to-default-image.jpg" alt="Xem trước ảnh">
+                    </div>
+                    <input type="file" id="uploadImage" accept="image/*">
+                    <label for="ngaysinh">Ngày sinh</label>
+                    <input type="date" id="ngaysinh">
+                    <label for="sodienthoai">Số điện thoại</label>
+                    <input type="text" id="sodienthoai">
+                    <label for="ngaybatdaulam">Ngày bắt đầu làm</label>
+                    <input type="date" id="ngaybatdaulam">
+                    <label for="chucvu">Chức vụ</label>
+                    <input type="text" id="chucvu">
+                </div>
+            </div>
+            <div class="form-buttons">
+                <button type="submit" id="save" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+                <button id="xoa" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+                <button id="huy" name="huy" class="btn btn-huy">Hủy<i class="fa-solid fa-circle-xmark icon-btn"></i> </button>
+            </div>
+        </form>
+    </section>
+
+   
+    <aside class="illustration-section">
+        <div class="image-wrapper">
+            <img src="~/Content/img/Group 9.png" alt="Illustration" class="background-image">
+        </div>
+    </aside>
+</div>
+   <script>
+       const uploadImageInput = document.getElementById('uploadImage');
+       const uploadedImage = document.getElementById('uploadedImage');
+
+       uploadImageInput.addEventListener('change', function (event) {
+           const file = event.target.files[0];
+
+           if (file) {
+               const reader = new FileReader();
+
+               reader.onload = function (e) {
+                   uploadedImage.src = e.target.result;
+               };
+
+               reader.readAsDataURL(file);
+           } else {
+               uploadedImage.src = ''; // Xóa ảnh nếu không có file nào được chọn
+           }
+       });
+   </script>

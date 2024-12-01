@@ -1,0 +1,207 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #333;
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 30px;
+    background-color: #f8faff;
+    min-height: 100vh;
+    width: 100%;
+    flex-wrap: nowrap;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    height: calc(100vh - 40px);
+}
+
+/* Phần form bên trái */
+.form-section {
+    flex: 0 0 70%;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    display: block;
+    flex-direction: column;
+    height:94%;
+}
+
+    .form-section h2 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+.form-group {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.form-left, .form-right {
+    width: 48%;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-top: 15px;
+    color: #555;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+    font-size: 14px;
+    background-color: #f9f9fc;
+}
+
+    input:focus,
+    select:focus {
+        border-color: #4d90fe;
+        outline: none;
+    }
+
+.image-frame {
+    width: 150px;
+    height: 200px;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: #f9f9fc;
+}
+
+#uploadedImage {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+/* Nút hành động */
+.form-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-save {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .btn-save:hover {
+        background-color: #218838;
+    }
+
+.btn-delete {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .btn-delete:hover {
+        background-color: #c82333;
+    }
+
+.btn-huy {
+    background-color: #ff6a00;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .btn-huy:hover {
+        background-color: #ff6a00;
+    }
+/* Phần minh họa bên phải */
+.illustration-section {
+    flex: 0 0 28%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.image-wrapper img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.header-illustration {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+    .header-illustration h2 {
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
+        background: linear-gradient(90deg, #1d87f1, #4db6f8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e3f2fd;
+    }
+
+.form-section::-webkit-scrollbar {
+    width: 8px;
+}
+
+.form-section::-webkit-scrollbar-thumb {
+    background: #9dc8f0;
+    border-radius: 4px;
+}
+
+    .form-section::-webkit-scrollbar-thumb:hover {
+        background: #6fa8dc;
+    }

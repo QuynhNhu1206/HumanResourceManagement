@@ -3,7 +3,9 @@
     ViewBag.Title = "NhanVien";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <head>
+   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/Content/Css/styleNV.css">
@@ -14,7 +16,6 @@
     <!-- Thêm jQuery UI -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
     <title>HOÀNG DIỆU SCHOOL</title>
 </head>
 <section class="main-section">
@@ -71,22 +72,22 @@
     <form class="panel-content">
         <div class="row g-3 flex-column">
             <div class="col">
-                <input type="text" class="form-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+                <input type="text" id ="manv" name ="manv" class="form-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
             </div>
             <div class="col">
-                <input type="text" class="form-control" placeholder="Họ và tên" aria-label="Họ và tên">
+                <input type="text" id ="ten" name="ten" class="form-control" placeholder="Họ và tên" aria-label="Họ và tên">
             </div>
             <div class="col">
-                <input type="text" class="form-control" placeholder="CCCD" aria-label="CCCD">
+                <input type="text" id ="cccd" name="cccd" class="form-control" placeholder="CCCD" aria-label="CCCD">
             </div>
             <div class="col select-container">
-                <select class="form-select">
+                <select id="phongban" name="phongban" class="form-select">
                     <option selected>Phòng ban</option>
                 </select>
                 <i class="fas fa-chevron-down select-icon"></i>
             </div>
             <div class="col select-container">
-                <select class="form-select">
+                <select id="gioitinh" name="gioitinh"class="form-select">
                     <option selected>Giới tính</option>
                     <option value="1">Nam</option>
                     <option value="2">Nữ</option>
@@ -94,18 +95,18 @@
                 <i class="fas fa-chevron-down select-icon"></i>
             </div>
             <div class="col input-with-icon">
-                <input type="text" id="datepicker1"  class="form-control datepicker-input" placeholder="Ngày sinh"
+                <input type="text" id="ngaysinh" class="form-control datepicker-input" placeholder="Ngày sinh"
                        aria-label="Ngày sinh">
                 <span class="datetime-icon"><i class="fas fa-calendar-alt"></i></span>
             </div>
             <div class="col">
-                <input type="text" class="form-control" placeholder="Nơi sinh" aria-label="Nơi sinh">
+                <input type="text" id="noisinh" name="noisinh" class="form-control" placeholder="Nơi sinh" aria-label="Nơi sinh">
             </div>
             <div class="col">
-                <input type="text" class="form-control" placeholder="Số điện thoại" aria-label="Số điện thoại">
+                <input type="text" id="sodienthoai" name="sodienthoai" class="form-control" placeholder="Số điện thoại" aria-label="Số điện thoại">
             </div>
             <div class="col select-container">
-                <select class="form-select">
+                <select id="dantoc" name="dantoc"class="form-select">
                     <option selected>Dân tộc</option>
                     <option value="1">Kinh</option>
                     <option value="2">Tày</option>
@@ -114,36 +115,117 @@
                 <i class="fas fa-chevron-down select-icon"></i>
             </div>
             <div class="col input-with-icon">
-                <input type="text" id="datepicker2"  class="form-control datepicker-input" placeholder="Ngày bắt đầu làm"
+                <input type="text" id="ngayvaolam" name="ngayvaolam"class="form-control datepicker-input" placeholder="Ngày bắt đầu làm"
                        aria-label="Ngày bắt đầu làm">
-                <span class="datetime-icon"><i class="fas fa-calendar-alt"></i></span>
+                <span  class="datetime-icon"><i class="fas fa-calendar-alt"></i></span>
             </div>
             <div class="col select-container">
 
-                <select class="form-select">
+                <select id="trinhdo" name="trinhdo" class="form-select">
                     <option selected>Trình độ học vấn</option>
                 </select>
                 <i class="fas fa-chevron-down select-icon"></i>
             </div>
             <div class="col">
-                <select class="form-select">
+                <select id="chucvu" name ="chucvu" class="form-select">
                     <option selected>Chức vụ</option>
 
                 </select>
                 <i class="fas fa-chevron-down select-icon"></i>
             </div>
             <div class="col">
-                <input type="text" class="form-control" placeholder="Email" aria-label="Email">
+                <input id="email" name ="email" type="text" class="form-control" placeholder="Email" aria-label="Email">
             </div>
         </div>
     </form>
 
     <div class="panel-footer d-flex justify-content-between">
-        <button class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
-        <button class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+        <button id="save" name ="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+        <button id="xoa" name ="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
     </div>
 </aside>
+<aside class="form-panel" id="formPanel">
+    <div class="panel-header d-flex justify-content-between align-items-center">
+        <h3>Chỉnh sửa thông tin</h3>
+        <button id="closePanel1" type="button" class="btn-close" aria-label="Close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <form class="panel-content">
+        <div class="row g-3 flex-column">
+            <div class="col">
+                <input type="text" id="manv" name="manv" class="form-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+            </div>
+            <div class="col">
+                <input type="text" id="ten" name="ten" class="form-control" placeholder="Họ và tên" aria-label="Họ và tên">
+            </div>
+            <div class="col">
+                <input type="text" id="cccd" name="cccd" class="form-control" placeholder="CCCD" aria-label="CCCD">
+            </div>
+            <div class="col select-container">
+                <select id="phongban" name="phongban" class="form-select">
+                    <option selected>Phòng ban</option>
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+            <div class="col select-container">
+                <select id="gioitinh" name="gioitinh" class="form-select">
+                    <option selected>Giới tính</option>
+                    <option value="1">Nam</option>
+                    <option value="2">Nữ</option>
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+            <div class="col input-with-icon">
+                <input type="text" id="ngaysinh" class="form-control datepicker-input" placeholder="Ngày sinh"
+                       aria-label="Ngày sinh">
+                <span class="datetime-icon"><i class="fas fa-calendar-alt"></i></span>
+            </div>
+            <div class="col">
+                <input type="text" id="noisinh" name="noisinh" class="form-control" placeholder="Nơi sinh" aria-label="Nơi sinh">
+            </div>
+            <div class="col">
+                <input type="text" id="sodienthoai" name="sodienthoai" class="form-control" placeholder="Số điện thoại" aria-label="Số điện thoại">
+            </div>
+            <div class="col select-container">
+                <select id="dantoc" name="dantoc" class="form-select">
+                    <option selected>Dân tộc</option>
+                    <option value="1">Kinh</option>
+                    <option value="2">Tày</option>
+                    <option value="3">Ê đê</option>
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+            <div class="col input-with-icon">
+                <input type="text" id="ngayvaolam" name="ngayvaolam" class="form-control datepicker-input" placeholder="Ngày bắt đầu làm"
+                       aria-label="Ngày bắt đầu làm">
+                <span class="datetime-icon"><i class="fas fa-calendar-alt"></i></span>
+            </div>
+            <div class="col select-container">
 
+                <select id="trinhdo" name="trinhdo" class="form-select">
+                    <option selected>Trình độ học vấn</option>
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+            <div class="col">
+                <select id="chucvu" name="chucvu" class="form-select">
+                    <option selected>Chức vụ</option>
+
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+            <div class="col">
+                <input id="email" name="email" type="text" class="form-control" placeholder="Email" aria-label="Email">
+            </div>
+        </div>
+    </form>
+
+    <div class="panel-footer d-flex justify-content-between">
+        <button id="save" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+        <button id="delete" name="delete" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+    </div>
+</aside>
 <script>
 
     const data = [
@@ -187,8 +269,17 @@
                         <img src="/Content/img/ri_more-2-fill.png" alt="3-dot" class="icon-dot">
                     </span>
                     <ul class="dropdown-menu" style="display: none;">
-                        <li><a href="#" class="edit-option" onclick="openEditPanel(event)">Sửa</a></li>
-                        <li><a href="#" class="delete-option">Xóa</a></li>
+                        <li>
+                            <a href="#" class="edit-option" onclick="openEditPanel(event)">
+                                <span>Sửa</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="delete-option">
+                                <span>Xóa</span>
+                            </a>
+                        </li>
+                        
                     </ul>`;
 
                 row.appendChild(cell5);
@@ -200,75 +291,131 @@
 
     function toggleDropdown(event) {
         const dropdownToggle = event.target.closest('.three-dots');
-
         const dropdownMenu = dropdownToggle ? dropdownToggle.nextElementSibling : null;
 
-       
         if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
-            
             const allDropdowns = document.querySelectorAll('.dropdown-menu');
             allDropdowns.forEach(menu => {
                 if (menu !== dropdownMenu) {
-                    menu.style.display = 'none'; 
+                    menu.style.display = 'none'; // Close other dropdowns
                 }
             });
 
-       
+            // Toggle the clicked dropdown
             dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
         }
     }
 
-    $(document).on('click', '.edit-option, .delete-option', function () {
-        
-        $('.dropdown-menu').hide();
-    });
-    document.addEventListener('DOMContentLoaded', function () {
-        renderTable(data); 
+    // Hide dropdown when clicking outside
+    document.addEventListener('click', function (event) {
+        const dropdownMenus = document.querySelectorAll('.dropdown-menu');
+        dropdownMenus.forEach(menu => {
+            if (!menu.contains(event.target) && !event.target.closest('.three-dots')) {
+                menu.style.display = 'none';
+            }
+        });
     });
 
+    // Hide dropdown when selecting an option
+    $(document).on('click', '.edit-option, .delete-option', function () {
+        $('.dropdown-menu').hide();
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        renderTable(data);
+    });
+
+    //datetimepicker
     $(document).ready(function () {
         $(".datetime-icon").on("click", function () {
             var inputField = $(this).prev('input');
 
-          
+
             inputField.datepicker('show');
         });
 
         // Khởi tạo datepicker cho các ô nhập liệu
-        $('#datepicker1').datepicker({
+        $('#ngaysinh').datepicker({
             format: 'dd/mm/yyyy',
             autoclose: true
         });
 
-        $('#datepicker2').datepicker({
+        $('#ngayvaolam').datepicker({
             format: 'dd/mm/yyyy',
             autoclose: true
         });
     });
     $(document).ready(function () {
-        
+
         var today = new Date();
 
-      
+
         var day = today.getDate();
-        var month = today.getMonth() + 1; 
+        var month = today.getMonth() + 1;
         var year = today.getFullYear();
 
-        
+
         day = day < 10 ? '0' + day : day;
         month = month < 10 ? '0' + month : month;
 
-        
+
         var formattedDate = day + '/' + month + '/' + year;
 
+
+        $('#ngaysinh').val(formattedDate);
+        $('#ngayvaolam').val(formattedDate);
+    });
+
+
+    //form-panel
+    
+    document.addEventListener('DOMContentLoaded', function () {
+       
+        const formPanel = document.getElementById('formPanel');
+        const mainContent = document.querySelector('.main-section');
+        const closePanelButton = document.getElementById("closePanel1");
+
+       
+
+        function openEditPanel() {
+            formPanel.classList.add('show');
+            mainContent.classList.add("panel-active");
+            updatePanelHeight();
+            const rightPanel = document.getElementById('rightPanel');
+            if (rightPanel) {
+                rightPanel.classList.remove('show'); 
+            }
+        }
+
+       
+        function updatePanelHeight() {
+            const mainSectionHeight = mainContent.offsetHeight;
+            formPanel.style.height = `${mainSectionHeight}px`;
+        }
+
+        const editButton = document.querySelector('.edit-option');
+        if (editButton) {
+            editButton.addEventListener('click', openEditPanel);
+        } else {
+            console.error('Nút sửa không tìm thấy!');
+        }
+
+      
+        closePanelButton.addEventListener("click", function () {
+            console.log("Đang đóng form...");
+            formPanel.classList.remove("show");
+            mainContent.classList.remove("panel-active");
+        });
+
+      
+        document.querySelector('.btn-save').addEventListener('click', () => {
+            alert('Lưu thành công!');
+        });
+
         
-        $('#datepicker1').val(formattedDate);  
-        $('#datepicker2').val(formattedDate); 
+        document.querySelector('.btn-delete').addEventListener('click', () => {
+            alert('Đã xóa!');
+        });
     });
 
 </script>
-
-
-
-
-
