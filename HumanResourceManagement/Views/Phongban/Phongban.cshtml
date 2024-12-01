@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Phongban";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/Css/stylePB.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Thêm jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Thêm jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <title>HOÀNG DIỆU SCHOOL</title>
+</head>
+<section class="main-section">
+    <div class="Tieude">
+        <h2>Danh sách phòng ban</h2>
+        <div class="right-tools">
+            <button class="loc">
+                <img src="~/Content/img/Vectorloc.png" alt="loc" class="icon-nav">
+            </button>
+
+            <button class="Them" id="openPanel">
+                Thêm
+                <img src="~/Content/img/Vectorthem.png" alt="icon-them">
+            </button>
+
+        </div>
+    </div>
+    <div class="tableds">
+        <table class="table table-hover">
+            <thead class="truong">
+                <tr>
+                    <th scope="col">Mã phòng ban</th>
+                    <th scope="col">Tên phòng ban</th>
+                    <th scope="col">Tùy chọn</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+</section>
+<aside class="right-panel" id="rightPanel">
+    <div class="panel-header d-flex justify-content-between align-items-center">
+        <h3>Thêm thông tin</h3>
+        <button id="closePanel" type="button" class="btn-close" aria-label="Close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <form class="panel-content">
+        <div class="row g-3 flex-column">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban">
+            </div>
+        </div>
+    </form>
+
+    <div class="panel-footer d-flex justify-content-between">
+        <button class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+        <button class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+    </div>
+</aside>
+

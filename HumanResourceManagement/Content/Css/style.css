@@ -379,7 +379,7 @@
 /*CSS Đăng nhập*/
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -390,140 +390,147 @@ body {
 }
 
 /* Container layout */
-.container {
+
+.custom-container {
     display: flex;
-    flex-wrap: wrap;
-    width: 90%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
     max-width: 1200px;
-    background: #fff;
-    border-radius: 10px;
+    background: #f8faff;
+    border-radius: 20px;
     overflow: hidden;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 40px auto;
 }
 
-/* Form section styles */
-.form-section {
+/* Phần form đăng nhập */
+.custom-dangnhap {
     flex: 1;
-    padding: 30px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-    .form-section h1 {
+    /* Tiêu đề chính của form */
+    .custom-dangnhap h1 {
         color: #000;
         text-align: center;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-family: 'Cambria', 'Georgia', serif;
         font-size: 48px;
-        font-style: normal;
         font-weight: 600;
-        line-height: normal;
+        margin-bottom: 15px;
     }
 
-    .form-section .highlight {
+    /* Highlight màu xanh của tiêu đề */
+    .custom-dangnhap .highlight {
         color: #0066ff;
-        text-align: center;
-        font-family: Roboto;
-        font-size: 66.667px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-        align-self: stretch;
+        font-family: Cambria, sans-serif;
+        font-size: 48px;
     }
 
-    .form-section p {
+    /* Đoạn mô tả dưới tiêu đề */
+    .custom-dangnhap p {
         color: #000;
         text-align: center;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        font-size: 13.333px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 21.333px;
-        /* 160% */
+        font-family: 'Cambria', 'Georgia', serif;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 30px;
     }
 
-        .form-section p .highlight1 {
+        /* Highlight màu xanh đậm trong đoạn mô tả */
+        .custom-dangnhap p .highlight1 {
             color: #3241BD;
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-            font-size: 13.333px;
-            font-style: normal;
             font-weight: 600;
-            line-height: 21.333px;
         }
 
 
-    .form-section form {
+    .custom-dangnhap form {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 15px;
+        gap: 10px;
+        width: 100%;
+        justify-content:space-between;
     }
 
-    /* Input chung */
-    .form-section .tdn {
+
+    .custom-dangnhap input {
+        position:relative;
         border-radius: 29.333px;
         background: #E8EEFF;
         width: 50%;
-        /* Chiều rộng thống nhất */
         padding: 10px 15px;
-        /* Khoảng cách trong */
         font-size: 16px;
-        border: 1px solid #ccc;
+        border: none;
         box-sizing: border-box;
-        /* Đảm bảo padding không làm thay đổi kích thước */
+        max-width: 300px;
     }
-
-/* Wrapper cho mật khẩu */
-.password-wrapper {
-    position: relative;
-    width: 50%;
-    box-sizing: border-box;
+        .custom-dangnhap input:focus {
+            border-radius: 29.333px;
+            border: 2px solid #9dc8f0;
+            outline: none;
+        }
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
 }
 
-    /* Input mật khẩu */
-    .password-wrapper input {
-        border-radius: 29.333px;
-        background: #E8EEFF;
-        width: 100%;
-        /* Chiều rộng thống nhất */
-        padding: 10px 15px;
-        /* Khoảng cách trong */
-        font-size: 16px;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-    }
+.custom-tdn, .custom-pass {
+    width: 100%; 
+}
+.custom-tdn {
+    margin-left: 150px;
+    margin-bottom: 10px;
+}
 
-/* Icon */
+.custom-pass {
+    margin-left: 150px;
+}
+
+/* Icon hiển thị mật khẩu */
 .hide-icon {
     position: absolute;
     top: 50%;
-    /* Căn giữa theo chiều dọc */
-    right: 10px;
-    /* Căn sát phải */
+    right: 15px;
     transform: translateY(-50%);
     width: 20px;
     height: 20px;
     cursor: pointer;
+    z-index: 2;
 }
 
+
 /* Liên kết "Quên mật khẩu?" */
-.form-section a {
+.custom-dangnhap a {
     font-size: 14px;
     color: #0066ff;
     text-decoration: none;
     align-self: flex-end;
-    margin-right: 25%;
+    margin-right: 10%;
 }
 
 /* Nút đăng nhập */
-.form-section button {
+.custom-dangnhap button {
     padding: 10px 15px;
+    width: 25%;
     font-size: 16px;
-    color: #fff;
+    color: white;
     background: linear-gradient(90deg, #0066ff, #33ccff);
     border: none;
-    border-radius: 5px;
+    border-radius: 29.333px;
     cursor: pointer;
     align-self: center;
+    cursor: pointer;
 }
 
-    .form-section button:hover {
+    .custom-dangnhap button:hover {
         background: linear-gradient(90deg, #0056d6, #2eb9e6);
     }
 
@@ -557,13 +564,9 @@ body {
 .foreground-image {
     position: absolute;
     top: 50%;
-    /* Center vertically */
     left: 50%;
-    /* Center horizontally */
     transform: translate(-50%, -50%);
-    /* Adjust alignment */
     width: 50%;
-    /* Adjust size of the foreground image */
     height: auto;
     width: 477.333px;
     height: 477.333px;
