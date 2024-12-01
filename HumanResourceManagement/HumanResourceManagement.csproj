@@ -133,11 +133,13 @@
     <Content Include="Content\Css\globals.css" />
     <Content Include="Content\Css\style.css" />
     <Content Include="Content\Css\styleAdmin.css" />
+    <Content Include="Content\Css\styleinfo.css" />
     <Content Include="Content\Css\styleNV.css" />
     <Content Include="Content\Css\stylePB.css" />
     <Content Include="Content\img\3-dot.jpg" />
     <Content Include="Content\img\a.png" />
     <Content Include="Content\img\cute.jpg" />
+    <Content Include="Content\img\Group 9.png" />
     <Content Include="Content\img\Hide.png" />
     <Content Include="Content\img\mask-group.png" />
     <Content Include="Content\img\mdi_bell-outline.png" />
@@ -148,6 +150,9 @@
     <Content Include="Content\img\Vectormail.png" />
     <Content Include="Content\img\Vectorthem.png" />
     <Content Include="Content\img\Vectortick.png" />
+    <Content Include="Content\js\admin.js" />
+    <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\option.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -187,6 +192,7 @@
     <Content Include="Views\Nhanvien\NhanVien.cshtml" />
     <Content Include="Views\MyHome\MyHome.cshtml" />
     <Content Include="Views\Phongban\Phongban.cshtml" />
+    <Content Include="Views\MyHome\UpdateInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

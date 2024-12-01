@@ -21,8 +21,13 @@ namespace HumanResourceManagement
 
             routes.MapRoute(
                 name: "login",
-                url: "login",  // URL /login sẽ khớp với route này
-                defaults: new { controller = "MyHome", action = "Login" }  // Điều hướng đến Login action trong MyHome controller
+                url: "login",  
+                defaults: new { controller = "MyHome", action = "Login" }  
+            );
+            routes.MapRoute(
+                name: "updateinfo",
+                url: "updateinfo",
+                defaults: new { controller = "MyHome", action = "UpdateInfo" }
             );
 
             routes.MapRoute(

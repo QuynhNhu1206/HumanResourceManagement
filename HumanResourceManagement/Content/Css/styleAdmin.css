@@ -1,4 +1,5 @@
-﻿* {
+﻿@import url('stylenv.css');
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -107,6 +108,7 @@ body {
     transition: all 0.3s ease;
     padding: 5px;
     border-radius: 8px;
+    position:relative;
 }
 
 
@@ -163,6 +165,84 @@ body {
     display: flex;
     width: 100%;
 }
+/*OpTion*/
+.dropdown-panel {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: var(--6, linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%));
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 200px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+}
+/* Định dạng cho dropdown panel */
+.dropdown-panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+    .dropdown-panel ul li {
+        padding: 0;
+    }
+
+        .dropdown-panel ul li a {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            font-size: 16px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+            .dropdown-panel ul li a:hover{
+                background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
+                color: white;
+            }
+                .dropdown-panel ul li a:hover i.icon {
+                    color: white; /* Màu icon thay đổi khi hover */
+                }
+            /* Định dạng cho icon trong a */
+            .dropdown-panel ul li a i.icon {
+                width: 24px;
+                height: 24px;
+                margin-right: 10px;
+                font-size: 20px;
+                color: #555;
+            }
+
+/* Định dạng riêng cho phần Đăng xuất */
+.logout-item {
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+}
+
+    .logout-item a {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        font-size: 16px;
+        color: red;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .logout-item a i.icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .logout-item a:hover {
+            background-color: red;
+            color: white;
+        }
 
 /* Sidebar */
 .dashboard {

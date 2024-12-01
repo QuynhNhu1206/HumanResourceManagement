@@ -25,5 +25,11 @@ namespace HumanResourceManagement.Controllers
             }
             return View();
         }
+
+        public ActionResult UpdateInfo()
+        {
+            return View();
+        }
+
     }
 }
