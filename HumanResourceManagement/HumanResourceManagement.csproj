@@ -123,6 +123,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MyHomeController.cs" />
     <Compile Include="Controllers\NhanvienController.cs" />
+    <Compile Include="Controllers\PhongbanController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -133,6 +134,7 @@
     <Content Include="Content\Css\style.css" />
     <Content Include="Content\Css\styleAdmin.css" />
     <Content Include="Content\Css\styleNV.css" />
+    <Content Include="Content\Css\stylePB.css" />
     <Content Include="Content\img\3-dot.jpg" />
     <Content Include="Content\img\a.png" />
     <Content Include="Content\img\cute.jpg" />
@@ -184,6 +186,7 @@
     <Content Include="Views\MyHome\Login.cshtml" />
     <Content Include="Views\Nhanvien\NhanVien.cshtml" />
     <Content Include="Views\MyHome\MyHome.cshtml" />
+    <Content Include="Views\Phongban\Phongban.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
