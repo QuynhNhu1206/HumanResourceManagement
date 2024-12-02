@@ -152,7 +152,7 @@
     <Content Include="Content\img\Vectortick.png" />
     <Content Include="Content\js\admin.js" />
     <Content Include="Content\js\main.js" />
-    <Content Include="Content\js\option.js" />
+    <Content Include="Content\js\updateInfor.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
