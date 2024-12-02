@@ -182,26 +182,26 @@ td:empty .three-dots {
     transition: background-color 0.3s, transform 0.3s;
 }
 
-/* Hover hiệu ứng cho nút "Lọc" */
+
 .loc:hover {
     background-color: #e0e0e0;
     transform: scale(1.05);
     transition: background-color 0.3s, transform 0.3s;
 }
 
-/* Hover hiệu ứng cho icon trong nút "Lọc" */
+
 .loc img:hover {
     filter: brightness(1.2);
     transition: filter 0.3s;
 }
 
-/* Hover hiệu ứng cho icon trong nút "Thêm" */
+
 .Them img:hover {
     filter: brightness(1.2);
     transition: filter 0.3s;
 }
 
-/* Pagination */
+
 .pagination {
     margin-top: 20px;
     justify-content: flex-end;
@@ -268,10 +268,10 @@ td:empty .three-dots {
 
         .panel-header .btn-close i {
             color: #333;
-            font-size: 20px; /* Giữ kích thước icon */
+            font-size: 20px;
         }
 
-/* Nội dung form */
+
 .panel-content {
     padding: 16px;
 }
@@ -294,7 +294,6 @@ td:empty .three-dots {
     margin-right: 10px;
     top: 40%;
     transform: translateY(-50%);
-    /* Để tránh icon bị click */
     font-size: 16px;
     color: #333;
 }
@@ -302,13 +301,11 @@ td:empty .three-dots {
 .form-select {
     width: 100%;
     padding-right: 40px;
-    /* Chừa không gian cho icon */
     height: 50px;
     background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
     border: 1px solid #ced4da;
     border-radius: 8px;
     -webkit-appearance: none;
-    /* Loại bỏ kiểu mặc định */
     -moz-appearance: none;
     appearance: none;
 }
@@ -319,16 +316,15 @@ td:empty .three-dots {
     margin-right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    /* Để tránh icon bị click */
     font-size: 16px;
     color: #333;
 }
 
-/* Gán chiều cao consistent giữa các field */
+
 .form-control,
 .form-select {
     height: 50px;
-    /* Tùy chỉnh chiều cao đồng nhất */
+    
 }
 
 .panel-content .form-control,
@@ -344,7 +340,7 @@ td:empty .three-dots {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px; /* Khoảng cách giữa icon và text */
+    gap: 30px; 
     padding: 8px 16px;
     border-radius: 6px;
     font-size: 14px;
@@ -355,7 +351,7 @@ td:empty .three-dots {
     height: 36px;
     margin-bottom: 20px;
 }
-/* Button Save */
+
 .btn-save {
     background: linear-gradient(90deg, #6AE628 0%, #1EB500 100%);
     color: #fff;
