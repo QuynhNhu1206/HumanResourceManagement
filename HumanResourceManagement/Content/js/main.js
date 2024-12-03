@@ -5,8 +5,12 @@ const mainContent = document.querySelector(".main-section");
 const formPanel = document.getElementById('formPanel');
 const tableBody = document.getElementById('table-body');
 const detailPanel = document.getElementById('detailPanel');
+const closedetailPanel = document.getElementById('closeDetailPanel');
+const filterPanel = document.getElementById('filterPanel');
+const openFilterButton = document.getElementById('openFilter');
+const closeFilterButton = document.getElementById('closeFilterPanel');
 
-// Dữ liệu giả lập (có thể thay thế bằng dữ liệu từ cơ sở dữ liệu hoặc API)
+
 const data = [
     { name: "Trần Lan Nhi", department: "Khoa ngoại ngữ", position: "Trưởng khoa", status: "Đang làm" },
     { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" },
@@ -19,6 +23,7 @@ function updatePanelHeight() {
     const mainSectionHeight = mainContent.offsetHeight;
     rightPanel.style.height = `${mainSectionHeight}px`;
     formPanel.style.height = `${mainSectionHeight}px`;
+    filterPanel.style.height = `${mainSectionHeight}px`;
 }
 
 // Mở và đóng panel bên phải
@@ -28,6 +33,23 @@ openPanelButton.addEventListener("click", () => {
     if (formPanel) {
         formPanel.classList.remove('show');
     }
+    if (filterPanel) {
+        filterPanel.classList.remove('show');
+    }
+    updatePanelHeight();
+});
+
+
+
+openFilterButton.addEventListener("click", () => {
+    filterPanel.classList.add("show");
+    mainContent.classList.add("panel-active");  
+    if (formPanel) {
+        formPanel.classList.remove("show");  
+    }
+    if (rightPanel) {
+        rightPanel.classList.remove("show");  
+    }
     updatePanelHeight();
 });
 
@@ -35,10 +57,13 @@ closePanelButton.addEventListener("click", () => {
     rightPanel.classList.remove("show");
     mainContent.classList.remove("panel-active");
 });
-
+closeFilterButton.addEventListener("click", () => {
+    filterPanel.classList.remove("show");
+    mainContent.classList.remove("panel-active");
+});
 // Hàm render bảng nội dung
 function renderTable(data) {
-    tableBody.innerHTML = '';  // Xóa nội dung bảng trước khi hiển thị lại
+    tableBody.innerHTML = '';  
     if (data.length === 0) {
         tableBody.innerHTML = '<tr><td colspan="5">Không có dữ liệu</td></tr>';
     } else {
@@ -61,7 +86,7 @@ function renderTable(data) {
                     </ul>
                 </td>
             `;
-            // Khi click vào dòng, hiển thị thông tin chi tiết
+            
             row.addEventListener('click', () => {
                 showDetailPanel(item);
             });
@@ -122,7 +147,7 @@ function showDetailPanel(manv) {
             const detailPanel = document.getElementById('detailPanel');
             detailPanel.classList.add('show');
 
-            // Cập nhật thông tin lên panel
+           
             detailPanel.innerHTML = `
                 <div class="panel-header">
                     <h3>Chi tiết thông tin</h3>
@@ -133,11 +158,11 @@ function showDetailPanel(manv) {
                         <img src="~/Content/img/cute.jpg" alt="Profile Picture" class="profile-pic">
                     </div>
                     <div class="employee-info">
-                        <span class="employee-id">Mã nhân viên: ${data.manv}</span>
+                        <span class="employee-id">${data.manv}</span>
                         <h2 class="employee-name">${data.ten}</h2>
                         <div class="employee-department">
-                            <span class="department">Phòng ban: ${data.phongban}</span>
-                            <span class="position">Chức vụ: ${data.chucvu}</span>
+                            <span class="department">${data.phongban}</span>
+                            <span class="position"> - ${data.chucvu}</span>
                         </div>
                     </div>
                     <div class="detail-group">
@@ -153,8 +178,10 @@ function showDetailPanel(manv) {
                     </div>
                 </div>
             `;
-
-            // Đóng panel khi nhấn nút đóng
+            document.querySelector('.edit-option').addEventListener('click', (event) => {
+                openEditPanel(event); 
+            });
+            
             document.getElementById('closeDetailPanel').addEventListener('click', () => {
                 detailPanel.classList.remove('show');
             });
@@ -171,6 +198,9 @@ function openEditPanel(event) {
     if (rightPanel) {
         rightPanel.classList.remove('show');
     }
+    if (filterPanel) {
+        filterPanel.classList.remove('show');
+    }
 }
 
 // Đóng form panel
@@ -179,16 +209,15 @@ document.getElementById("closePanel1").addEventListener("click", function () {
     mainContent.classList.remove("panel-active");
 });
 
-// Lắng nghe sự kiện resize để cập nhật chiều cao panel
 window.addEventListener("resize", updatePanelHeight);
 
-// Khởi tạo bảng dữ liệu
+
 document.addEventListener('DOMContentLoaded', () => {
     renderTable(data);  
     updatePanelHeight();
 });
 
-// Xử lý các hành động Lưu và Xóa
+
 document.querySelector('.btn-save').addEventListener('click', () => {
     alert('Lưu thành công!');
 });
@@ -254,4 +283,41 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         console.error('Các phần tử select không tìm thấy.');
     }
+});
+
+//filter-panle-content
+function selectFilter(element, value) {
+    const parent = element.parentNode;
+    const options = parent.querySelectorAll('.filter-option');
+
+    options.forEach(option => option.classList.remove('active'));
+
+   
+    element.classList.add('active');
+
+    console.log(`Filter selected: ${value}`);
+}
+
+// Cập nhật khoảng độ tuổi
+function updateAgeRange() {
+    const ageMin = document.getElementById('age-min').value;
+    const ageMax = document.getElementById('age-max').value;
+
+   
+    if (parseInt(ageMin) > parseInt(ageMax)) {
+        document.getElementById('age-min').value = ageMax;
+    }
+
+    console.log(`Age range: ${ageMin} - ${ageMax}`);
+}
+
+
+
+// Nút xác nhận lọc
+document.getElementById('SubmitFilterPanel').addEventListener('click', function () {
+    const ageMin = document.getElementById('age-min').value;
+    const ageMax = document.getElementById('age-max').value;
+    const status = document.querySelector('input[name="status"]:checked').value;
+
+    console.log(`Lọc: Độ tuổi từ ${ageMin} đến ${ageMax}, Tình trạng: ${status}`);
 });

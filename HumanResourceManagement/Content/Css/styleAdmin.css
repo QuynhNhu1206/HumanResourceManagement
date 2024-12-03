@@ -10,6 +10,7 @@ body {
     color: #333;
     min-height: 100vh;
     line-height: 1.5;
+    overflow:hidden;
 }
 
 #main-header {
@@ -21,6 +22,8 @@ body {
     background-color: white;
     padding: 10px 0;
     z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
    
@@ -243,31 +246,32 @@ body {
 
 /* Sidebar */
 .dashboard {
-    display: grid;
+    display: flex;
+    flex-direction: row;
     gap: 20px;
     padding: 20px;
-    margin-top: 80px;
-    height: calc(100vh - 80px);
+    margin-top: 70px;
+    height: 100vh;
+    position: relative;
+    overflow-x: hidden;
 }
 
 /* Sidebar */
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
     background-color: #fff;
-    padding: 2px;
-    border-radius: 10px;
-    height: calc(100vh - 80px);
+    left:0;
+    padding: 40px;
+    top: -40px;
+    position: fixed;
+    top: 70px; 
+    width: 250px;
+    height: 100%;
     overflow-y: auto;
-    margin-top: -20px;
-    position: relative;
-    flex-grow: 1;
 }
 
 /* Welcome Message */
 .welcome-message {
+    margin-top: -20px;
     text-align: left;
     margin-bottom: 20px;
 }
@@ -280,7 +284,7 @@ body {
 
     .welcome-message .highlight {
         display: block;
-        font-size: 36px;
+        font-size: 40px;
         font-weight: bold;
         background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
         background-clip: text;
@@ -301,7 +305,7 @@ body {
     list-style: none;
     padding: 0;
     margin: 0;
-    text-align: left;
+    text-align: justify-all;
 }
 
 .sidebar .nav-link {
@@ -323,5 +327,14 @@ body {
         border-radius: 8px;
         background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
     }
-
+.main-content {
+    margin-left: 250px;
+    flex-grow: 1;
+    background: none;
+    border-radius:8px;
+    box-sizing: border-box;
+    height: 100vh;
+    margin-top: 80px;
+    width: 100%;
+}
 
