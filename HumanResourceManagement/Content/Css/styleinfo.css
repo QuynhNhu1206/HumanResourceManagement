@@ -4,12 +4,14 @@
     box-sizing: border-box;
 }
 
-body {
+body{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: #333;
     display: flex;
     min-height: 100vh;
+    height: 100vh;
     width: 100%;
+    background:none;
 }
 
 .main-container {
@@ -17,15 +19,15 @@ body {
     justify-content: space-between;
     align-items: flex-start;
     gap: 20px;
-    padding: 30px;
-    background-color: #f8faff;
-    min-height: 100vh;
+    padding: 20px;
+    background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
     width: 100%;
     flex-wrap: nowrap;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
-    height: calc(100vh - 40px);
+    height: 94%;
 }
+
 
 /* Phần form bên trái */
 .form-section {
@@ -37,7 +39,7 @@ body {
     overflow-y: auto;
     display: block;
     flex-direction: column;
-    height: 94%;
+    height:100%;
 }
 
     .form-section h2 {
@@ -182,7 +184,7 @@ select {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px;
+    padding: 20px;
     background-color: #ffffff;
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -194,7 +196,7 @@ select {
 .image-wrapper img {
     max-width: 100%;
     height: auto;
-    border-radius: 10px;
+    border-radius: 2px;
 }
 
 .header-illustration {

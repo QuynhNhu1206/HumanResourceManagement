@@ -49,13 +49,13 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-end">
             <li class="page-item disabled">
-                <a class="page-link">Previous</a>
+                <a class="page-link">Trước</a>
             </li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item">
-                <a class="page-link" href="#">Next</a>
+                <a class="page-link" href="#">Tiếp theo</a>
             </li>
         </ul>
     </nav>
@@ -68,19 +68,65 @@
         </button>
     </div>
     <form class="panel-content">
-        <div class="row g-3 flex-column">
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban">
-            </div>
+        <div class="form-group">
+            <input type="text" id="mapbedit" name="mapb" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
+            <input type="text" id="tenpbedit" name="tenpb" class="input-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban"> aria-label="Email">
+        </div>
+
+        <div class="panel-footer d-flex justify-content-between">
+            <button id="saveedit" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+            <button id="xoaedit" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+        </div>
+    </form>
+</aside>
+<!-- panel sửa -->
+<aside class="form-panel" id="formPanel">
+    <div class="panel-header d-flex justify-content-between align-items-center">
+        <h3>Chỉnh sửa thông tin</h3>
+        <button id="closePanel1" type="button" class="btn-close" aria-label="Close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <form class="panel-content">
+        <div class="form-group">
+            <input type="text" id="mapbedit" name="mapb" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
+            <input type="text" id="tenpbedit" name="tenpb" class="input-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban"> aria-label="Email">
+        </div>
+
+        <div class="panel-footer d-flex justify-content-between">
+            <button id="saveedit" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+            <button id="xoaedit" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
         </div>
     </form>
 
-    <div class="panel-footer d-flex justify-content-between">
-        <button class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
-        <button class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+</aside>
+<!-- panel lọc -->
+<aside class="filter-panel" id="filterPanel">
+    <div class="panel-header d-flex justify-content-between align-items-center">
+        <h3>Bộ lọc</h3>
+        <button id="closeFilterPanel" type="button" class="btn-close" aria-label="Close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="panel-content">
+
+
+        <div class="filter-section">
+            <label for="department-filter">Tên phòng ban</label>
+            <select id="department-filter">
+                <option value="all">Tất cả</option>
+                <option value="natural-sciences">Khoa tự nhiên</option>
+                <option value="social-sciences">Khoa xã hội</option>
+                <option value="foreign-languages">Khoa ngoại ngữ</option>
+            </select>
+        </div>
+
+        <div class="panel-footer d-flex justify-content-between">
+            <button id="SubmitFilterPanel" type="button" class="btn btn-ok" aria-label="ok">
+                Xác nhận
+                <i class="fa-solid fa-check"></i>
+            </button>
+        </div>
     </div>
 </aside>
-
+@Scripts.Render("~/bundles/pb")

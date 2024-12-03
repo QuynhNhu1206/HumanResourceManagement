@@ -23,7 +23,8 @@ namespace HumanResourceManagement
                         "~/Content/js/option.js"));
             bundles.Add(new ScriptBundle("~/bundles/updateInfor").Include(
                         "~/Content/js/updateInfor.js"));
-
+            bundles.Add(new ScriptBundle("~/bundles/pb").Include(
+                       "~/Content/js/pb.js"));
             // Các bundle hiện có
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
