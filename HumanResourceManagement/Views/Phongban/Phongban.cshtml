@@ -16,12 +16,12 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <title>HOÀNG DIỆU SCHOOL</title>
+    <title>PHÒNG BAN</title>
 </head>
 <section class="main-section">
     <div class="Tieude">
         <h2>Danh sách phòng ban</h2>
-        <div class="right-tools">
+        <div class="right-tools" id="openFilter">
             <button class="loc">
                 <img src="~/Content/img/Vectorloc.png" alt="loc" class="icon-nav">
             </button>
@@ -60,6 +60,8 @@
         </ul>
     </nav>
 </section>
+
+<!-- panel thêm -->
 <aside class="right-panel" id="rightPanel">
     <div class="panel-header d-flex justify-content-between align-items-center">
         <h3>Thêm thông tin</h3>
@@ -69,13 +71,13 @@
     </div>
     <form class="panel-content">
         <div class="form-group">
-            <input type="text" id="mapbedit" name="mapb" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
-            <input type="text" id="tenpbedit" name="tenpb" class="input-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban"> aria-label="Email">
+            <input type="text" id="mapb" name="mapb" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
+            <input type="text" id="tenpb" name="tenpb" class="input-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban">
         </div>
 
         <div class="panel-footer d-flex justify-content-between">
-            <button id="saveedit" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
-            <button id="xoaedit" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+            <button id="save" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+            <button id="xoa" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
         </div>
     </form>
 </aside>
@@ -90,7 +92,7 @@
     <form class="panel-content">
         <div class="form-group">
             <input type="text" id="mapbedit" name="mapb" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
-            <input type="text" id="tenpbedit" name="tenpb" class="input-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban"> aria-label="Email">
+            <input type="text" id="tenpbedit" name="tenpb" class="input-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban">
         </div>
 
         <div class="panel-footer d-flex justify-content-between">
