@@ -13,17 +13,13 @@
     <!-- Thêm jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- Thêm jQuery UI -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
     <title>PHÒNG BAN</title>
 </head>
 <section class="main-section">
     <div class="Tieude">
         <h2>Danh sách phòng ban</h2>
-        <div class="right-tools" id="openFilter">
-            <button class="loc">
+        <div class="right-tools" >
+            <button class="loc" id="openFilter">
                 <img src="~/Content/img/Vectorloc.png" alt="loc" class="icon-nav">
             </button>
 
@@ -195,4 +191,4 @@
     </form>
 
 </aside>
-@Scripts.Render("~/bundles/pb")
+@Scripts.Render("~/bundles/phongban")

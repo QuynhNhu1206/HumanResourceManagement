@@ -2,11 +2,12 @@
 const closePanelButton = document.getElementById("closePanel");
 const rightPanel = document.getElementById("rightPanel");
 const mainContent = document.querySelector(".main-section");
-const formPanel = document.getElementById('formPanel');
 const tableBody = document.getElementById('table-body');
 const filterPanel = document.getElementById('filterPanel');
 const openFilterButton = document.getElementById('openFilter');
 const closeFilterButton = document.getElementById('closeFilterPanel');
+
+
 
 const data = [
     { id: "PB01", department: "Khoa ngoại ngữ" },
@@ -19,6 +20,8 @@ function updatePanelHeight() {
     formPanel.style.height = `${mainSectionHeight}px`;
     filterPanel.style.height = `${mainSectionHeight}px`;
 }
+
+//Addpanel
 openPanelButton.addEventListener("click", () => {
     rightPanel.classList.add("show");
     mainContent.classList.add("panel-active");
@@ -30,41 +33,36 @@ openPanelButton.addEventListener("click", () => {
     }
     updatePanelHeight();
 });
-openFilterButton.addEventListener("click", () => {
-    filterPanel.classList.add("show");
-    mainContent.classList.add("panel-active");
-    if (formPanel) {
-        formPanel.classList.remove("show");
-    }
-    if (rightPanel) {
-        rightPanel.classList.remove("show");
-    }
-    updatePanelHeight();
-});
-function openEditPanel(event) {
-    event.preventDefault();
-    formPanel.classList.add('show');
-    mainContent.classList.add("panel-active");
-    updatePanelHeight();
-    if (rightPanel) {
-        rightPanel.classList.remove('show');
-    }
-    if (filterPanel) {
-        filterPanel.classList.remove('show');
-    }
-}
+
+
 closePanelButton.addEventListener("click", () => {
     rightPanel.classList.remove("show");
     mainContent.classList.remove("panel-active");
 });
+
+// Filterpanel
+openFilterButton.addEventListener("click", () => {
+    filterPanel.classList.add("show");
+    mainContent.classList.add("panel-active");
+    if (formPanel) {
+        formPanel.classList.remove('show');
+    }
+    if (rightPanel) {
+        rightPanel.classList.remove('show');
+    }
+    updatePanelHeight();
+});
+
 closeFilterButton.addEventListener("click", () => {
     filterPanel.classList.remove("show");
     mainContent.classList.remove("panel-active");
 });
-document.getElementById("closePanel1").addEventListener("click", function () {
-    formPanel.classList.remove("show");
-    mainContent.classList.remove("panel-active");
-});
+
+
+
+
+
+
 function renderTable(data) {
     tableBody.innerHTML = '';
     if (data.length === 0) {
@@ -92,6 +90,7 @@ function renderTable(data) {
         });
     }
 }
+
 
 // Hàm toggle menu dropdown
 function toggleDropdown(event) {
