@@ -255,12 +255,14 @@ td:empty .three-dots {
     margin-top: 24px;
     margin-right: 20px;
     margin-left: 10px;
+    display: none; /* Ẩn form khi không có class 'show' */
 }
 
     .right-panel.show {
         right: 0;
         animation: bounceIn 0.5s ease-out;
         transform: scale(1);
+        display: none; /* Ẩn form khi không có class 'show' */
     }
 
 .panel-header {

@@ -1,11 +1,12 @@
-﻿
+﻿@model HumanResourceManagement.Models.NhanVienViewModel
+
 @{
     ViewBag.Title = "NhanVien";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <head>
-   
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/Content/Css/styleNV.css">
@@ -25,7 +26,6 @@
             <button class="loc">
                 <img src="~/Content/img/Vectorloc.png" alt="loc" class="icon-nav">
             </button>
-
             <button class="Them" id="openPanel">
                 Thêm
                 <img src="~/Content/img/Vectorthem.png" alt="icon-them">
@@ -37,15 +37,78 @@
         <table class="table table-hover">
             <thead class="truong">
                 <tr>
+                    <th scope="col">Mã nhân viên</th>
                     <th scope="col">Họ và tên</th>
-                    <th scope="col">Trực thuộc bộ phận</th>
-                    <th scope="col">Vị trí</th>
-                    <th scope="col">Tình trạng</th>
-                    <th scope="col">Tùy chọn</th>
+                    <th scope="col">Trực thuộc phòng ban</th>
+                    <th scope="col">Trình độ</th>
+                    <th scope="col">Chức vụ</th>
+                    @*<th scope="col">CCCD</th>*@
+                    @*<th scope="col">Ngày sinh</th>
+                    <th scope="col">Giới tính</th>
+                    <th scope="col">Địa chỉ</th>*@
+                    @*<th scope="col">Email</th>
+                    <th scope="col">Số điện thoại</th>
+                    <th scope="col">Ngày bắt đầu</th>
+                    <th scope="col">Tên tài khoản</th>*@
                 </tr>
+
             </thead>
-            <tbody id="table-body">
-            </tbody>
+
+            @foreach (var nv in Model.DanhSachNhanVien)
+            {
+
+                <tr>
+                    <td>@nv.MaNhanVien</td>
+                    <td>@nv.HoTen</td>
+                    <td>
+                        @* Tìm Phòng ban dựa trên MaPhongBan *@
+                        @* Dùng LINQ để tìm tên Phòng ban dựa trên mã *@
+                        @{
+                            var phongBan = Model.PhongBanList.FirstOrDefault(p => p.Value == nv.MaPhongBan.ToString());
+                        }
+                        @phongBan.Text
+                    </td>
+                    <td>
+                        @* Tìm Trình độ dựa trên MaTrinhDo *@
+                        @{
+                            var trinhDo = Model.TrinhDoList.FirstOrDefault(t => t.Value == nv.MaTrinhDo.ToString());
+                        }
+                        @trinhDo.Text
+                    </td>
+                    <td>
+                        @* Tìm Chức vụ dựa trên MaChucVu *@
+                        @{
+                            var chucVu = Model.ChucVuList.FirstOrDefault(c => c.Value == nv.MaChucVu.ToString());
+                        }
+                        @chucVu.Text
+                    </td>
+                    @*<td>@nv.CCCD</td>
+                    <td>@nv.NgaySinh.Value.ToString("d/M/yyyy")</td>
+                    <td>@nv.GioiTinh</td>
+                    <td>@nv.DiaChi</td>*@
+                    @*<td>@nv.Email</td>
+        <td>@nv.SoDienThoai</td>
+        <td>@nv.NgayBatDauLam.Value.ToString("d/M/yyyy")</td>
+        <td>@nv.TenTaiKhoan</td>*@
+                    <td>
+                        <span class="three-dots" onclick="toggleDropdown(event)">
+                            <img src="/Content/img/ri_more-2-fill.png" alt="3-dot" class="icon-dot">
+                        </span>
+                        <ul class="dropdown-menu" style="display: none;">
+                            <li>
+                                <a href="#" class="edit-option" data-id="@nv.MaNhanVien" onclick="openEditPanel(@nv.MaNhanVien)">
+                                    <span>Sửa</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="delete-option" onclick="deleteNhanVien(@nv.MaNhanVien)">
+                                    <span>Xóa</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            }
         </table>
     </div>
     <nav aria-label="Page navigation example">
@@ -69,227 +132,259 @@
             <i class="fas fa-times"></i>
         </button>
     </div>
-    <form class="panel-content">
+    <form class="panel-content" method="post" action="/Nhanvien/AddNhanVien">
         <div class="row g-3 flex-column">
             <div class="col">
-                <input type="text" id ="manv" name ="manv" class="form-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+                <input type="text" name="NhanVienMoi.MaNhanVien" class="form-control" placeholder="Mã nhân viên" required>
             </div>
             <div class="col">
-                <input type="text" id ="ten" name="ten" class="form-control" placeholder="Họ và tên" aria-label="Họ và tên">
+                <input type="text" name="NhanVienMoi.HoTen" class="form-control" placeholder="Họ và tên" required>
             </div>
             <div class="col">
-                <input type="text" id ="cccd" name="cccd" class="form-control" placeholder="CCCD" aria-label="CCCD">
-            </div>
-            <div class="col select-container">
-                <select id="phongban" name="phongban" class="form-select">
-                    <option selected>Phòng ban</option>
+                <select name="NhanVienMoi.MaPhongBan" class="form-select">
+                    @if (Model.PhongBanList != null && Model.PhongBanList.Any())  
+                    {
+                        foreach (var phongBan in Model.PhongBanList)
+                        {
+                            <option value="@phongBan.Value">@phongBan.Text</option>
+                        }
+                    }
+                    else
+                    {
+                        <option disabled>Không có phòng ban</option>
+                    }
                 </select>
-                <i class="fas fa-chevron-down select-icon"></i>
             </div>
-            <div class="col select-container">
-                <select id="gioitinh" name="gioitinh"class="form-select">
+            <div class="col">
+                <select name="NhanVienMoi.MaTrinhDo" class="form-select">
+                    @if (Model.TrinhDoList != null && Model.TrinhDoList.Any())
+                    {
+                        foreach (var trinhDo in Model.TrinhDoList)
+                        {
+                            <option value="@trinhDo.Value">@trinhDo.Text</option>
+                        }
+                    }
+                    else
+                    {
+                        <option disabled>Không có trình độ</option>
+                    }
+                </select>
+            </div>
+            <div class="col">
+                <select name="NhanVienMoi.MaChucVu" class="form-select">
+                    @if (Model.ChucVuList != null && Model.ChucVuList.Any())
+                    {
+                        foreach (var chucVu in Model.ChucVuList)
+                        {
+                            <option value="@chucVu.Value">@chucVu.Text</option>
+                        }
+                    }
+                    else
+                    {
+                        <option disabled>Không có Chức vụ</option>
+                    }
+                </select>
+            </div>
+            <div class="col">
+                <input type="text" name="NhanVienMoi.CCCD" class="form-control" placeholder="CCCD">
+            </div>
+            <div class="col input-with-icon">
+                <input type="date" name="NhanVienMoi.NgaySinh" class="form-control" placeholder="Ngày sinh">
+            </div>
+            <div class="col">
+                <select name="NhanVienMoi.GioiTinh" class="form-select">
                     <option selected>Giới tính</option>
                     <option value="1">Nam</option>
                     <option value="2">Nữ</option>
+                    <option value="3">Khác</option>
                 </select>
-                <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+            <div class="col">
+                <input type="text" name="NhanVienMoi.DiaChi" class="form-control" placeholder="Địa chỉ">
+            </div>
+            <div class="col">
+                <input type="text" name="NhanVienMoi.Email" class="form-control" placeholder="Email">
+            </div>
+            <div class="col">
+                <input type="text" name="NhanVienMoi.SoDienThoai" class="form-control" placeholder="Số điện thoại">
             </div>
             <div class="col input-with-icon">
-                <input type="text" id="ngaysinh" class="form-control datepicker-input" placeholder="Ngày sinh"
-                       aria-label="Ngày sinh">
-                <span class="datetime-icon"><i class="fas fa-calendar-alt"></i></span>
+                <input type="date" name="NhanVienMoi.NgayBatDauLam" class="form-control" placeholder="Ngày bắt đầu làm">
             </div>
             <div class="col">
-                <input type="text" id="noisinh" name="noisinh" class="form-control" placeholder="Nơi sinh" aria-label="Nơi sinh">
-            </div>
-            <div class="col">
-                <input type="text" id="sodienthoai" name="sodienthoai" class="form-control" placeholder="Số điện thoại" aria-label="Số điện thoại">
-            </div>
-            <div class="col select-container">
-                <select id="dantoc" name="dantoc"class="form-select">
-                    <option selected>Dân tộc</option>
-                    <option value="1">Kinh</option>
-                    <option value="2">Tày</option>
-                    <option value="3">Ê đê</option>
-                </select>
-                <i class="fas fa-chevron-down select-icon"></i>
-            </div>
-            <div class="col input-with-icon">
-                <input type="text" id="ngayvaolam" name="ngayvaolam"class="form-control datepicker-input" placeholder="Ngày bắt đầu làm"
-                       aria-label="Ngày bắt đầu làm">
-                <span  class="datetime-icon"><i class="fas fa-calendar-alt"></i></span>
-            </div>
-            <div class="col select-container">
-
-                <select id="trinhdo" name="trinhdo" class="form-select">
-                    <option selected>Trình độ học vấn</option>
-                </select>
-                <i class="fas fa-chevron-down select-icon"></i>
-            </div>
-            <div class="col">
-                <select id="chucvu" name ="chucvu" class="form-select">
-                    <option selected>Chức vụ</option>
-
-                </select>
-                <i class="fas fa-chevron-down select-icon"></i>
-            </div>
-            <div class="col">
-                <input id="email" name ="email" type="text" class="form-control" placeholder="Email" aria-label="Email">
+                <input type="text" name="NhanVienMoi.TenTaiKhoan" class="form-control" placeholder="Tên Tài Khoản">
             </div>
         </div>
+        <div class="panel-footer d-flex justify-content-between">
+            <button type="submit" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i></button>
+        </div>
     </form>
-
-    <div class="panel-footer d-flex justify-content-between">
-        <button id="save" name ="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
-        <button id="xoa" name ="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
-    </div>
 </aside>
-<aside class="form-panel" id="formPanel">
+<aside class="right-panel" id="rightPanel">
     <div class="panel-header d-flex justify-content-between align-items-center">
-        <h3>Chỉnh sửa thông tin</h3>
-        <button id="closePanel1" type="button" class="btn-close" aria-label="Close">
+
+        <h3>Cập nhật thông tin</h3>
+        <button id="closePanel" type="button" class="btn-close" aria-label="Close">
             <i class="fas fa-times"></i>
         </button>
     </div>
-    <form class="panel-content">
+    <form class="panel-content" method="post" action="/Nhanvien/UpdateNhanVien">
         <div class="row g-3 flex-column">
             <div class="col">
-                <input type="text" id="manv" name="manv" class="form-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+                <input type="hidden" name="NhanVienUpdate.MaNhanVien" id="updateMaNhanVien" class="form-control" placeholder="Mã nhân viên" required>
             </div>
             <div class="col">
-                <input type="text" id="ten" name="ten" class="form-control" placeholder="Họ và tên" aria-label="Họ và tên">
+                <input type="text" name="NhanVienUpdate.HoTen" id="updateHoTen" class="form-control" placeholder="Họ và tên" required>
             </div>
             <div class="col">
-                <input type="text" id="cccd" name="cccd" class="form-control" placeholder="CCCD" aria-label="CCCD">
-            </div>
-            <div class="col select-container">
-                <select id="phongban" name="phongban" class="form-select">
-                    <option selected>Phòng ban</option>
+                <select name="NhanVienUpdate.MaPhongBan" id="updateMaPhongBan"  class="form-select">
+                    @if (Model.PhongBanList != null && Model.PhongBanList.Any())
+                    {
+                        foreach (var phongBan in Model.PhongBanList)
+                        {
+                            <option value="@phongBan.Value">@phongBan.Text</option>
+                        }
+                    }
+                    else
+                    {
+                        <option disabled>Không có phòng ban</option>
+                    }
                 </select>
-                <i class="fas fa-chevron-down select-icon"></i>
             </div>
-            <div class="col select-container">
-                <select id="gioitinh" name="gioitinh" class="form-select">
+            <div class="col">
+                <select name="NhanVienUpdate.MaTrinhDo" id="updateMaTrinhDo" class="form-select">
+                    @if (Model.TrinhDoList != null && Model.TrinhDoList.Any())
+                    {
+                        foreach (var trinhDo in Model.TrinhDoList)
+                        {
+                            <option value="@trinhDo.Value">@trinhDo.Text</option>
+                        }
+                    }
+                    else
+                    {
+                        <option disabled>Không có trình độ</option>
+                    }
+                </select>
+            </div>
+            <div class="col">
+                <select name="NhanVienUpdate.MaChucVu" id="updateMaChucVu" class="form-select">
+                    @if (Model.ChucVuList != null && Model.ChucVuList.Any())
+                    {
+                        foreach (var chucVu in Model.ChucVuList)
+                        {
+                            <option value="@chucVu.Value">@chucVu.Text</option>
+                        }
+                    }
+                    else
+                    {
+                        <option disabled>Không có Chức vụ</option>
+                    }
+                </select>
+            </div>
+            <div class="col">
+                <input type="text" name="NhanVienUpdate.CCCD" id="updateCCCD" class="form-control" placeholder="CCCD">
+            </div>
+            <div class="col input-with-icon">
+                <input type="date" name="NhanVienUpdate.NgaySinh" id="updateNgaySinh" class="form-control" placeholder="Ngày sinh">
+            </div>
+            <div class="col">
+                <select name="NhanVienUpdate.GioiTinh" id="updateGioiTinh" class="form-select">
                     <option selected>Giới tính</option>
                     <option value="1">Nam</option>
                     <option value="2">Nữ</option>
+                    <option value="3">Khác</option>
                 </select>
-                <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+            <div class="col">
+                <input type="text" name="NhanVienUpdate.DiaChi" id="updateDiaChi" class="form-control" placeholder="Địa chỉ">
+            </div>
+            <div class="col">
+                <input type="email" name="NhanVienUpdate.Email" id="updateEmail" class="form-control" placeholder="Email">
+            </div>
+            <div class="col">
+                <input type="text" name="NhanVienUpdate.SoDienThoai" id="updateSoDienThoai" class="form-control" placeholder="Số điện thoại">
             </div>
             <div class="col input-with-icon">
-                <input type="text" id="ngaysinh" class="form-control datepicker-input" placeholder="Ngày sinh"
-                       aria-label="Ngày sinh">
-                <span class="datetime-icon"><i class="fas fa-calendar-alt"></i></span>
+                <input type="date" name="NhanVienUpdate.NgayBatDauLam" id="updateNgayBatDauLam" class="form-control" placeholder="Ngày bắt đầu làm">
             </div>
             <div class="col">
-                <input type="text" id="noisinh" name="noisinh" class="form-control" placeholder="Nơi sinh" aria-label="Nơi sinh">
-            </div>
-            <div class="col">
-                <input type="text" id="sodienthoai" name="sodienthoai" class="form-control" placeholder="Số điện thoại" aria-label="Số điện thoại">
-            </div>
-            <div class="col select-container">
-                <select id="dantoc" name="dantoc" class="form-select">
-                    <option selected>Dân tộc</option>
-                    <option value="1">Kinh</option>
-                    <option value="2">Tày</option>
-                    <option value="3">Ê đê</option>
-                </select>
-                <i class="fas fa-chevron-down select-icon"></i>
-            </div>
-            <div class="col input-with-icon">
-                <input type="text" id="ngayvaolam" name="ngayvaolam" class="form-control datepicker-input" placeholder="Ngày bắt đầu làm"
-                       aria-label="Ngày bắt đầu làm">
-                <span class="datetime-icon"><i class="fas fa-calendar-alt"></i></span>
-            </div>
-            <div class="col select-container">
-
-                <select id="trinhdo" name="trinhdo" class="form-select">
-                    <option selected>Trình độ học vấn</option>
-                </select>
-                <i class="fas fa-chevron-down select-icon"></i>
-            </div>
-            <div class="col">
-                <select id="chucvu" name="chucvu" class="form-select">
-                    <option selected>Chức vụ</option>
-
-                </select>
-                <i class="fas fa-chevron-down select-icon"></i>
-            </div>
-            <div class="col">
-                <input id="email" name="email" type="text" class="form-control" placeholder="Email" aria-label="Email">
+                <input type="text"  name="NhanVienUpdate.TenTaiKhoan" id="updateTenTaiKhoan" class="form-control" placeholder="Tên Tài Khoản">
             </div>
         </div>
+        <div class="panel-footer d-flex justify-content-between">
+            <button type="submit" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i></button>
+        </div>
     </form>
-
-    <div class="panel-footer d-flex justify-content-between">
-        <button id="save" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
-        <button id="delete" name="delete" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
-    </div>
 </aside>
 <script>
 
-    const data = [
-        { name: "Trần Lan Nhi", department: "Khoa ngoại ngữ", position: "Trưởng khoa", status: "Đang làm" },
-        { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" }
+    //const data = [
+    //    { name: "Trần Lan Nhi", department: "Khoa ngoại ngữ", position: "Trưởng khoa", status: "Đang làm" },
+    //    { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" }
 
-    ];
+    //];
 
-    // Hàm để tạo bảng dữ liệu động
-    function renderTable(data) {
-        const tableBody = document.getElementById('table-body');
-        tableBody.innerHTML = '';
+    //// Hàm để tạo bảng dữ liệu động
+    //function renderTable(data) {
+    //    const tableBody = document.getElementById('table-body');
+    //    tableBody.innerHTML = '';
 
 
-        if (data.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="5">Không có dữ liệu</td></tr>';
-        } else {
+    //    if (data.length === 0) {
+    //        tableBody.innerHTML = '<tr><td colspan="5">Không có dữ liệu</td></tr>';
+    //    } else {
 
-            for (let i = 0; i < data.length; i++) {
-                const row = document.createElement('tr');
+    //        for (let i = 0; i < data.length; i++) {
+    //            const row = document.createElement('tr');
 
-                const cell1 = document.createElement('td');
-                cell1.textContent = data[i].name;
-                row.appendChild(cell1);
+    //            const cell1 = document.createElement('td');
+    //            cell1.textContent = data[i].name;
+    //            row.appendChild(cell1);
 
-                const cell2 = document.createElement('td');
-                cell2.textContent = data[i].department;
-                row.appendChild(cell2);
+    //            const cell2 = document.createElement('td');
+    //            cell2.textContent = data[i].department;
+    //            row.appendChild(cell2);
 
-                const cell3 = document.createElement('td');
-                cell3.textContent = data[i].position;
-                row.appendChild(cell3);
+    //            const cell3 = document.createElement('td');
+    //            cell3.textContent = data[i].position;
+    //            row.appendChild(cell3);
 
-                const cell4 = document.createElement('td');
-                cell4.textContent = data[i].status;
-                row.appendChild(cell4);
+    //            const cell4 = document.createElement('td');
+    //            cell4.textContent = data[i].status;
+    //            row.ap    pendChild(cell4);
 
-                const cell5 = document.createElement('td');
-                cell5.innerHTML = `
-                    <span class="three-dots" onclick="toggleDropdown(event)">
-                        <img src="/Content/img/ri_more-2-fill.png" alt="3-dot" class="icon-dot">
-                    </span>
-                    <ul class="dropdown-menu" style="display: none;">
-                        <li>
-                            <a href="#" class="edit-option" onclick="openEditPanel(event)">
-                                <span>Sửa</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="delete-option">
-                                <span>Xóa</span>
-                            </a>
-                        </li>
-                        
-                    </ul>`;
+   // const cell5 = document.createElement('td');
+   //cell5.innerHTML = `   
+   // <span class="three-dots" onclick="toggleDropdown(event)">
+   //     <img src="/Content/img/ri_more-2-fill.png" alt="3-dot" class="icon-dot">
+   // </span>
+   // <ul class="dropdown-menu" style="display: none;">
+   //     <li>
+   //         <a href="#" class="edit-option" onclick="openEditPanel(${data[i].MaNhanVien})">
+   //             <span>Sửa</span>
+   //         </a>
+   //     </li>
+   //     <li>
+   //         <a href="#" class="delete-option">
+   //             <span>Xóa</span>
+   //         </a>
+   //     </li>
+   // </ul>`;
 
-                row.appendChild(cell5);
+    //row.appendChild(cell5);
 
-                tableBody.appendChild(row);
-            }
-        }
-    }
-
+    //tableBody.appendChild(row);
+    //        }
+    //    }
+    //}
+    document.querySelectorAll('.edit-option').forEach(editButton => {
+        editButton.addEventListener('click', function () {
+            const maNhanVien = this.getAttribute('data-id');
+            openEditPanel(maNhanVien);  // gọi hàm với maNhanVien từ thuộc tính data-id
+        });
+    });
     function toggleDropdown(event) {
+        event.stopPropagation(); // Prevent the event from propagating to the document
         const dropdownToggle = event.target.closest('.three-dots');
         const dropdownMenu = dropdownToggle ? dropdownToggle.nextElementSibling : null;
 
@@ -306,6 +401,7 @@
         }
     }
 
+
     // Hide dropdown when clicking outside
     document.addEventListener('click', function (event) {
         const dropdownMenus = document.querySelectorAll('.dropdown-menu');
@@ -321,9 +417,9 @@
         $('.dropdown-menu').hide();
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-        renderTable(data);
-    });
+    //document.addEventListener('DOMContentLoaded', function () {
+    //    renderTable(data);
+    //});
 
     //datetimepicker
     $(document).ready(function () {
@@ -368,26 +464,31 @@
 
 
     //form-panel
-    
+    function openEditPanel(maNhanVien) {
+        // Tìm nhân viên dựa trên maNhanVien
+        const nhanVien = Model.DanhSachNhanVien.find(nv => nv.MaNhanVien == maNhanVien);
+
+        // Kiểm tra nếu tìm thấy nhân viên và tải dữ liệu vào form
+        if (nhanVien) {
+            loadUpdateForm(nhanVien);
+            const rightPanel = document.getElementById('rightPanel');
+            if (rightPanel) {
+                rightPanel.classList.add('show');  // Hiển thị form sửa
+                document.querySelector('.main-section').classList.add('panel-active');
+            }
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
-       
+
         const formPanel = document.getElementById('formPanel');
         const mainContent = document.querySelector('.main-section');
         const closePanelButton = document.getElementById("closePanel1");
 
-       
-
-        function openEditPanel() {
-            formPanel.classList.add('show');
-            mainContent.classList.add("panel-active");
-            updatePanelHeight();
-            const rightPanel = document.getElementById('rightPanel');
-            if (rightPanel) {
-                rightPanel.classList.remove('show'); 
-            }
-        }
 
        
+
+
         function updatePanelHeight() {
             const mainSectionHeight = mainContent.offsetHeight;
             formPanel.style.height = `${mainSectionHeight}px`;
@@ -399,23 +500,41 @@
         } else {
             console.error('Nút sửa không tìm thấy!');
         }
+  
 
-      
+
         closePanelButton.addEventListener("click", function () {
             console.log("Đang đóng form...");
             formPanel.classList.remove("show");
             mainContent.classList.remove("panel-active");
         });
 
-      
+
         document.querySelector('.btn-save').addEventListener('click', () => {
             alert('Lưu thành công!');
         });
 
-        
+
         document.querySelector('.btn-delete').addEventListener('click', () => {
             alert('Đã xóa!');
         });
     });
+    function loadUpdateForm(nhanVien) {
+        document.getElementById("updateMaNhanVien").value = nhanVien.MaNhanVien || '';
+        document.getElementById("updateHoTen").value = nhanVien.HoTen || '';
+        document.getElementById("updateMaPhongBan").value = nhanVien.MaPhongBan || '';
+        document.getElementById("updateMaTrinhDo").value = nhanVien.MaTrinhDo || '';
+        document.getElementById("updateMaChucVu").value = nhanVien.MaChucVu || '';
+        document.getElementById("updateCCCD").value = nhanVien.CCCD || '';
+        document.getElementById("updateNgaySinh").value = nhanVien.NgaySinh || '';
+        document.getElementById("updateGioiTinh").value = nhanVien.GioiTinh || '';
+        document.getElementById("updateDiaChi").value = nhanVien.DiaChi || '';
+        document.getElementById("updateEmail").value = nhanVien.Email || '';
+        document.getElementById("updateSoDienThoai").value = nhanVien.SoDienThoai || '';
+        document.getElementById("updateNgayBatDauLam").value = nhanVien.NgayBatDauLam || '';
+        document.getElementById("updateTenTaiKhoan").value = nhanVien.TenTaiKhoan || '';
+    }
+
+
 
 </script>

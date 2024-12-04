@@ -1,4 +1,4 @@
-﻿/* Reset CSS */
+﻿﻿ /* Reset CSS */
 * {
     margin: 0;
     padding: 0;
@@ -14,9 +14,7 @@
     left: 0;
     width: 100%;
     z-index: 1000;
-    /* Đảm bảo header ở trên cùng */
     background-color: white;
-    /* Màu nền của header */
     padding: 10px 0;
 }
 
@@ -107,7 +105,7 @@
             color: #007bff;
         }
 
-/* Nút đăng nhập */
+
 .login-btn {
     padding: 10px 20px;
     background: linear-gradient(180deg, rgb(232, 238, 255) 20.27%, rgb(255, 255, 255) 100%);
@@ -124,10 +122,10 @@
 
     .login-btn:hover {
         background-color: #9dc8f0;
-        color: transparent; /* Làm cho chữ không có màu */
+        color: transparent;
         background: linear-gradient(112deg, #06F -17.31%, #0084FF 33.37%, #68F0FF 169.57%); /* Gradient cho nền chữ */
-        -webkit-background-clip: text; /* Cắt nền theo hình chữ */
-        background-clip: text; /* Cắt nền theo hình chữ */
+        -webkit-background-clip: text;
+        background-clip: text;
     }
 
 .ellipse {
@@ -185,7 +183,6 @@
 /*Content*/
 .hero-section {
     text-align: center;
-    /* Căn giữa nội dung */
     top: 48px;
     margin: 0 auto;
     position: relative;
@@ -196,11 +193,9 @@
     z-index: 1;
     padding: 40px 40px;
     width: 100%;
-    /* Đảm bảo hero-section chiếm toàn bộ chiều rộng */
     box-sizing: border-box
 }
 
-    /* Hiệu ứng gradient phủ lên ảnh nền */
 
 
     .hero-section h1 {
@@ -210,7 +205,6 @@
         font-style: normal;
         font-weight: 700;
         line-height: 58.667px;
-        /* 146.667% */
         text-transform: uppercase;
         background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
         background-clip: text;
@@ -264,7 +258,6 @@
         max-height: 336px;
         flex-shrink: 0;
         background: url('~/Content/img/mask-group.png') center center / cover no-repeat;
-        /* Đảm bảo ảnh không bị cắt */
         opacity: 0.6;
         z-index: -1;
         object-fit: cover;
@@ -279,7 +272,6 @@
     align-items: center;
     width: 100%;
     max-width: 100%;
-    /* Cập nhật thành 100% để chiều rộng của stats-section bằng với hero-section */
     margin: 0 auto;
     padding: 80px 20px;
     position: relative;
@@ -302,7 +294,6 @@
 
     .stat-item:hover {
         transform: translateY(-10px);
-        /* Đẩy khối lên khi hover */
     }
 
 .stat-title {
@@ -317,7 +308,6 @@
     -webkit-text-fill-color: transparent;
     display: flex;
     flex-direction: row;
-    /* Sắp xếp "Sản phẩm" nằm ngang với "800+" */
     align-items: center;
     margin-top: 2px;
 }
@@ -330,9 +320,7 @@
     font-weight: 400;
     line-height: normal;
     text-align: left;
-    /* Căn trái phần mô tả */
     margin-top: 15px;
-    /* Tùy chọn, để làm rõ phần mô tả */
 }
 
 .stat-item h2 {
@@ -348,19 +336,16 @@
 }
 
 
-/* Đảm bảo khối sẽ thay đổi theo màn hình nhỏ */
+
 @media screen and (max-width: 768px) {
     .stats-section {
         flex-direction: column;
-        /* Chuyển các khối thành cột */
         align-items: center;
     }
 
     .stat-item {
         width: 80%;
-        /* Mỗi khối sẽ chiếm 80% chiều rộng */
         margin-bottom: 20px;
-        /* Khoảng cách giữa các khối */
     }
 }
 
@@ -389,7 +374,7 @@ body {
     background-color: #f5f7ff;
 }
 
-/* Container layout */
+
 
 .custom-container {
     display: flex;
@@ -405,7 +390,7 @@ body {
     margin: 40px auto;
 }
 
-/* Phần form đăng nhập */
+
 .custom-dangnhap {
     flex: 1;
     padding: 50px;
@@ -415,7 +400,7 @@ body {
     align-items: center;
 }
 
-    /* Tiêu đề chính của form */
+
     .custom-dangnhap h1 {
         color: #000;
         text-align: center;
@@ -425,14 +410,13 @@ body {
         margin-bottom: 15px;
     }
 
-    /* Highlight màu xanh của tiêu đề */
+
     .custom-dangnhap .highlight {
         color: #0066ff;
         font-family: Cambria, sans-serif;
         font-size: 48px;
     }
 
-    /* Đoạn mô tả dưới tiêu đề */
     .custom-dangnhap p {
         color: #000;
         text-align: center;
@@ -455,26 +439,33 @@ body {
         align-items: center;
         gap: 10px;
         width: 100%;
-        justify-content:space-between;
+        justify-content: space-between;
     }
 
 
     .custom-dangnhap input {
-        position:relative;
+        position: relative;
         border-radius: 29.333px;
-        background: #E8EEFF;
+        background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
         width: 50%;
         padding: 10px 15px;
         font-size: 16px;
-        border: none;
+        border: 1px solid #ced4da;
+        appearance: auto;
+        -webkit-appearance: auto;
+        -moz-appearance: auto;
         box-sizing: border-box;
         max-width: 300px;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
+
         .custom-dangnhap input:focus {
             border-radius: 29.333px;
-            border: 2px solid #9dc8f0;
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
             outline: none;
         }
+
 .input-wrapper {
     display: flex;
     flex-direction: column;
@@ -483,8 +474,9 @@ body {
 }
 
 .custom-tdn, .custom-pass {
-    width: 100%; 
+    width: 100%;
 }
+
 .custom-tdn {
     margin-left: 150px;
     margin-bottom: 10px;
@@ -494,7 +486,7 @@ body {
     margin-left: 150px;
 }
 
-/* Icon hiển thị mật khẩu */
+
 .hide-icon {
     position: absolute;
     top: 50%;
@@ -507,7 +499,7 @@ body {
 }
 
 
-/* Liên kết "Quên mật khẩu?" */
+
 .custom-dangnhap a {
     font-size: 14px;
     color: #0066ff;
@@ -516,7 +508,7 @@ body {
     margin-right: 10%;
 }
 
-/* Nút đăng nhập */
+
 .custom-dangnhap button {
     padding: 10px 15px;
     width: 25%;
@@ -534,7 +526,7 @@ body {
         background: linear-gradient(90deg, #0056d6, #2eb9e6);
     }
 
-/* Illustration section styles */
+
 .illustration-section {
     display: flex;
     justify-content: center;
@@ -544,23 +536,21 @@ body {
     padding: 20px;
 }
 
-/* Wrapper for the images */
 .image-wrapper {
     position: relative;
     width: fit-content;
     height: fit-content;
 }
 
-/* Background image styles */
+
 .background-image {
     display: block;
     width: 100%;
     max-width: 500px;
-    /* Adjust the size as needed */
     height: auto;
 }
 
-/* Foreground image styles */
+
 .foreground-image {
     position: absolute;
     top: 50%;
