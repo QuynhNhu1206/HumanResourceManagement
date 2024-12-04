@@ -1,0 +1,215 @@
+﻿
+
+/*CSS Đăng nhập*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
+}
+
+
+
+.custom-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    background: #f8faff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 40px auto;
+}
+
+
+.custom-dangnhap {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+    .custom-dangnhap h1 {
+        color: #000;
+        text-align: center;
+        font-size: 48px;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+
+    .custom-dangnhap .highlight {
+        background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: Cambria, sans-serif;
+        font-size: 48px;
+    }
+
+    .custom-dangnhap p {
+        color: #000;
+        text-align: center;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+
+        /* Highlight màu xanh đậm trong đoạn mô tả */
+        .custom-dangnhap p .highlight1 {
+            background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+
+    .custom-dangnhap form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+
+    .custom-dangnhap input {
+        position: relative;
+        border-radius: 29.333px;
+        background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
+        width: 50%;
+        padding: 10px 15px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+        appearance: auto;
+        -webkit-appearance: auto;
+        -moz-appearance: auto;
+        box-sizing: border-box;
+        max-width: 300px;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    }
+
+        .custom-dangnhap input:focus {
+            border-radius: 29.333px;
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            outline: none;
+        }
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.custom-tdn, .custom-pass {
+    width: 100%;
+}
+
+.custom-tdn {
+    margin-left: 150px;
+    margin-bottom: 10px;
+}
+
+.custom-pass {
+    margin-left: 150px;
+}
+
+
+.hide-icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+
+
+.custom-dangnhap a {
+    font-size: 14px;
+    background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+    align-self: flex-end;
+    margin-right: 24%;
+}
+
+
+.custom-dangnhap button {
+    padding: 10px 15px;
+    width: 25%;
+    font-size: 16px;
+    color: white;
+    background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
+    border: none;
+    border-radius: 29.333px;
+    cursor: pointer;
+    align-self: center;
+    cursor: pointer;
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+}
+
+    .custom-dangnhap button:hover {
+        background: linear-gradient(90deg, #0056d6, #2eb9e6);
+    }
+
+
+.illustration-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: #f5f7ff;
+    padding: 20px;
+}
+
+.image-wrapper {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+}
+
+
+.background-image {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
+
+
+.foreground-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: auto;
+    width: 477.333px;
+    height: 477.333px;
+    flex-shrink: 0;
+}

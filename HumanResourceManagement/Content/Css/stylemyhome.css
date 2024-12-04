@@ -69,7 +69,7 @@ body {
     }
 
     .resource-management button {
-        padding: 10px 40px; 
+        padding: 10px 40px;
         background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         color: white;
@@ -80,9 +80,13 @@ body {
         margin-top: 10px;
         z-index: 1;
         justify-content: center;
-        display: inline-flex; 
-        align-items: center; 
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
     }
+        .resource-management button:hover {
+            background: #0094ff;
+        }
     .sections-row {
         display: flex;
         gap: 20px;
