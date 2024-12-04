@@ -15,10 +15,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Thêm jQuery UI -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <title>HOÀNG DIỆU SCHOOL</title>
+
+    <title>NHÂN VIÊN</title>
 </head>
+<<<<<<< HEAD
 <section class="main-section">
     <div class="Tieude">
         <h2>Danh sách nhân viên</h2>
@@ -30,8 +30,29 @@
                 Thêm
                 <img src="~/Content/img/Vectorthem.png" alt="icon-them">
             </button>
+=======
 
+    <section class="main-section">
+        <div class="Tieude">
+            <h2>Danh sách nhân viên</h2>
+            <div class="right-tools">
+                <button class="quanly">
+                    Quản lý
+                    <i class="fa-solid fa-user icon-nav"></i>
+                </button>
+                <button class="loc" id="openFilter">
+                    <img src="~/Content/img/Vectorloc.png" alt="loc" class="icon-nav">
+                </button>
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
+
+                <button class="Them" id="openPanel">
+                    Thêm
+                    <img src="~/Content/img/Vectorthem.png" alt="icon-them">
+                </button>
+
+            </div>
         </div>
+<<<<<<< HEAD
     </div>
     <div class="tableds">
         <table class="table table-hover">
@@ -193,11 +214,62 @@
             </div>
             <div class="col">
                 <select name="NhanVienMoi.GioiTinh" class="form-select">
+=======
+        <div class="tableds">
+            <table class="table table-hover" id="employeeTable">
+                <thead class="truong">
+                    <tr>
+                        <th scope="col">Họ và tên</th>
+                        <th scope="col">Trực thuộc bộ phận</th>
+                        <th scope="col">Vị trí</th>
+                        <th scope="col">Tình trạng</th>
+                        <th scope="col">Tùy chọn</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+                <li class="page-item disabled">
+                    <a class="page-link">Trước</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Tiếp theo</a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+    <!-- panel thêm -->
+    <aside class="right-panel" id="rightPanel">
+        <div class="panel-header d-flex justify-content-between align-items-center">
+            <h3>Thêm thông tin</h3>
+            <button id="closePanel" type="button" class="btn-close" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <form class="panel-content">
+            <div class="form-group">
+                <input type="text" id="manv" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+                <input type="text" id="ten" name="ten" class="input-control" placeholder="Họ và tên" aria-label="Họ và tên">
+                <input type="text" id="cccd" name="cccd" class="input-control" placeholder="CCCD" aria-label="CCCD">
+                <select id="phongban" name="phongban" class="input-select">
+                    <option selected>Phòng ban</option>
+                </select>
+                <input type="date" id="ngaysinh" class="input-control datepicker-input" placeholder="Ngày sinh"
+                       aria-label="Ngày sinh">
+                <select id="gioitinh" name="gioitinh" class="input-select">
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
                     <option selected>Giới tính</option>
                     <option value="1">Nam</option>
                     <option value="2">Nữ</option>
                     <option value="3">Khác</option>
                 </select>
+<<<<<<< HEAD
             </div>
             <div class="col">
                 <input type="text" name="NhanVienMoi.DiaChi" class="form-control" placeholder="Địa chỉ">
@@ -289,11 +361,62 @@
             </div>
             <div class="col">
                 <select name="NhanVienUpdate.GioiTinh" id="updateGioiTinh" class="form-select">
+=======
+                <select id="noisinh" name="noisinh" class="input-select">
+                    <option value="" selected>Chọn tỉnh/thành phố</option>
+                </select>
+                <input type="text" id="sodienthoai" name="sodienthoai" class="input-control" placeholder="Số điện thoại" aria-label="Số điện thoại">
+                <select id="dantoc" name="dantoc" class="input-select">
+                    <option value="" selected>Chọn dân tộc</option>
+                </select>
+
+                <input type="date" id="ngayvaolam" name="ngayvaolam" class="input-control datepicker-input" placeholder="Ngày bắt đầu làm"
+                       aria-label="Ngày bắt đầu làm" />
+                <select id="trinhdo" name="trinhdo" class="input-select">
+                    <option selected>Trình độ học vấn</option>
+                </select>
+                <select id="chucvu" name="chucvu" class="input-select">
+                    <option selected>Chức vụ</option>
+
+                </select>
+                <input id="email" type="email" name="email" class="input-control" placeholder="Email" aria-label="Email">
+            </div>
+
+            <div class="panel-footer d-flex justify-content-between">
+                <button id="save" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+                <button id="xoa" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+            </div>
+        </form>
+
+
+    </aside>
+
+    <!-- panel sửa -->
+    <aside class="form-panel" id="formPanel">
+        <div class="panel-header d-flex justify-content-between align-items-center">
+            <h3>Chỉnh sửa thông tin</h3>
+            <button id="closePanel1" type="button" class="btn-close" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <form class="panel-content">
+            <div class="form-group">
+                <input type="text" id="manvedit" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+                <input type="text" id="tenedit" name="ten" class="input-control" placeholder="Họ và tên" aria-label="Họ và tên">
+                <input type="text" id="cccdedit" name="cccd" class="input-control" placeholder="CCCD" aria-label="CCCD">
+                <select id="phongbanedit" name="phongban" class="input-select">
+                    <option selected>Phòng ban</option>
+                </select>
+                <input type="date" id="ngaysinhedit" class="input-control datepicker-input" placeholder="Ngày sinh"
+                       aria-label="Ngày sinh">
+                <select id="gioitinhedit" name="gioitinh" class="input-select">
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
                     <option selected>Giới tính</option>
                     <option value="1">Nam</option>
                     <option value="2">Nữ</option>
                     <option value="3">Khác</option>
                 </select>
+<<<<<<< HEAD
             </div>
             <div class="col">
                 <input type="text" name="NhanVienUpdate.DiaChi" id="updateDiaChi" class="form-control" placeholder="Địa chỉ">
@@ -538,3 +661,181 @@
 
 
 </script>
+=======
+                <select id="noisinhedit" name="noisinh" class="input-select">
+                    <option value="" selected>Chọn tỉnh/thành phố</option>
+                </select>
+                <input type="text" id="sodienthoai" name="sodienthoai" class="input-control" placeholder="Số điện thoại" aria-label="Số điện thoại">
+                <select id="dantocedit" name="dantoc" class="input-select">
+                    <option value="" selected>Chọn dân tộc</option>
+                </select>
+
+                <input type="date" id="ngayvaolamedit" name="ngayvaolam" class="input-control datepicker-input" placeholder="Ngày bắt đầu làm"
+                       aria-label="Ngày bắt đầu làm" />
+                <select id="trinhdoedit" name="trinhdo" class="input-select">
+                    <option selected>Trình độ học vấn</option>
+                </select>
+                <select id="chucvuedit" name="chucvu" class="input-select">
+                    <option selected>Chức vụ</option>
+
+                </select>
+                <input id="emailedit" type="email" name="email" class="input-control" placeholder="Email" aria-label="Email">
+            </div>
+
+            <div class="panel-footer d-flex justify-content-between">
+                <button id="saveedit" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+                <button id="xoaedit" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+            </div>
+        </form>
+
+    </aside>
+
+    <!-- panel chi tiết -->
+    <aside class="details-panel" id="detailPanel">
+        <div class="panel-header d-flex justify-content-between align-items-center">
+            <h3>Chi tiết thông tin</h3>
+            <div class="panel-controls">
+                <button id="menuButton" type="button" class="btn-menu" aria-label="Menu">
+                    <i class="fas fa-ellipsis-v"></i> 
+                </button>
+                <button id="closeDetailPanel" type="button" class="btn-close" aria-label="Close">
+                    <i class="fas fa-times"></i> 
+                </button>
+            </div>
+            <ul class="dropdown-menu panel-detail-menu" style="display: none;">
+                <li><a href="#" class="edit-option" onclick="openEditPanel(event)">Sửa</a></li>
+                <li><a href="#" class="delete-option">Xóa</a></li>
+            </ul>
+        </div>
+        <div class="panel-content">
+            <div class="profile-image">
+                <img src="~/Content/img/cute.jpg" alt="Profile Picture" class="profile-pic">
+            </div>
+            <div class="employee-info">
+                <span class="manv">NV01</span>
+                <h2 class="ten">Trần Lan Nhi</h2>
+                <div class="employee-department">
+                    <span class="department">Khoa tự nhiên</span>
+                    <span class="position">Giảng viên</span>
+                </div>
+            </div>
+            <div class="detail-group">
+                <div class="detail-item">
+                    <label for="cccd">CCCD</label>
+                    <span id="cccd">123456789</span>
+                </div>
+                <div class="detail-item">
+                    <label for="ngaysinh">Ngày sinh</label>
+                    <span id="ngaysinh">12/06/2002</span>
+                </div>
+                <div class="detail-item">
+                    <label for="gioitinh">Giới tính</label>
+                    <span id="gioitinh">Nữ</span>
+                </div>
+                <div class="detail-item">
+                    <label for="noisinhsinh">Nơi sinh</label>
+                    <span id="noisinhsinh">Quảng Trị</span>
+                </div>
+                <div class="detail-item">
+                    <label for="sodienthoai">Số điện thoại</label>
+                    <span id="sodienthoai">0356854289</span>
+                </div>
+                <div class="detail-item">
+                    <label for="email">Email</label>
+                    <span id="email">lannhi126@gmail.com</span>
+                </div>
+                <div class="detail-item">
+                    <label for="dantoc">Dân tộc</label>
+                    <span id="dantoc">Kinh</span>
+                </div>
+                <div class="detail-item">
+                    <label for="ngayvaolam">Ngày bắt đầu làm</label>
+                    <span id="ngayvaolam">20/11/2023</span>
+                </div>
+                <div class="detail-item">
+                    <label for="trinhdo">Trình độ học vấn</label>
+                    <span id="trinhdo">Đại học</span>
+                </div>
+                <div class="detail-item">
+                    <label for="chucvu">Chức vụ</label>
+                    <span id="chucvu">Hiệu trưởng</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- panel lọc -->
+    <aside class="filter-panel" id="filterPanel">
+        <div class="panel-header d-flex justify-content-between align-items-center">
+            <h3>Bộ lọc</h3>
+            <button id="closeFilterPanel" type="button" class="btn-close" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="panel-content">
+            <div class="filter-section">
+                <label for="time-filter">Thời gian</label>
+                <div class="filter-options ">
+                    <div class="filter-option" onclick="selectFilter(this, '1-week')">Dưới 1 tuần</div>
+                    <div class="filter-option" onclick="selectFilter(this, '1-month')">Dưới 1 tháng</div>
+                    <div class="filter-option" onclick="selectFilter(this, '1-year')">Dưới 1 năm</div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <label for="gender-filter">Giới tính</label>
+                <div class="filter-options" id="gender-filter">
+                    <div class="filter-option" onclick="selectFilter(this, 'male')">Nam</div>
+                    <div class="filter-option" onclick="selectFilter(this, 'female')">Nữ</div>
+                    <div class="filter-option" onclick="selectFilter(this, 'other')">Khác</div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <label for="department-filter">Phòng ban</label>
+                <select id="department-filter">
+                    <option value="all">Tất cả</option>
+                    <option value="natural-sciences">Khoa tự nhiên</option>
+                    <option value="social-sciences">Khoa xã hội</option>
+                    <option value="foreign-languages">Khoa ngoại ngữ</option>
+                </select>
+            </div>
+
+            <div class="filter-section">
+                <label for="position-filter">Chức vụ</label>
+                <select id="position-filter">
+                    <option value="all">Tất cả</option>
+                    <option value="teacher">Giáo viên</option>
+                    <option value="head">Hiệu trưởng</option>
+                    <option value="vice-head">Phó hiệu trưởng</option>
+                </select>
+            </div>
+
+            <div class="filter-section">
+                <label for="age-range">Độ tuổi</label>
+                <div class="age-range">
+                    <input type="number" id="age-min" min="18" max="62" value="18" oninput="updateAgeRange()">
+                    <span>-</span>
+                    <input type="number" id="age-max" min="18" max="62" value="62" oninput="updateAgeRange()">
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <label>Tình trạng</label>
+                <div class="filter-options">
+                    <label><input type="radio" name="status" value="working" checked> Đang làm</label>
+                    <label><input type="radio" name="status" value="quit" checked> Đã nghỉ việc</label>
+                </div>
+            </div>
+            <div class="panel-footer d-flex justify-content-between">
+                <button id="SubmitFilterPanel" type="button" class="btn btn-ok" aria-label="ok">
+                    Xác nhận
+                    <i class="fa-solid fa-check"></i>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+
+@Scripts.Render("~/bundles/main")
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd

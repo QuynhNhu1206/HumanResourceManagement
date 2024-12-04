@@ -201,13 +201,19 @@
     <Content Include="Content\Css\style.css" />
     <Content Include="Content\Css\styleAdmin.css" />
     <Content Include="Content\Css\styleinfo.css" />
+    <Content Include="Content\Css\stylemyhome.css" />
     <Content Include="Content\Css\styleNV.css" />
     <Content Include="Content\Css\stylePB.css" />
     <Content Include="Content\img\3-dot.jpg" />
     <Content Include="Content\img\a.png" />
+    <Content Include="Content\img\anhmyhome.png" />
     <Content Include="Content\img\cute.jpg" />
     <Content Include="Content\img\Group 9.png" />
     <Content Include="Content\img\Hide.png" />
+    <Content Include="Content\img\image1.png" />
+    <Content Include="Content\img\image2.png" />
+    <Content Include="Content\img\image3.png" />
+    <Content Include="Content\img\image4.png" />
     <Content Include="Content\img\mask-group.png" />
     <Content Include="Content\img\mdi_bell-outline.png" />
     <Content Include="Content\img\Rectangle 22.png" />
@@ -219,6 +225,7 @@
     <Content Include="Content\img\Vectortick.png" />
     <Content Include="Content\js\admin.js" />
     <Content Include="Content\js\main.js" />
+<<<<<<< HEAD
     <Content Include="Content\js\option.js" />
     <Content Include="Data\HumanRSM.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -230,6 +237,10 @@
       <DependentUpon>HumanRSM.edmx</DependentUpon>
       <LastGenOutput>HumanRSM.cs</LastGenOutput>
     </Content>
+=======
+    <Content Include="Content\js\pb.js" />
+    <Content Include="Content\js\updateInfor.js" />
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="package.json" />

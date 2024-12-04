@@ -2,235 +2,322 @@
 const closePanelButton = document.getElementById("closePanel");
 const rightPanel = document.getElementById("rightPanel");
 const mainContent = document.querySelector(".main-section");
+const formPanel = document.getElementById('formPanel');
+const tableBody = document.getElementById('table-body');
+const detailPanel = document.getElementById('detailPanel');
+const closedetailPanel = document.getElementById('closeDetailPanel');
+const filterPanel = document.getElementById('filterPanel');
+const openFilterButton = document.getElementById('openFilter');
+const closeFilterButton = document.getElementById('closeFilterPanel');
 
+
+const data = [
+    { name: "Trần Lan Nhi", department: "Khoa ngoại ngữ", position: "Trưởng khoa", status: "Đang làm" },
+    { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" },
+    { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" },
+    { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" }
+];
+
+// Cập nhật chiều cao của panel dựa trên nội dung chính
 function updatePanelHeight() {
-    const mainSectionHeight = mainSection.offsetHeight;
+    const mainSectionHeight = mainContent.offsetHeight;
     rightPanel.style.height = `${mainSectionHeight}px`;
+    formPanel.style.height = `${mainSectionHeight}px`;
+    filterPanel.style.height = `${mainSectionHeight}px`;
 }
 
-
+// Mở và đóng panel bên phải
 openPanelButton.addEventListener("click", () => {
     rightPanel.classList.add("show");
     mainContent.classList.add("panel-active");
-    const formPanel = document.getElementById('formPanel');
     if (formPanel) {
-        formtPanel.classList.remove('show');
+        formPanel.classList.remove('show');
+    }
+    if (filterPanel) {
+        filterPanel.classList.remove('show');
     }
     updatePanelHeight();
 });
 
 
+
+openFilterButton.addEventListener("click", () => {
+    filterPanel.classList.add("show");
+    mainContent.classList.add("panel-active");  
+    if (formPanel) {
+        formPanel.classList.remove("show");  
+    }
+    if (rightPanel) {
+        rightPanel.classList.remove("show");  
+    }
+    updatePanelHeight();
+});
+
 closePanelButton.addEventListener("click", () => {
     rightPanel.classList.remove("show");
     mainContent.classList.remove("panel-active");
+});
+closeFilterButton.addEventListener("click", () => {
+    filterPanel.classList.remove("show");
+    mainContent.classList.remove("panel-active");
+});
+// Hàm render bảng nội dung
+function renderTable(data) {
+    tableBody.innerHTML = '';  
+    if (data.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="5">Không có dữ liệu</td></tr>';
+    } else {
+        data.forEach((item) => {
+            const row = document.createElement('tr');
+            row.classList.add('table-row');
+            row.id = `data-manv-${item.manv}`;
+            row.innerHTML = `
+                <td>${item.name}</td>
+                <td>${item.department}</td>
+                <td>${item.position}</td>
+                <td>${item.status}</td>
+                <td>
+                    <span class="three-dots" onclick="toggleDropdown(event)">
+                        <img src="/Content/img/ri_more-2-fill.png" alt="3-dot" class="icon-dot">
+                    </span>
+                    <ul class="dropdown-menu" style="display: none;">
+                        <li><a href="#" class="edit-option" onclick="openEditPanel(event)">Sửa</a></li>
+                        <li><a href="#" class="delete-option">Xóa</a></li>
+                    </ul>
+                </td>
+            `;
+            
+            row.addEventListener('click', () => {
+                showDetailPanel(item);
+            });
+            tableBody.appendChild(row);
+        });
+    }
+}
 
+// Hàm toggle menu dropdown
+function toggleDropdown(event) {
+    event.stopPropagation();  
+    const isTableDropdown = event.target.closest('.three-dots');  
+    const isPanelDropdown = event.target.closest('.btn-menu'); 
+
+    let dropdownMenu = null;
+
+    if (isTableDropdown) {
+        
+        dropdownMenu = isTableDropdown.nextElementSibling;  
+    } else if (isPanelDropdown) {
+        
+        dropdownMenu = document.querySelector('.dropdown-menu.panel-detail-menu');
+    }
+
+    if (dropdownMenu) {
+       
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            if (menu !== dropdownMenu) {
+                menu.style.display = 'none';
+            }
+        });
+        
+        dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+
+document.addEventListener('click', (event) => {
+    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+        if (!menu.contains(event.target) && !event.target.closest('.three-dots') && !event.target.closest('.btn-menu')) {
+            menu.style.display = 'none';
+        }
+    });
+});
+document.getElementById("employeeTable").addEventListener("click", function (event) {
+    const clickedRow = event.target.closest("tr");
+    if (clickedRow) {
+        const manv = clickedRow.getAttribute("data-manv");
+        showDetailPanel(manv);
+    }
+});
+
+function showDetailPanel(manv) {
+    // Gọi API để lấy thông tin chi tiết của nhân viên
+    fetch(`/Nhanvien/GetEmployeeDetail?manv=${manv}`)
+        .then(response => response.json())
+        .then(data => {
+            const detailPanel = document.getElementById('detailPanel');
+            detailPanel.classList.add('show');
+
+           
+            detailPanel.innerHTML = `
+                <div class="panel-header">
+                    <h3>Chi tiết thông tin</h3>
+                    <button id="closeDetailPanel" class="btn-close">X</button>
+                </div>
+                <div class="panel-content">
+                    <div class="profile-image">
+                        <img src="~/Content/img/cute.jpg" alt="Profile Picture" class="profile-pic">
+                    </div>
+                    <div class="employee-info">
+                        <span class="employee-id">${data.manv}</span>
+                        <h2 class="employee-name">${data.ten}</h2>
+                        <div class="employee-department">
+                            <span class="department">${data.phongban}</span>
+                            <span class="position"> - ${data.chucvu}</span>
+                        </div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-item"><label>CCCD</label><span>${data.cccd}</span></div>
+                        <div class="detail-item"><label>Ngày sinh</label><span>${data.ngaysinh}</span></div>
+                        <div class="detail-item"><label>Giới tính</label><span>${data.gioitinh}</span></div>
+                        <div class="detail-item"><label>Nơi sinh</label><span>${data.noisinhsinh}</span></div>
+                        <div class="detail-item"><label>Số điện thoại</label><span>${data.sodienthoai}</span></div>
+                        <div class="detail-item"><label>Email</label><span>${data.email}</span></div>
+                        <div class="detail-item"><label>Dân tộc</label><span>${data.dantoc}</span></div>
+                        <div class="detail-item"><label>Ngày vào làm</label><span>${data.ngayvaolam}</span></div>
+                        <div class="detail-item"><label>Trình độ học vấn</label><span>${data.trinhdo}</span></div>
+                    </div>
+                </div>
+            `;
+            document.querySelector('.edit-option').addEventListener('click', (event) => {
+                openEditPanel(event); 
+            });
+            
+            document.getElementById('closeDetailPanel').addEventListener('click', () => {
+                detailPanel.classList.remove('show');
+            });
+        })
+        .catch(error => console.error('Error fetching employee data:', error));
+}
+
+// Mở Edit Panel
+function openEditPanel(event) {
+    event.preventDefault();
+    formPanel.classList.add('show');
+    mainContent.classList.add("panel-active");
+    updatePanelHeight();
+    if (rightPanel) {
+        rightPanel.classList.remove('show');
+    }
+    if (filterPanel) {
+        filterPanel.classList.remove('show');
+    }
+}
+
+// Đóng form panel
+document.getElementById("closePanel1").addEventListener("click", function () {
+    formPanel.classList.remove("show");
+    mainContent.classList.remove("panel-active");
+});
+
+window.addEventListener("resize", updatePanelHeight);
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderTable(data);  
+    updatePanelHeight();
 });
 
 
 document.querySelector('.btn-save').addEventListener('click', () => {
     alert('Lưu thành công!');
-
 });
 
 document.querySelector('.btn-delete').addEventListener('click', () => {
     alert('Đã xóa!');
-
 });
 
 
-window.addEventListener("resize", updatePanelHeight);
+// dân tộc && Nơi sinh
+document.addEventListener('DOMContentLoaded', function () {
+
+    const dantocSelect = document.getElementById('dantoc');
+    const noisinhSelect = document.getElementById('noisinh');
+    const noisinheditSelect = document.getElementById('noisinhedit');
+    const dantoceditSelect = document.getElementById('dantocedit');
+
+    if (dantocSelect && noisinhSelect && dantoceditSelect && noisinheditSelect) {
+        const danTocs = [
+            "Kinh", "Tày", "Ê Đê", "Hoa", "Mường", "Khơ-me", "Nùng", "Thái", "H’mông", "Chăm",
+            "Ba Na", "Xơ Đăng", "Co", "Sán Dìu", "Sán Chí", "Ra Glai", "Brâu", "Tà Ôi", "Stieng",
+            "Giarai", "Kơ Tu", "Churu", "H're", "Cơ Ho", "K'Ho", "Rơ Măm", "M'Nông", "Bru-Vân Kiều",
+            "Vân Kiều", "Dẻo", "Sáo", "Cơ Tu", "Xinh Mun", "Chứt", "Lào", "Phù Lá", "Mày", "Lô Lô"
+        ];
+
+        const provinces = [
+            "Hà Nội", "Hồ Chí Minh", "Đà Nẵng", "Cần Thơ", "An Giang", "Bà Rịa-Vũng Tàu", "Bắc Giang",
+            "Bắc Kạn", "Bạc Liêu", "Bắc Ninh", "Bến Tre", "Bình Dương", "Bình Phước", "Bình Thuận",
+            "Cà Mau", "Cao Bằng", "Đắk Lắk", "Đắk Nông", "Điện Biên", "Đồng Nai", "Đồng Tháp", "Gia Lai",
+            "Hà Giang", "Hà Nam", "Hà Tĩnh", "Hải Dương", "Hải Phòng", "Hậu Giang", "Hòa Bình", "Hưng Yên",
+            "Khánh Hòa", "Kiên Giang", "Kon Tum", "Lai Châu", "Lâm Đồng", "Lạng Sơn", "Lào Cai", "Long An",
+            "Nam Định", "Nghệ An", "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Phú Yên", "Quảng Bình", "Quảng Nam",
+            "Quảng Ngãi", "Quảng Ninh", "Quảng Trị", "Sóc Trăng", "Sơn La", "Tây Ninh", "Thái Bình",
+            "Thái Nguyên", "Thanh Hóa", "Thừa Thiên-Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang", "Vĩnh Long",
+            "Vĩnh Phúc", "Yên Bái"
+        ];
 
 
-// table
+        provinces.forEach(function (province) {
+            const option1 = document.createElement('option');
+            option1.value = province;
+            option1.textContent = province;
+            noisinhSelect.appendChild(option1);
 
-const data = [
-    { name: "Trần Lan Nhi", department: "Khoa ngoại ngữ", position: "Trưởng khoa", status: "Đang làm" },
-    { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" }
-
-];
-
-// Hàm để tạo bảng dữ liệu động
-function renderTable(data) {
-    const tableBody = document.getElementById('table-body');
-    tableBody.innerHTML = '';
-
-
-    if (data.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="5">Không có dữ liệu</td></tr>';
-    } else {
-
-        for (let i = 0; i < data.length; i++) {
-            const row = document.createElement('tr');
-
-            const cell1 = document.createElement('td');
-            cell1.textContent = data[i].name;
-            row.appendChild(cell1);
-
-            const cell2 = document.createElement('td');
-            cell2.textContent = data[i].department;
-            row.appendChild(cell2);
-
-            const cell3 = document.createElement('td');
-            cell3.textContent = data[i].position;
-            row.appendChild(cell3);
-
-            const cell4 = document.createElement('td');
-            cell4.textContent = data[i].status;
-            row.appendChild(cell4);
-
-            const cell5 = document.createElement('td');
-            cell5.innerHTML = `
-                    <span class="three-dots" onclick="toggleDropdown(event)">
-                        <img src="/Content/img/ri_more-2-fill.png" alt="3-dot" class="icon-dot">
-                    </span>
-                    <ul class="dropdown-menu" style="display: none;">
-                        <li>
-                            <a href="#" class="edit-option" onclick="openEditPanel(event)">
-                                <span>Sửa</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="delete-option">
-                                <span>Xóa</span>
-                            </a>
-                        </li>
-                        
-                    </ul>`;
-
-            row.appendChild(cell5);
-
-            tableBody.appendChild(row);
-        }
-    }
-}
-
-function toggleDropdown(event) {
-    const dropdownToggle = event.target.closest('.three-dots');
-    const dropdownMenu = dropdownToggle ? dropdownToggle.nextElementSibling : null;
-
-    if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
-        const allDropdowns = document.querySelectorAll('.dropdown-menu');
-        allDropdowns.forEach(menu => {
-            if (menu !== dropdownMenu) {
-                menu.style.display = 'none'; // Close other dropdowns
-            }
+            const option2 = document.createElement('option');
+            option2.value = province;
+            option2.textContent = province;
+            noisinheditSelect.appendChild(option2);
         });
 
-        // Toggle the clicked dropdown
-        dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+
+        danTocs.forEach(function (dantoc) {
+            const option1 = document.createElement('option');
+            option1.value = dantoc;
+            option1.textContent = dantoc;
+            dantocSelect.appendChild(option1);
+
+            const option2 = document.createElement('option');
+            option2.value = dantoc;
+            option2.textContent = dantoc;
+            dantoceditSelect.appendChild(option2);
+        });
+    } else {
+        console.error('Các phần tử select không tìm thấy.');
     }
+});
+
+//filter-panle-content
+function selectFilter(element, value) {
+    const parent = element.parentNode;
+    const options = parent.querySelectorAll('.filter-option');
+
+    options.forEach(option => option.classList.remove('active'));
+
+   
+    element.classList.add('active');
+
+    console.log(`Filter selected: ${value}`);
 }
 
-// Hide dropdown when clicking outside
-document.addEventListener('click', function (event) {
-    const dropdownMenus = document.querySelectorAll('.dropdown-menu');
-    dropdownMenus.forEach(menu => {
-        if (!menu.contains(event.target) && !event.target.closest('.three-dots')) {
-            menu.style.display = 'none';
-        }
-    });
-});
+// Cập nhật khoảng độ tuổi
+function updateAgeRange() {
+    const ageMin = document.getElementById('age-min').value;
+    const ageMax = document.getElementById('age-max').value;
 
-// Hide dropdown when selecting an option
-$(document).on('click', '.edit-option, .delete-option', function () {
-    $('.dropdown-menu').hide();
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    renderTable(data);
-});
-
-//datetimepicker
-$(document).ready(function () {
-    $(".datetime-icon").on("click", function () {
-        var inputField = $(this).prev('input');
-
-
-        inputField.datepicker('show');
-    });
-
-    // Khởi tạo datepicker cho các ô nhập liệu
-    $('#ngaysinh').datepicker({
-        format: 'dd/mm/yyyy',
-        autoclose: true
-    });
-
-    $('#ngayvaolam').datepicker({
-        format: 'dd/mm/yyyy',
-        autoclose: true
-    });
-});
-$(document).ready(function () {
-
-    var today = new Date();
-
-
-    var day = today.getDate();
-    var month = today.getMonth() + 1;
-    var year = today.getFullYear();
-
-
-    day = day < 10 ? '0' + day : day;
-    month = month < 10 ? '0' + month : month;
-
-
-    var formattedDate = day + '/' + month + '/' + year;
-
-
-    $('#ngaysinh').val(formattedDate);
-    $('#ngayvaolam').val(formattedDate);
-});
-
-
-//form-panel
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    const formPanel = document.getElementById('formPanel');
-    const mainContent = document.querySelector('.main-section');
-    const closePanelButton = document.getElementById("closePanel1");
-
-
-
-    function openEditPanel() {
-        formPanel.classList.add('show');
-        mainContent.classList.add("panel-active");
-        updatePanelHeight();
-        const rightPanel = document.getElementById('rightPanel');
-        if (rightPanel) {
-            rightPanel.classList.remove('show');
-        }
+   
+    if (parseInt(ageMin) > parseInt(ageMax)) {
+        document.getElementById('age-min').value = ageMax;
     }
 
-
-    function updatePanelHeight() {
-        const mainSectionHeight = mainContent.offsetHeight;
-        formPanel.style.height = `${mainSectionHeight}px`;
-    }
-
-    const editButton = document.querySelector('.edit-option');
-    if (editButton) {
-        editButton.addEventListener('click', openEditPanel);
-    } else {
-        console.error('Nút sửa không tìm thấy!');
-    }
+    console.log(`Age range: ${ageMin} - ${ageMax}`);
+}
 
 
-    closePanelButton.addEventListener("click", function () {
-        console.log("Đang đóng form...");
-        formPanel.classList.remove("show");
-        mainContent.classList.remove("panel-active");
-    });
 
+// Nút xác nhận lọc
+document.getElementById('SubmitFilterPanel').addEventListener('click', function () {
+    const ageMin = document.getElementById('age-min').value;
+    const ageMax = document.getElementById('age-max').value;
+    const status = document.querySelector('input[name="status"]:checked').value;
 
-    document.querySelector('.btn-save').addEventListener('click', () => {
-        alert('Lưu thành công!');
-    });
-
-
-    document.querySelector('.btn-delete').addEventListener('click', () => {
-        alert('Đã xóa!');
-    });
+    console.log(`Lọc: Độ tuổi từ ${ageMin} đến ${ageMax}, Tình trạng: ${status}`);
 });
-
-

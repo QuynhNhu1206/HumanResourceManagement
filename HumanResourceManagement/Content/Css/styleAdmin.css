@@ -10,6 +10,7 @@ body {
     color: #333;
     min-height: 100vh;
     line-height: 1.5;
+    overflow:hidden;
 }
 
 #main-header {
@@ -21,6 +22,8 @@ body {
     background-color: white;
     padding: 10px 0;
     z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
    
@@ -126,28 +129,25 @@ body {
     display: flex;
     flex-direction: column;
     margin-right: 10px;
-    /* Khoảng cách giữa text và icon */
     transition: color 0.3s ease;
-    /* Căn giữa theo chiều dọc */
 }
 
 
 
-/* Phong cách tên người dùng */
+
 .user-name {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: bold;
     font-size: 18px;
 }
 
-/* Phong cách thông tin chi tiết */
+
 .user-detail {
     margin: 0;
     font-size: 10px;
     color: gray;
 }
 
-/* Phong cách ảnh avatar */
 .user-avatar {
     width: 40px;
     height: 40px;
@@ -179,7 +179,7 @@ body {
     z-index: 1000;
     display: none;
 }
-/* Định dạng cho dropdown panel */
+
 .dropdown-panel ul {
     list-style: none;
     margin: 0;
@@ -205,9 +205,9 @@ body {
                 color: white;
             }
                 .dropdown-panel ul li a:hover i.icon {
-                    color: white; /* Màu icon thay đổi khi hover */
+                    color: white; 
                 }
-            /* Định dạng cho icon trong a */
+            
             .dropdown-panel ul li a i.icon {
                 width: 24px;
                 height: 24px;
@@ -216,7 +216,7 @@ body {
                 color: #555;
             }
 
-/* Định dạng riêng cho phần Đăng xuất */
+
 .logout-item {
     border-top: 1px solid #ddd;
     margin-top: 10px;
@@ -246,31 +246,32 @@ body {
 
 /* Sidebar */
 .dashboard {
-    display: grid;
+    display: flex;
+    flex-direction: row;
     gap: 20px;
     padding: 20px;
-    margin-top: 80px;
-    height: calc(100vh - 80px);
+    margin-top: 70px;
+    height: 100vh;
+    position: relative;
+    overflow-x: hidden;
 }
 
 /* Sidebar */
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
     background-color: #fff;
-    padding: 2px;
-    border-radius: 10px;
-    height: calc(100vh - 80px);
+    left:0;
+    padding: 40px;
+    top: -40px;
+    position: fixed;
+    top: 70px; 
+    width: 250px;
+    height: 100%;
     overflow-y: auto;
-    margin-top: -20px;
-    position: relative;
-    flex-grow: 1;
 }
 
 /* Welcome Message */
 .welcome-message {
+    margin-top: -20px;
     text-align: left;
     margin-bottom: 20px;
 }
@@ -283,28 +284,28 @@ body {
 
     .welcome-message .highlight {
         display: block;
-        font-size: 36px;
+        font-size: 40px;
         font-weight: bold;
         background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin: 0;
-        /* Xóa margin */
+
     }
 
     .welcome-message .update-info {
         font-size: 12px;
         color: #666;
         margin-top: 5px;
-        /* Khoảng cách trên */
+   
     }
 
 .sidebar ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    text-align: left;
+    text-align: justify-all;
 }
 
 .sidebar .nav-link {
@@ -326,5 +327,14 @@ body {
         border-radius: 8px;
         background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
     }
-
+.main-content {
+    margin-left: 250px;
+    flex-grow: 1;
+    background: none;
+    border-radius:8px;
+    box-sizing: border-box;
+    height: 100vh;
+    margin-top: 80px;
+    width: 100%;
+}
 

@@ -1,18 +1,30 @@
-﻿document.getElementById('user-profile').addEventListener('click', function (e) {
-    var optionsMenu = document.getElementById('options-menu');
-    optionsMenu.classList.toggle('show');
+﻿//Option
+document.addEventListener('DOMContentLoaded', function () {
+    const observer = new MutationObserver(function () {
+        const userAvatar = document.getElementById('userAvatar');
+        const userProfile = document.getElementById('userProfile');
+        const dropdownPanel = document.getElementById('dropdownPanel');
 
-  
-    e.stopPropagation();
-});
+        if (userAvatar && userProfile && dropdownPanel) {
+            observer.disconnect();
 
+            function toggleDropdown() {
+                dropdownPanel.style.display = dropdownPanel.style.display === 'block' ? 'none' : 'block';
+            }
 
-document.addEventListener('click', function (e) {
-    var optionsMenu = document.getElementById('options-menu');
-    var userProfile = document.getElementById('user-profile');
+            function hideDropdown(event) {
+                if (!dropdownPanel.contains(event.target) &&
+                    !userAvatar.contains(event.target) &&
+                    !userProfile.contains(event.target)) {
+                    dropdownPanel.style.display = 'none';
+                }
+            }
 
+            userAvatar.addEventListener('click', toggleDropdown);
+            userProfile.addEventListener('click', toggleDropdown);
+            document.addEventListener('click', hideDropdown);
+        }
+    });
 
-    if (!userProfile.contains(e.target) && !optionsMenu.contains(e.target)) {
-        optionsMenu.classList.remove('show');
-    }
+    observer.observe(document.body, { childList: true, subtree: true });
 });

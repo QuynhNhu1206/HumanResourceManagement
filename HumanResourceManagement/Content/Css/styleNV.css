@@ -1,4 +1,6 @@
-﻿* {
+﻿/*css nhan vien */
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,31 +10,18 @@ body {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: #333;
     display: flex;
-    min-height: 100vh;
-    height: calc(100vh-80px);
-    width: 100%;
-}
-
-.main-content {
-    position: relative;
     height: 100vh;
-    overflow: hidden;
-    margin-left: 60px;
-    margin-top: 70px;
-    display: flex;
-    flex-grow: 1;
-    padding: 20px;
-    border-radius: 10px;
-    background: var(--6, linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%));
-    transition: transform 0.3s ease;
+    width: 100%;
+    background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
 }
-
 
 .main-section {
-    min-height: 100vh;
     flex: 1;
-    padding-right: 30px;
+    padding-right: 10px;
     transition: margin-right 0.3s ease;
+    margin-top: 20px;
+    padding-right: 40px;
+    max-height:fit-content;
 }
 
 
@@ -53,16 +42,18 @@ body {
     border-radius: 13.333px;
     z-index: 1;
 }
+
 .truong {
     justify-content: center;
     align-items: center;
 }
+
 th, td {
     vertical-align: middle;
 }
 
     th:last-child, td:last-child {
-        text-align: center; 
+        text-align: center;
     }
 
 .three-dots {
@@ -77,7 +68,7 @@ th, td {
 .dropdown-menu {
     list-style-type: none;
     justify-content: space-between;
-    justify-items:center;
+    justify-items: center;
     padding: 0;
     margin: 0;
     position: absolute;
@@ -101,6 +92,7 @@ th, td {
             background-color: #f0f0f0;
             background-color: #f1f1f1;
         }
+
     .dropdown-menu .edit-option .delete-option {
         display: block;
         text-align: center;
@@ -109,15 +101,17 @@ th, td {
         transition: background-color 0.3s ease;
     }
 
-       
+
 
 
 .show {
     display: block;
 }
+
 td:empty .three-dots {
     display: none;
 }
+
 .tableds th,
 .tableds td {
     padding: 20px 20px;
@@ -158,7 +152,7 @@ td:empty .three-dots {
     z-index: 1;
 }
 
-   
+
     .Them img {
         width: 18px;
         height: 18px;
@@ -189,6 +183,44 @@ td:empty .three-dots {
         background: none;
     }
 
+.quanly {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    background-color: white;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    cursor: pointer;
+    height: 40px;
+    z-index: 1;
+}
+
+    .quanly i {
+        width: 18px;
+        height: 18px;
+        background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .quanly:hover {
+        background-color: #e0e0e0;
+        transform: scale(1.05);
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+
+    .quanly i:hover {
+        filter: brightness(1.2);
+        transition: filter 0.3s;
+    }
 
 .icon-nav {
     width: 40px;
@@ -242,20 +274,23 @@ td:empty .three-dots {
 
 .right-panel {
     position: absolute;
-    top: 0;
+    top: 20px;
     right: -350px;
     width: 350px;
-    height: 600px;
     background-color: white;
     transition: right 0.3s ease;
     transform: scale(0.8);
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     border-radius: 20px;
-    margin-top: 24px;
+    margin-top: 80px;
     margin-right: 20px;
     margin-left: 10px;
+<<<<<<< HEAD
     display: none; /* Ẩn form khi không có class 'show' */
+=======
+    z-index:1;
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
 }
 
     .right-panel.show {
@@ -295,7 +330,7 @@ td:empty .three-dots {
 
         .panel-header .btn-close i {
             color: #333;
-            font-size: 20px; /* Giữ kích thước icon */
+            font-size: 20px;
         }
 
 /* Nội dung form */
@@ -303,75 +338,72 @@ td:empty .three-dots {
     padding: 16px;
 }
 
-.input-with-icon {
-    position: relative;
-    display: inline-block;
-    width: 100%;
+form.panel-content .form-group {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
-.select-container {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-}
+    form.panel-content .form-group .input-control,
+    form.panel-content .form-group .input-select {
+        margin-bottom: 8px;
+        background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
+        position: relative;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        margin-top: 5px;
+        font-size: 14px;
+        height: 50px;
+        border-radius: 16px;
+        appearance: auto;
+        -webkit-appearance: auto;
+        -moz-appearance: auto;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
 
-.datetime-icon {
-    position: absolute;
-    right: 10px;
-    margin-right: 10px;
-    top: 40%;
-    transform: translateY(-50%);
-    /* Để tránh icon bị click */
-    font-size: 16px;
-    color: #333;
-}
 
-.form-select {
-    width: 100%;
-    padding-right: 40px;
-    /* Chừa không gian cho icon */
-    height: 50px;
-    background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    -webkit-appearance: none;
-    /* Loại bỏ kiểu mặc định */
-    -moz-appearance: none;
-    appearance: none;
-}
+        form.panel-content .form-group .input-control:focus,
+        form.panel-content .form-group .input-select:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            outline: none;
+        }
 
-.select-icon {
-    position: absolute;
-    right: 10px;
-    margin-right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    /* Để tránh icon bị click */
-    font-size: 16px;
-    color: #333;
-}
+        form.panel-content .form-group .input-select option:hover {
+            background-color: #86b7fe;
+            color: #fff;
+        }
 
-/* Gán chiều cao consistent giữa các field */
-.form-control,
-.form-select {
-    height: 50px;
-    /* Tùy chỉnh chiều cao đồng nhất */
-}
+        form.panel-content .form-group .input-select option[selected] {
+            color: white;
+            background-color: #86b7fe;
+        }
 
-.panel-content .form-control,
-.panel-content .form-select {
-    margin-bottom: 8px;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
-    position: relative;
+
+        form.panel-content .form-group .input-select option {
+            color: #333;
+            background-color: #fff;
+        }
+
+
+        form.panel-content .form-group .input-select:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            outline: none;
+        }
+
+.panel-footer {
+    margin-top: 20px;
+    gap: 20px;
 }
 
 .btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px; /* Khoảng cách giữa icon và text */
+    gap: 30px;
     padding: 8px 16px;
     border-radius: 6px;
     font-size: 14px;
@@ -440,87 +472,356 @@ td:empty .three-dots {
 .btn-delete i {
     font-size: 16px;
 }
+
 .icon-dot {
     width: 20px;
     height: 20px;
 }
-.ui-datepicker {
-    background: #fff; 
-    border: 1px solid #ccc; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
-    font-family: 'Arial', sans-serif;
-    font-size: 14px;
-    color: #333; 
-}
-ui-datepicker td a {
-    color: #007bff; 
-    padding: 10px;
-    text-decoration: none;
-    display: block;
-    border-radius: 4px;
-}
 
-.ui-datepicker td a:hover {
-    background-color: #007bff; 
-    color: #fff; 
-}
-
-
-.ui-datepicker .ui-state-active {
-    background-color: #007bff; 
-    color: #fff; 
-}
-
-
-.ui-datepicker-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #555;
-}
-
-
-.ui-datepicker-prev, .ui-datepicker-next {
-    background-color: #007bff; 
-    border-radius: 50%;
-    color: #fff;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    line-height: 30px;
-    font-size: 16px;
-    border: none;
-}
-
-    .ui-datepicker-prev:hover, .ui-datepicker-next:hover {
-        background-color: #0056b3; 
-    }
 /*Editpanel*/
 .form-panel {
     position: absolute;
-    top: 0;
+    top: 20px;
     right: -350px;
     width: 350px;
-    height: 600px !important;
+    height: 600px;
     background-color: white;
     transition: right 0.3s ease;
     transform: scale(0.8);
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     border-radius: 20px;
-    margin-top: 24px;
+    margin-top: 80px;
     margin-right: 20px;
     margin-left: 10px;
-    z-index:1;
+    z-index: 1;
 }
-   
+
     .form-panel.show {
         right: 0;
         animation: bounceIn 0.5s ease-out;
         transform: scale(1);
-        display:block;
+        display: block;
     }
 
 .formPanel .form-content {
     padding: 20px;
 }
+/*panel chi tiết*/
+.details-panel {
+    position: absolute;
+    top: 20px;
+    right: -350px;
+    width: 350px;
+    background-color: white;
+    transition: right 0.3s ease;
+    transform: scale(0.8);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    border-radius: 20px;
+    margin-top: 80px;
+    margin-right: 20px;
+    margin-left: 10px;
+    z-index: 1;
+}
+
+    .details-panel.show {
+        right: 0;
+        animation: bounceIn 0.5s ease-out;
+        transform: scale(1);
+        display: block;
+    }
+
+.detail-panel .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+
+.menu-options {
+    display: none;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 10;
+}
+
+    .menu-options button {
+        display: block;
+        padding: 10px;
+        width: 100%;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+
+        .menu-options button:hover {
+            background-color: #f1f1f1;
+        }
+
+.btn-menu, .btn-close {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.profile-image {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+    .profile-image .profile-pic {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+.employee-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.employee-id {
+    font-size: 12px;
+    color: #888;
+}
+
+.employee-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.employee-department {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.department, .position {
+    font-size: 16px;
+}
+
+.detail-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .detail-item label {
+        font-size: 14px;
+        color: #888;
+    }
+
+    .detail-item span {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+    }
+
+.panel-controls {
+    display: flex;
+    gap: 10px;
+}
+/*Filter-panel*/
+.filter-panel {
+    position: absolute;
+    top: 20px;
+    right: -350px;
+    width: 350px;
+    background-color: white;
+    transition: right 0.3s ease;
+    transform: scale(0.8);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    border-radius: 20px;
+    margin-top: 80px;
+    margin-left: 4px;
+    z-index: 1;
+
+}
+
+    .filter-panel.show {
+        right: 0;
+        animation: bounceIn 0.5s ease-out;
+        transform: scale(1);
+        display: block;
+    }
+
+.panel-header h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Label các phần bộ lọc */
+.filter-section label {
+    font-weight:bold;
+    margin-top: 5px; 
+    margin-bottom: 5px;
+    display: block;
+    font-size: 14px;
+}
+
+
+.filter-options {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin-top: 5px;
+    justify-content:center;
+}
+
+.filter-option {
+    padding: 10px;
+    background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size:14px;
+}
+
+    .filter-option:hover {
+        background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
+        color: white;
+    }
+
+    .filter-option.active {
+        background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
+        color: white;
+    }
+
+
+select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 16px;
+    border: 1px solid #ccc;
+    background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
+    margin-top: 5px;
+    font-size:14px
+}
+
+
+    select:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        outline: none;
+    }
+
+    
+    select:hover {
+        border-color: #86b7fe; 
+    }
+
+    select option[selected] {
+        color: white;
+        background-color: #86b7fe;
+    }
+
+    select option {
+        color: #333;
+        background-color: #fff;
+    }
+
+
+form.panel-content .form-group .input-select:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    outline: none;
+}
+
+.age-range {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0px 30px 0 30px;
+    margin-top: 5px
+}
+
+    .age-range input[type="number"] {
+        width: 100px;
+        padding: 5px;
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 16px;
+        font-size: 14px;
+        background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
+    }
+        .age-range input[type="number"]:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            outline: none;
+        }
+
+/* Radio button cho Tình trạng */
+
+
+.filter-options input[type="radio"] {
+    color: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
+    margin-right: 5px;
+}
+
+.btn-ok {
+    background: linear-gradient(90deg, #6AE628 0%, #1EB500 100%);
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 10px 16px;
+    cursor: pointer;
+    height: 40px;
+    width:120px;
+    z-index: 1;
+    margin-left: 100px;
+}
+
+    .btn-ok i {
+        margin-left: 5px;
+    }
+
+    .btn-ok:hover {
+        background: linear-gradient(90deg, #5CA020 0%, #186E00 100%);
+    }
