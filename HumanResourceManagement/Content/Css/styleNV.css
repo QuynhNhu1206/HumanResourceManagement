@@ -286,13 +286,18 @@ td:empty .three-dots {
     margin-top: 80px;
     margin-right: 20px;
     margin-left: 10px;
+<<<<<<< HEAD
+    display: none; /* Ẩn form khi không có class 'show' */
+=======
     z-index:1;
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
 }
 
     .right-panel.show {
         right: 0;
         animation: bounceIn 0.5s ease-out;
         transform: scale(1);
+        display: none; /* Ẩn form khi không có class 'show' */
     }
 
 .panel-header {
