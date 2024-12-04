@@ -1,4 +1,4 @@
-﻿/* Reset CSS */
+﻿﻿ /* Reset CSS */
 * {
     margin: 0;
     padding: 0;
@@ -124,8 +124,13 @@
         background-color: #9dc8f0;
         color: transparent;
         background: linear-gradient(112deg, #06F -17.31%, #0084FF 33.37%, #68F0FF 169.57%); /* Gradient cho nền chữ */
+<<<<<<< HEAD
+        -webkit-background-clip: text;
+        background-clip: text;
+=======
         -webkit-background-clip: text; 
         background-clip: text; 
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
     }
 
 .ellipse {
@@ -293,7 +298,10 @@
 
     .stat-item:hover {
         transform: translateY(-10px);
+<<<<<<< HEAD
+=======
        
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
     }
 
 .stat-title {
@@ -308,7 +316,10 @@
     -webkit-text-fill-color: transparent;
     display: flex;
     flex-direction: row;
+<<<<<<< HEAD
+=======
    
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
     align-items: center;
     margin-top: 2px;
 }
@@ -321,9 +332,13 @@
     font-weight: 400;
     line-height: normal;
     text-align: left;
+<<<<<<< HEAD
+    margin-top: 15px;
+=======
    
     margin-top: 15px;
    
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
 }
 
 .stat-item h2 {
@@ -343,15 +358,22 @@
 @media screen and (max-width: 768px) {
     .stats-section {
         flex-direction: column;
+<<<<<<< HEAD
+=======
        
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
         align-items: center;
     }
 
     .stat-item {
         width: 80%;
+<<<<<<< HEAD
+        margin-bottom: 20px;
+=======
        
         margin-bottom: 20px;
        
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
     }
 }
 
@@ -406,7 +428,11 @@ body {
     align-items: center;
 }
 
+<<<<<<< HEAD
+
+=======
   
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
     .custom-dangnhap h1 {
         color: #000;
         text-align: center;
@@ -416,7 +442,11 @@ body {
         margin-bottom: 15px;
     }
 
+<<<<<<< HEAD
+
+=======
    
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
     .custom-dangnhap .highlight {
         color: #0066ff;
         font-family: Cambria, sans-serif;
@@ -445,7 +475,7 @@ body {
         align-items: center;
         gap: 10px;
         width: 100%;
-        justify-content:space-between;
+        justify-content: space-between;
     }
 
 
@@ -464,12 +494,14 @@ body {
         max-width: 300px;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
+
         .custom-dangnhap input:focus {
             border-radius: 29.333px;
             border-color: #86b7fe;
             box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
             outline: none;
         }
+
 .input-wrapper {
     display: flex;
     flex-direction: column;
@@ -478,8 +510,9 @@ body {
 }
 
 .custom-tdn, .custom-pass {
-    width: 100%; 
+    width: 100%;
 }
+
 .custom-tdn {
     margin-left: 150px;
     margin-bottom: 10px;

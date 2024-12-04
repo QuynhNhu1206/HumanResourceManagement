@@ -1,4 +1,5 @@
-﻿
+﻿@model HumanResourceManagement.Models.PhongBanViewModel
+
 @{
     ViewBag.Title = "Phongban";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -39,11 +40,23 @@
                 <tr>
                     <th scope="col">Mã phòng ban</th>
                     <th scope="col">Tên phòng ban</th>
-                    <th scope="col">Tùy chọn</th>
+                    <th scope="col">Số lượng nhân viên</th>
+                    <th scope="col">Mô tả</th>
+
                 </tr>
             </thead>
-            <tbody id="table-body">
-            </tbody>
+            @foreach (var item in Model.DanhSachPhongBan)
+            {
+                <tr>
+                    <td> @item.MaPhongBan</td>
+                    <td>@item.TenPhongBan</td>
+                    <td>@item.SoLuongNhanVien</td>
+                    <td>@item.MoTa</td>
+
+                </tr>
+
+            }
+
         </table>
     </div>
     <nav aria-label="Page navigation example">
@@ -69,6 +82,26 @@
             <i class="fas fa-times"></i>
         </button>
     </div>
+<<<<<<< HEAD
+    <form class="panel-content" method="post" action="/Phongban/Phongban">
+        <div class="row g-3 flex-column">
+            <div class="col">
+                <input type="text" name="PhongBanMoi.MaPhongBan" class="form-control" placeholder="Mã phòng ban"
+            </div>
+            <div class="col">
+                <input type="text" name="PhongBanMoi.TenPhongBan" class="form-control" placeholder="Tên phòng ban"
+            </div>
+            <div class="col">
+                <input type="text" name="PhongBanMoi.SoLuongNhanVien" class="form-control" placeholder="Số lượng nhân viên"
+            </div>
+            <div class="col">
+                <input type="text" name="PhongBanMoi.MoTa" class="form-control" placeholder="Mô tả" aria-label="Mô tả">
+            </div>
+        </div>
+
+        <div class="panel-footer d-flex justify-content-between">
+            <button class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+=======
     <form class="panel-content">
         <div class="form-group">
             <input type="text" id="mapb" name="mapb" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
@@ -98,10 +131,19 @@
         <div class="panel-footer d-flex justify-content-between">
             <button id="saveedit" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
             <button id="xoaedit" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
         </div>
     </form>
 
 </aside>
+<<<<<<< HEAD
+<aside class="right-panel" id="rightPanel">
+    <div class="panel-header d-flex justify-content-between align-items-center">
+        <h3>Cập nhật thông tin</h3>
+        <button id="closePanel" type="button" class="btn-close" aria-label="Close">
+            <i class="fas fa-times"></i>
+        </button>
+=======
 <!-- panel lọc -->
 <aside class="filter-panel" id="filterPanel">
     <div class="panel-header d-flex justify-content-between align-items-center">
@@ -129,6 +171,28 @@
                 <i class="fa-solid fa-check"></i>
             </button>
         </div>
+>>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
     </div>
+    <form class="panel-content" method="post" action="/Phongban/Phongban">
+        <div class="row g-3 flex-column">
+            <div class="col">
+                <input type="text" name="PhongBanMoi.MaPhongBan" class="form-control" placeholder="Mã phòng ban"
+            </div>
+            <div class="col">
+                <input type="text" name="PhongBanMoi.TenPhongBan" class="form-control" placeholder="Tên phòng ban"
+            </div>
+            <div class="col">
+                <input type="text" name="PhongBanMoi.SoLuongNhanVien" class="form-control" placeholder="Số lượng nhân viên"
+            </div>
+            <div class="col">
+                <input type="text" name="PhongBanMoi.MoTa" class="form-control" placeholder="Mô tả" aria-label="Mô tả">
+            </div>
+        </div>
+
+        <div class="panel-footer d-flex justify-content-between">
+            <button class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+        </div>
+    </form>
+
 </aside>
 @Scripts.Render("~/bundles/pb")
