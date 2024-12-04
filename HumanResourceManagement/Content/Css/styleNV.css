@@ -21,7 +21,7 @@ body {
     transition: margin-right 0.3s ease;
     margin-top: 20px;
     padding-right: 40px;
-    height:600px;
+    max-height:fit-content;
 }
 
 
@@ -277,7 +277,6 @@ td:empty .three-dots {
     top: 20px;
     right: -350px;
     width: 350px;
-    height: 600px;
     background-color: white;
     transition: right 0.3s ease;
     transform: scale(0.8);
@@ -509,7 +508,6 @@ form.panel-content .form-group {
     top: 20px;
     right: -350px;
     width: 350px;
-    height: 600px;
     background-color: white;
     transition: right 0.3s ease;
     transform: scale(0.8);
@@ -655,7 +653,6 @@ form.panel-content .form-group {
     top: 20px;
     right: -350px;
     width: 350px;
-    height: 600px;
     background-color: white;
     transition: right 0.3s ease;
     transform: scale(0.8);
@@ -663,8 +660,7 @@ form.panel-content .form-group {
     overflow-y: auto;
     border-radius: 20px;
     margin-top: 80px;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-left: 4px;
     z-index: 1;
 
 }
@@ -702,8 +698,9 @@ form.panel-content .form-group {
 .filter-options {
     display: flex;
     flex-wrap: nowrap;
-    gap: 10px;
+    gap: 8px;
     margin-top: 5px;
+    justify-content:center;
 }
 
 .filter-option {

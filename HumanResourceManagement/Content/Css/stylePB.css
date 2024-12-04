@@ -15,11 +15,10 @@ body {
 
 .main-section {
     flex: 1;
-    padding-right: 10px;
     transition: margin-right 0.3s ease;
     margin-top: 20px;
     padding-right: 40px;
-    height: 600px;
+    height:fit-content;
 }
 
 .Tieude {
@@ -225,7 +224,7 @@ td:empty .three-dots {
 
 .right-panel {
     position: absolute;
-    top: 0;
+    top: 20px;
     right: -350px;
     width: 350px;
     height: 350px;
@@ -235,9 +234,10 @@ td:empty .three-dots {
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     border-radius: 20px;
-    margin-top: 36px;
+    margin-top: 80px;
     margin-right: 20px;
     margin-left: 10px;
+    z-index: 1;
 }
 
     .right-panel.show {
@@ -403,7 +403,7 @@ form.panel-content .form-group {
 /*Editpanel*/
 .form-panel {
     position: absolute;
-    top: 0;
+    top: 20px;
     right: -350px;
     width: 350px;
     height: 350px;
@@ -413,7 +413,7 @@ form.panel-content .form-group {
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     border-radius: 20px;
-    margin-top: 36px;
+    margin-top: 80px;
     margin-right: 20px;
     margin-left: 10px;
     z-index:1;
@@ -432,7 +432,7 @@ form.panel-content .form-group {
 
 .filter-panel {
     position: absolute;
-    top: 0;
+    top: 20px;
     right: -350px;
     width: 350px;
     height: 350px;
@@ -442,9 +442,10 @@ form.panel-content .form-group {
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     border-radius: 20px;
-    margin-top: 36px;
+    margin-top: 80px;
     margin-right: 20px;
     margin-left: 10px;
+    z-index: 1;
 }
 
     .filter-panel.show {

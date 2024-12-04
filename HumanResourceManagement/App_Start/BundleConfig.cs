@@ -12,7 +12,7 @@ namespace HumanResourceManagement
                 "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Content/jquery.validate*"));
+                        "~/Scripts/jquery.validate*"));
 
             // Thêm bundle cho tệp JavaScript của bạn
             bundles.Add(new ScriptBundle("~/bundles/admin").Include(
