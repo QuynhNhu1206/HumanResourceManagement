@@ -1,12 +1,13 @@
-﻿
 
-/*CSS Đăng nhập*/
+﻿/*CSS Đăng nhập*/
+
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
     display: flex;
