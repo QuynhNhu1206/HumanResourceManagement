@@ -1,5 +1,4 @@
-﻿/*css nhan vien */
-
+﻿﻿﻿ /*css nhan vien */
 * {
     margin: 0;
     padding: 0;
@@ -21,7 +20,7 @@ body {
     transition: margin-right 0.3s ease;
     margin-top: 20px;
     padding-right: 40px;
-    max-height:fit-content;
+    max-height: fit-content;
 }
 
 
@@ -286,18 +285,13 @@ td:empty .three-dots {
     margin-top: 80px;
     margin-right: 20px;
     margin-left: 10px;
-<<<<<<< HEAD
-    display: none; /* Ẩn form khi không có class 'show' */
-=======
-    z-index:1;
->>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
+    z-index: 1;
 }
 
     .right-panel.show {
         right: 0;
         animation: bounceIn 0.5s ease-out;
         transform: scale(1);
-        display: none; /* Ẩn form khi không có class 'show' */
     }
 
 .panel-header {
@@ -667,7 +661,6 @@ form.panel-content .form-group {
     margin-top: 80px;
     margin-left: 4px;
     z-index: 1;
-
 }
 
     .filter-panel.show {
@@ -692,8 +685,8 @@ form.panel-content .form-group {
 
 /* Label các phần bộ lọc */
 .filter-section label {
-    font-weight:bold;
-    margin-top: 5px; 
+    font-weight: bold;
+    margin-top: 5px;
     margin-bottom: 5px;
     display: block;
     font-size: 14px;
@@ -705,7 +698,7 @@ form.panel-content .form-group {
     flex-wrap: nowrap;
     gap: 8px;
     margin-top: 5px;
-    justify-content:center;
+    justify-content: center;
 }
 
 .filter-option {
@@ -714,7 +707,7 @@ form.panel-content .form-group {
     border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
-    font-size:14px;
+    font-size: 14px;
 }
 
     .filter-option:hover {
@@ -735,7 +728,7 @@ select {
     border: 1px solid #ccc;
     background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
     margin-top: 5px;
-    font-size:14px
+    font-size: 14px
 }
 
 
@@ -745,9 +738,9 @@ select {
         outline: none;
     }
 
-    
+
     select:hover {
-        border-color: #86b7fe; 
+        border-color: #86b7fe;
     }
 
     select option[selected] {
@@ -784,6 +777,7 @@ form.panel-content .form-group .input-select:focus {
         font-size: 14px;
         background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
     }
+
         .age-range input[type="number"]:focus {
             border-color: #86b7fe;
             box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
@@ -813,7 +807,7 @@ form.panel-content .form-group .input-select:focus {
     padding: 10px 16px;
     cursor: pointer;
     height: 40px;
-    width:120px;
+    width: 120px;
     z-index: 1;
     margin-left: 100px;
 }

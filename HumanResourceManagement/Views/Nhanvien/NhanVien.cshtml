@@ -1,6 +1,4 @@
-﻿@model HumanResourceManagement.Models.NhanVienViewModel
-
-@{
+﻿﻿@{
     ViewBag.Title = "NhanVien";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
@@ -18,134 +16,56 @@
 
     <title>NHÂN VIÊN</title>
 </head>
-<<<<<<< HEAD
+
 <section class="main-section">
     <div class="Tieude">
         <h2>Danh sách nhân viên</h2>
         <div class="right-tools">
-            <button class="loc">
+            <button class="quanly">
+                Quản lý
+                <i class="fa-solid fa-user icon-nav"></i>
+            </button>
+            <button class="loc" id="openFilter">
                 <img src="~/Content/img/Vectorloc.png" alt="loc" class="icon-nav">
             </button>
+
             <button class="Them" id="openPanel">
                 Thêm
                 <img src="~/Content/img/Vectorthem.png" alt="icon-them">
             </button>
-=======
 
-    <section class="main-section">
-        <div class="Tieude">
-            <h2>Danh sách nhân viên</h2>
-            <div class="right-tools">
-                <button class="quanly">
-                    Quản lý
-                    <i class="fa-solid fa-user icon-nav"></i>
-                </button>
-                <button class="loc" id="openFilter">
-                    <img src="~/Content/img/Vectorloc.png" alt="loc" class="icon-nav">
-                </button>
->>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
-
-                <button class="Them" id="openPanel">
-                    Thêm
-                    <img src="~/Content/img/Vectorthem.png" alt="icon-them">
-                </button>
-
-            </div>
         </div>
-<<<<<<< HEAD
     </div>
     <div class="tableds">
-        <table class="table table-hover">
+        <table class="table table-hover" id="employeeTable">
             <thead class="truong">
                 <tr>
-                    <th scope="col">Mã nhân viên</th>
                     <th scope="col">Họ và tên</th>
-                    <th scope="col">Trực thuộc phòng ban</th>
-                    <th scope="col">Trình độ</th>
-                    <th scope="col">Chức vụ</th>
-                    @*<th scope="col">CCCD</th>*@
-                    @*<th scope="col">Ngày sinh</th>
-                    <th scope="col">Giới tính</th>
-                    <th scope="col">Địa chỉ</th>*@
-                    @*<th scope="col">Email</th>
-                    <th scope="col">Số điện thoại</th>
-                    <th scope="col">Ngày bắt đầu</th>
-                    <th scope="col">Tên tài khoản</th>*@
+                    <th scope="col">Trực thuộc bộ phận</th>
+                    <th scope="col">Vị trí</th>
+                    <th scope="col">Tình trạng</th>
+                    <th scope="col">Tùy chọn</th>
                 </tr>
-
             </thead>
-
-            @foreach (var nv in Model.DanhSachNhanVien)
-            {
-
-                <tr>
-                    <td>@nv.MaNhanVien</td>
-                    <td>@nv.HoTen</td>
-                    <td>
-                        @* Tìm Phòng ban dựa trên MaPhongBan *@
-                        @* Dùng LINQ để tìm tên Phòng ban dựa trên mã *@
-                        @{
-                            var phongBan = Model.PhongBanList.FirstOrDefault(p => p.Value == nv.MaPhongBan.ToString());
-                        }
-                        @phongBan.Text
-                    </td>
-                    <td>
-                        @* Tìm Trình độ dựa trên MaTrinhDo *@
-                        @{
-                            var trinhDo = Model.TrinhDoList.FirstOrDefault(t => t.Value == nv.MaTrinhDo.ToString());
-                        }
-                        @trinhDo.Text
-                    </td>
-                    <td>
-                        @* Tìm Chức vụ dựa trên MaChucVu *@
-                        @{
-                            var chucVu = Model.ChucVuList.FirstOrDefault(c => c.Value == nv.MaChucVu.ToString());
-                        }
-                        @chucVu.Text
-                    </td>
-                    @*<td>@nv.CCCD</td>
-                    <td>@nv.NgaySinh.Value.ToString("d/M/yyyy")</td>
-                    <td>@nv.GioiTinh</td>
-                    <td>@nv.DiaChi</td>*@
-                    @*<td>@nv.Email</td>
-        <td>@nv.SoDienThoai</td>
-        <td>@nv.NgayBatDauLam.Value.ToString("d/M/yyyy")</td>
-        <td>@nv.TenTaiKhoan</td>*@
-                    <td>
-                        <span class="three-dots" onclick="toggleDropdown(event)">
-                            <img src="/Content/img/ri_more-2-fill.png" alt="3-dot" class="icon-dot">
-                        </span>
-                        <ul class="dropdown-menu" style="display: none;">
-                            <li>
-                                <a href="#" class="edit-option" data-id="@nv.MaNhanVien" onclick="openEditPanel(@nv.MaNhanVien)">
-                                    <span>Sửa</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="delete-option" onclick="deleteNhanVien(@nv.MaNhanVien)">
-                                    <span>Xóa</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            }
+            <tbody id="table-body">
+            </tbody>
         </table>
     </div>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-end">
             <li class="page-item disabled">
-                <a class="page-link">Previous</a>
+                <a class="page-link">Trước</a>
             </li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item">
-                <a class="page-link" href="#">Next</a>
+                <a class="page-link" href="#">Tiếp theo</a>
             </li>
         </ul>
     </nav>
 </section>
+<!-- panel thêm -->
 <aside class="right-panel" id="rightPanel">
     <div class="panel-header d-flex justify-content-between align-items-center">
         <h3>Thêm thông tin</h3>
@@ -153,689 +73,246 @@
             <i class="fas fa-times"></i>
         </button>
     </div>
-    <form class="panel-content" method="post" action="/Nhanvien/AddNhanVien">
-        <div class="row g-3 flex-column">
-            <div class="col">
-                <input type="text" name="NhanVienMoi.MaNhanVien" class="form-control" placeholder="Mã nhân viên" required>
-            </div>
-            <div class="col">
-                <input type="text" name="NhanVienMoi.HoTen" class="form-control" placeholder="Họ và tên" required>
-            </div>
-            <div class="col">
-                <select name="NhanVienMoi.MaPhongBan" class="form-select">
-                    @if (Model.PhongBanList != null && Model.PhongBanList.Any())  
-                    {
-                        foreach (var phongBan in Model.PhongBanList)
-                        {
-                            <option value="@phongBan.Value">@phongBan.Text</option>
-                        }
-                    }
-                    else
-                    {
-                        <option disabled>Không có phòng ban</option>
-                    }
-                </select>
-            </div>
-            <div class="col">
-                <select name="NhanVienMoi.MaTrinhDo" class="form-select">
-                    @if (Model.TrinhDoList != null && Model.TrinhDoList.Any())
-                    {
-                        foreach (var trinhDo in Model.TrinhDoList)
-                        {
-                            <option value="@trinhDo.Value">@trinhDo.Text</option>
-                        }
-                    }
-                    else
-                    {
-                        <option disabled>Không có trình độ</option>
-                    }
-                </select>
-            </div>
-            <div class="col">
-                <select name="NhanVienMoi.MaChucVu" class="form-select">
-                    @if (Model.ChucVuList != null && Model.ChucVuList.Any())
-                    {
-                        foreach (var chucVu in Model.ChucVuList)
-                        {
-                            <option value="@chucVu.Value">@chucVu.Text</option>
-                        }
-                    }
-                    else
-                    {
-                        <option disabled>Không có Chức vụ</option>
-                    }
-                </select>
-            </div>
-            <div class="col">
-                <input type="text" name="NhanVienMoi.CCCD" class="form-control" placeholder="CCCD">
-            </div>
-            <div class="col input-with-icon">
-                <input type="date" name="NhanVienMoi.NgaySinh" class="form-control" placeholder="Ngày sinh">
-            </div>
-            <div class="col">
-                <select name="NhanVienMoi.GioiTinh" class="form-select">
-=======
-        <div class="tableds">
-            <table class="table table-hover" id="employeeTable">
-                <thead class="truong">
-                    <tr>
-                        <th scope="col">Họ và tên</th>
-                        <th scope="col">Trực thuộc bộ phận</th>
-                        <th scope="col">Vị trí</th>
-                        <th scope="col">Tình trạng</th>
-                        <th scope="col">Tùy chọn</th>
-                    </tr>
-                </thead>
-                <tbody id="table-body">
-                </tbody>
-            </table>
+    <form class="panel-content">
+        <div class="form-group">
+            <input type="text" id="manv" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+            <input type="text" id="ten" name="ten" class="input-control" placeholder="Họ và tên" aria-label="Họ và tên">
+            <input type="text" id="cccd" name="cccd" class="input-control" placeholder="CCCD" aria-label="CCCD">
+            <select id="phongban" name="phongban" class="input-select">
+                <option selected>Phòng ban</option>
+            </select>
+            <input type="date" id="ngaysinh" class="input-control datepicker-input" placeholder="Ngày sinh"
+                   aria-label="Ngày sinh">
+            <select id="gioitinh" name="gioitinh" class="input-select">
+                <option selected>Giới tính</option>
+                <option value="1">Nam</option>
+                <option value="2">Nữ</option>
+            </select>
+            <select id="noisinh" name="noisinh" class="input-select">
+                <option value="" selected>Chọn tỉnh/thành phố</option>
+            </select>
+            <input type="text" id="sodienthoai" name="sodienthoai" class="input-control" placeholder="Số điện thoại" aria-label="Số điện thoại">
+            <select id="dantoc" name="dantoc" class="input-select">
+                <option value="" selected>Chọn dân tộc</option>
+            </select>
+
+            <input type="date" id="ngayvaolam" name="ngayvaolam" class="input-control datepicker-input" placeholder="Ngày bắt đầu làm"
+                   aria-label="Ngày bắt đầu làm" />
+            <select id="trinhdo" name="trinhdo" class="input-select">
+                <option selected>Trình độ học vấn</option>
+            </select>
+            <select id="chucvu" name="chucvu" class="input-select">
+                <option selected>Chức vụ</option>
+
+            </select>
+            <input id="email" type="email" name="email" class="input-control" placeholder="Email" aria-label="Email">
         </div>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-end">
-                <li class="page-item disabled">
-                    <a class="page-link">Trước</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Tiếp theo</a>
-                </li>
-            </ul>
-        </nav>
-    </section>
-    <!-- panel thêm -->
-    <aside class="right-panel" id="rightPanel">
-        <div class="panel-header d-flex justify-content-between align-items-center">
-            <h3>Thêm thông tin</h3>
-            <button id="closePanel" type="button" class="btn-close" aria-label="Close">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <form class="panel-content">
-            <div class="form-group">
-                <input type="text" id="manv" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
-                <input type="text" id="ten" name="ten" class="input-control" placeholder="Họ và tên" aria-label="Họ và tên">
-                <input type="text" id="cccd" name="cccd" class="input-control" placeholder="CCCD" aria-label="CCCD">
-                <select id="phongban" name="phongban" class="input-select">
-                    <option selected>Phòng ban</option>
-                </select>
-                <input type="date" id="ngaysinh" class="input-control datepicker-input" placeholder="Ngày sinh"
-                       aria-label="Ngày sinh">
-                <select id="gioitinh" name="gioitinh" class="input-select">
->>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
-                    <option selected>Giới tính</option>
-                    <option value="1">Nam</option>
-                    <option value="2">Nữ</option>
-                    <option value="3">Khác</option>
-                </select>
-<<<<<<< HEAD
-            </div>
-            <div class="col">
-                <input type="text" name="NhanVienMoi.DiaChi" class="form-control" placeholder="Địa chỉ">
-            </div>
-            <div class="col">
-                <input type="text" name="NhanVienMoi.Email" class="form-control" placeholder="Email">
-            </div>
-            <div class="col">
-                <input type="text" name="NhanVienMoi.SoDienThoai" class="form-control" placeholder="Số điện thoại">
-            </div>
-            <div class="col input-with-icon">
-                <input type="date" name="NhanVienMoi.NgayBatDauLam" class="form-control" placeholder="Ngày bắt đầu làm">
-            </div>
-            <div class="col">
-                <input type="text" name="NhanVienMoi.TenTaiKhoan" class="form-control" placeholder="Tên Tài Khoản">
-            </div>
-        </div>
+
         <div class="panel-footer d-flex justify-content-between">
-            <button type="submit" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i></button>
+            <button id="save" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+            <button id="xoa" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
         </div>
     </form>
-</aside>
-<aside class="right-panel" id="rightPanel">
-    <div class="panel-header d-flex justify-content-between align-items-center">
 
-        <h3>Cập nhật thông tin</h3>
-        <button id="closePanel" type="button" class="btn-close" aria-label="Close">
+
+</aside>
+
+<!-- panel sửa -->
+<aside class="form-panel" id="formPanel">
+    <div class="panel-header d-flex justify-content-between align-items-center">
+        <h3>Chỉnh sửa thông tin</h3>
+        <button id="closePanel1" type="button" class="btn-close" aria-label="Close">
             <i class="fas fa-times"></i>
         </button>
     </div>
-    <form class="panel-content" method="post" action="/Nhanvien/UpdateNhanVien">
-        <div class="row g-3 flex-column">
-            <div class="col">
-                <input type="hidden" name="NhanVienUpdate.MaNhanVien" id="updateMaNhanVien" class="form-control" placeholder="Mã nhân viên" required>
-            </div>
-            <div class="col">
-                <input type="text" name="NhanVienUpdate.HoTen" id="updateHoTen" class="form-control" placeholder="Họ và tên" required>
-            </div>
-            <div class="col">
-                <select name="NhanVienUpdate.MaPhongBan" id="updateMaPhongBan"  class="form-select">
-                    @if (Model.PhongBanList != null && Model.PhongBanList.Any())
-                    {
-                        foreach (var phongBan in Model.PhongBanList)
-                        {
-                            <option value="@phongBan.Value">@phongBan.Text</option>
-                        }
-                    }
-                    else
-                    {
-                        <option disabled>Không có phòng ban</option>
-                    }
-                </select>
-            </div>
-            <div class="col">
-                <select name="NhanVienUpdate.MaTrinhDo" id="updateMaTrinhDo" class="form-select">
-                    @if (Model.TrinhDoList != null && Model.TrinhDoList.Any())
-                    {
-                        foreach (var trinhDo in Model.TrinhDoList)
-                        {
-                            <option value="@trinhDo.Value">@trinhDo.Text</option>
-                        }
-                    }
-                    else
-                    {
-                        <option disabled>Không có trình độ</option>
-                    }
-                </select>
-            </div>
-            <div class="col">
-                <select name="NhanVienUpdate.MaChucVu" id="updateMaChucVu" class="form-select">
-                    @if (Model.ChucVuList != null && Model.ChucVuList.Any())
-                    {
-                        foreach (var chucVu in Model.ChucVuList)
-                        {
-                            <option value="@chucVu.Value">@chucVu.Text</option>
-                        }
-                    }
-                    else
-                    {
-                        <option disabled>Không có Chức vụ</option>
-                    }
-                </select>
-            </div>
-            <div class="col">
-                <input type="text" name="NhanVienUpdate.CCCD" id="updateCCCD" class="form-control" placeholder="CCCD">
-            </div>
-            <div class="col input-with-icon">
-                <input type="date" name="NhanVienUpdate.NgaySinh" id="updateNgaySinh" class="form-control" placeholder="Ngày sinh">
-            </div>
-            <div class="col">
-                <select name="NhanVienUpdate.GioiTinh" id="updateGioiTinh" class="form-select">
-=======
-                <select id="noisinh" name="noisinh" class="input-select">
-                    <option value="" selected>Chọn tỉnh/thành phố</option>
-                </select>
-                <input type="text" id="sodienthoai" name="sodienthoai" class="input-control" placeholder="Số điện thoại" aria-label="Số điện thoại">
-                <select id="dantoc" name="dantoc" class="input-select">
-                    <option value="" selected>Chọn dân tộc</option>
-                </select>
+    <form class="panel-content">
+        <div class="form-group">
+            <input type="text" id="manvedit" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+            <input type="text" id="tenedit" name="ten" class="input-control" placeholder="Họ và tên" aria-label="Họ và tên">
+            <input type="text" id="cccdedit" name="cccd" class="input-control" placeholder="CCCD" aria-label="CCCD">
+            <select id="phongbanedit" name="phongban" class="input-select">
+                <option selected>Phòng ban</option>
+            </select>
+            <input type="date" id="ngaysinhedit" class="input-control datepicker-input" placeholder="Ngày sinh"
+                   aria-label="Ngày sinh">
+            <select id="gioitinhedit" name="gioitinh" class="input-select">
+                <option selected>Giới tính</option>
+                <option value="1">Nam</option>
+                <option value="2">Nữ</option>
+            </select>
+            <select id="noisinhedit" name="noisinh" class="input-select">
+                <option value="" selected>Chọn tỉnh/thành phố</option>
+            </select>
+            <input type="text" id="sodienthoai" name="sodienthoai" class="input-control" placeholder="Số điện thoại" aria-label="Số điện thoại">
+            <select id="dantocedit" name="dantoc" class="input-select">
+                <option value="" selected>Chọn dân tộc</option>
+            </select>
 
-                <input type="date" id="ngayvaolam" name="ngayvaolam" class="input-control datepicker-input" placeholder="Ngày bắt đầu làm"
-                       aria-label="Ngày bắt đầu làm" />
-                <select id="trinhdo" name="trinhdo" class="input-select">
-                    <option selected>Trình độ học vấn</option>
-                </select>
-                <select id="chucvu" name="chucvu" class="input-select">
-                    <option selected>Chức vụ</option>
+            <input type="date" id="ngayvaolamedit" name="ngayvaolam" class="input-control datepicker-input" placeholder="Ngày bắt đầu làm"
+                   aria-label="Ngày bắt đầu làm" />
+            <select id="trinhdoedit" name="trinhdo" class="input-select">
+                <option selected>Trình độ học vấn</option>
+            </select>
+            <select id="chucvuedit" name="chucvu" class="input-select">
+                <option selected>Chức vụ</option>
 
-                </select>
-                <input id="email" type="email" name="email" class="input-control" placeholder="Email" aria-label="Email">
-            </div>
+            </select>
+            <input id="emailedit" type="email" name="email" class="input-control" placeholder="Email" aria-label="Email">
+        </div>
 
-            <div class="panel-footer d-flex justify-content-between">
-                <button id="save" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
-                <button id="xoa" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
-            </div>
-        </form>
+        <div class="panel-footer d-flex justify-content-between">
+            <button id="saveedit" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+            <button id="xoaedit" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+        </div>
+    </form>
 
+</aside>
 
-    </aside>
-
-    <!-- panel sửa -->
-    <aside class="form-panel" id="formPanel">
-        <div class="panel-header d-flex justify-content-between align-items-center">
-            <h3>Chỉnh sửa thông tin</h3>
-            <button id="closePanel1" type="button" class="btn-close" aria-label="Close">
+<!-- panel chi tiết -->
+<aside class="details-panel" id="detailPanel">
+    <div class="panel-header d-flex justify-content-between align-items-center">
+        <h3>Chi tiết thông tin</h3>
+        <div class="panel-controls">
+            <button id="menuButton" type="button" class="btn-menu" aria-label="Menu">
+                <i class="fas fa-ellipsis-v"></i>
+            </button>
+            <button id="closeDetailPanel" type="button" class="btn-close" aria-label="Close">
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        <form class="panel-content">
-            <div class="form-group">
-                <input type="text" id="manvedit" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
-                <input type="text" id="tenedit" name="ten" class="input-control" placeholder="Họ và tên" aria-label="Họ và tên">
-                <input type="text" id="cccdedit" name="cccd" class="input-control" placeholder="CCCD" aria-label="CCCD">
-                <select id="phongbanedit" name="phongban" class="input-select">
-                    <option selected>Phòng ban</option>
-                </select>
-                <input type="date" id="ngaysinhedit" class="input-control datepicker-input" placeholder="Ngày sinh"
-                       aria-label="Ngày sinh">
-                <select id="gioitinhedit" name="gioitinh" class="input-select">
->>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
-                    <option selected>Giới tính</option>
-                    <option value="1">Nam</option>
-                    <option value="2">Nữ</option>
-                    <option value="3">Khác</option>
-                </select>
-<<<<<<< HEAD
+        <ul class="dropdown-menu panel-detail-menu" style="display: none;">
+            <li><a href="#" class="edit-option" onclick="openEditPanel(event)">Sửa</a></li>
+            <li><a href="#" class="delete-option">Xóa</a></li>
+        </ul>
+    </div>
+    <div class="panel-content">
+        <div class="profile-image">
+            <img src="~/Content/img/cute.jpg" alt="Profile Picture" class="profile-pic">
+        </div>
+        <div class="employee-info">
+            <span class="manv">NV01</span>
+            <h2 class="ten">Trần Lan Nhi</h2>
+            <div class="employee-department">
+                <span class="department">Khoa tự nhiên</span>
+                <span class="position">Giảng viên</span>
             </div>
-            <div class="col">
-                <input type="text" name="NhanVienUpdate.DiaChi" id="updateDiaChi" class="form-control" placeholder="Địa chỉ">
+        </div>
+        <div class="detail-group">
+            <div class="detail-item">
+                <label for="cccd">CCCD</label>
+                <span id="cccd">123456789</span>
             </div>
-            <div class="col">
-                <input type="email" name="NhanVienUpdate.Email" id="updateEmail" class="form-control" placeholder="Email">
+            <div class="detail-item">
+                <label for="ngaysinh">Ngày sinh</label>
+                <span id="ngaysinh">12/06/2002</span>
             </div>
-            <div class="col">
-                <input type="text" name="NhanVienUpdate.SoDienThoai" id="updateSoDienThoai" class="form-control" placeholder="Số điện thoại">
+            <div class="detail-item">
+                <label for="gioitinh">Giới tính</label>
+                <span id="gioitinh">Nữ</span>
             </div>
-            <div class="col input-with-icon">
-                <input type="date" name="NhanVienUpdate.NgayBatDauLam" id="updateNgayBatDauLam" class="form-control" placeholder="Ngày bắt đầu làm">
+            <div class="detail-item">
+                <label for="noisinhsinh">Nơi sinh</label>
+                <span id="noisinhsinh">Quảng Trị</span>
             </div>
-            <div class="col">
-                <input type="text"  name="NhanVienUpdate.TenTaiKhoan" id="updateTenTaiKhoan" class="form-control" placeholder="Tên Tài Khoản">
+            <div class="detail-item">
+                <label for="sodienthoai">Số điện thoại</label>
+                <span id="sodienthoai">0356854289</span>
+            </div>
+            <div class="detail-item">
+                <label for="email">Email</label>
+                <span id="email">lannhi126@gmail.com</span>
+            </div>
+            <div class="detail-item">
+                <label for="dantoc">Dân tộc</label>
+                <span id="dantoc">Kinh</span>
+            </div>
+            <div class="detail-item">
+                <label for="ngayvaolam">Ngày bắt đầu làm</label>
+                <span id="ngayvaolam">20/11/2023</span>
+            </div>
+            <div class="detail-item">
+                <label for="trinhdo">Trình độ học vấn</label>
+                <span id="trinhdo">Đại học</span>
+            </div>
+            <div class="detail-item">
+                <label for="chucvu">Chức vụ</label>
+                <span id="chucvu">Hiệu trưởng</span>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<!-- panel lọc -->
+<aside class="filter-panel" id="filterPanel">
+    <div class="panel-header d-flex justify-content-between align-items-center">
+        <h3>Bộ lọc</h3>
+        <button id="closeFilterPanel" type="button" class="btn-close" aria-label="Close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="panel-content">
+        <div class="filter-section">
+            <label for="time-filter">Thời gian</label>
+            <div class="filter-options ">
+                <div class="filter-option" onclick="selectFilter(this, '1-week')">Dưới 1 tuần</div>
+                <div class="filter-option" onclick="selectFilter(this, '1-month')">Dưới 1 tháng</div>
+                <div class="filter-option" onclick="selectFilter(this, '1-year')">Dưới 1 năm</div>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <label for="gender-filter">Giới tính</label>
+            <div class="filter-options" id="gender-filter">
+                <div class="filter-option" onclick="selectFilter(this, 'male')">Nam</div>
+                <div class="filter-option" onclick="selectFilter(this, 'female')">Nữ</div>
+                <div class="filter-option" onclick="selectFilter(this, 'other')">Khác</div>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <label for="department-filter">Phòng ban</label>
+            <select id="department-filter">
+                <option value="all">Tất cả</option>
+                <option value="natural-sciences">Khoa tự nhiên</option>
+                <option value="social-sciences">Khoa xã hội</option>
+                <option value="foreign-languages">Khoa ngoại ngữ</option>
+            </select>
+        </div>
+
+        <div class="filter-section">
+            <label for="position-filter">Chức vụ</label>
+            <select id="position-filter">
+                <option value="all">Tất cả</option>
+                <option value="teacher">Giáo viên</option>
+                <option value="head">Hiệu trưởng</option>
+                <option value="vice-head">Phó hiệu trưởng</option>
+            </select>
+        </div>
+
+        <div class="filter-section">
+            <label for="age-range">Độ tuổi</label>
+            <div class="age-range">
+                <input type="number" id="age-min" min="18" max="62" value="18" oninput="updateAgeRange()">
+                <span>-</span>
+                <input type="number" id="age-max" min="18" max="62" value="62" oninput="updateAgeRange()">
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <label>Tình trạng</label>
+            <div class="filter-options">
+                <label><input type="radio" name="status" value="working" checked> Đang làm</label>
+                <label><input type="radio" name="status" value="quit" checked> Đã nghỉ việc</label>
             </div>
         </div>
         <div class="panel-footer d-flex justify-content-between">
-            <button type="submit" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i></button>
-        </div>
-    </form>
-</aside>
-<script>
-
-    //const data = [
-    //    { name: "Trần Lan Nhi", department: "Khoa ngoại ngữ", position: "Trưởng khoa", status: "Đang làm" },
-    //    { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" }
-
-    //];
-
-    //// Hàm để tạo bảng dữ liệu động
-    //function renderTable(data) {
-    //    const tableBody = document.getElementById('table-body');
-    //    tableBody.innerHTML = '';
-
-
-    //    if (data.length === 0) {
-    //        tableBody.innerHTML = '<tr><td colspan="5">Không có dữ liệu</td></tr>';
-    //    } else {
-
-    //        for (let i = 0; i < data.length; i++) {
-    //            const row = document.createElement('tr');
-
-    //            const cell1 = document.createElement('td');
-    //            cell1.textContent = data[i].name;
-    //            row.appendChild(cell1);
-
-    //            const cell2 = document.createElement('td');
-    //            cell2.textContent = data[i].department;
-    //            row.appendChild(cell2);
-
-    //            const cell3 = document.createElement('td');
-    //            cell3.textContent = data[i].position;
-    //            row.appendChild(cell3);
-
-    //            const cell4 = document.createElement('td');
-    //            cell4.textContent = data[i].status;
-    //            row.ap    pendChild(cell4);
-
-   // const cell5 = document.createElement('td');
-   //cell5.innerHTML = `   
-   // <span class="three-dots" onclick="toggleDropdown(event)">
-   //     <img src="/Content/img/ri_more-2-fill.png" alt="3-dot" class="icon-dot">
-   // </span>
-   // <ul class="dropdown-menu" style="display: none;">
-   //     <li>
-   //         <a href="#" class="edit-option" onclick="openEditPanel(${data[i].MaNhanVien})">
-   //             <span>Sửa</span>
-   //         </a>
-   //     </li>
-   //     <li>
-   //         <a href="#" class="delete-option">
-   //             <span>Xóa</span>
-   //         </a>
-   //     </li>
-   // </ul>`;
-
-    //row.appendChild(cell5);
-
-    //tableBody.appendChild(row);
-    //        }
-    //    }
-    //}
-    document.querySelectorAll('.edit-option').forEach(editButton => {
-        editButton.addEventListener('click', function () {
-            const maNhanVien = this.getAttribute('data-id');
-            openEditPanel(maNhanVien);  // gọi hàm với maNhanVien từ thuộc tính data-id
-        });
-    });
-    function toggleDropdown(event) {
-        event.stopPropagation(); // Prevent the event from propagating to the document
-        const dropdownToggle = event.target.closest('.three-dots');
-        const dropdownMenu = dropdownToggle ? dropdownToggle.nextElementSibling : null;
-
-        if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
-            const allDropdowns = document.querySelectorAll('.dropdown-menu');
-            allDropdowns.forEach(menu => {
-                if (menu !== dropdownMenu) {
-                    menu.style.display = 'none'; // Close other dropdowns
-                }
-            });
-
-            // Toggle the clicked dropdown
-            dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
-        }
-    }
-
-
-    // Hide dropdown when clicking outside
-    document.addEventListener('click', function (event) {
-        const dropdownMenus = document.querySelectorAll('.dropdown-menu');
-        dropdownMenus.forEach(menu => {
-            if (!menu.contains(event.target) && !event.target.closest('.three-dots')) {
-                menu.style.display = 'none';
-            }
-        });
-    });
-
-    // Hide dropdown when selecting an option
-    $(document).on('click', '.edit-option, .delete-option', function () {
-        $('.dropdown-menu').hide();
-    });
-
-    //document.addEventListener('DOMContentLoaded', function () {
-    //    renderTable(data);
-    //});
-
-    //datetimepicker
-    $(document).ready(function () {
-        $(".datetime-icon").on("click", function () {
-            var inputField = $(this).prev('input');
-
-
-            inputField.datepicker('show');
-        });
-
-        // Khởi tạo datepicker cho các ô nhập liệu
-        $('#ngaysinh').datepicker({
-            format: 'dd/mm/yyyy',
-            autoclose: true
-        });
-
-        $('#ngayvaolam').datepicker({
-            format: 'dd/mm/yyyy',
-            autoclose: true
-        });
-    });
-    $(document).ready(function () {
-
-        var today = new Date();
-
-
-        var day = today.getDate();
-        var month = today.getMonth() + 1;
-        var year = today.getFullYear();
-
-
-        day = day < 10 ? '0' + day : day;
-        month = month < 10 ? '0' + month : month;
-
-
-        var formattedDate = day + '/' + month + '/' + year;
-
-
-        $('#ngaysinh').val(formattedDate);
-        $('#ngayvaolam').val(formattedDate);
-    });
-
-
-    //form-panel
-    function openEditPanel(maNhanVien) {
-        // Tìm nhân viên dựa trên maNhanVien
-        const nhanVien = Model.DanhSachNhanVien.find(nv => nv.MaNhanVien == maNhanVien);
-
-        // Kiểm tra nếu tìm thấy nhân viên và tải dữ liệu vào form
-        if (nhanVien) {
-            loadUpdateForm(nhanVien);
-            const rightPanel = document.getElementById('rightPanel');
-            if (rightPanel) {
-                rightPanel.classList.add('show');  // Hiển thị form sửa
-                document.querySelector('.main-section').classList.add('panel-active');
-            }
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-
-        const formPanel = document.getElementById('formPanel');
-        const mainContent = document.querySelector('.main-section');
-        const closePanelButton = document.getElementById("closePanel1");
-
-
-       
-
-
-        function updatePanelHeight() {
-            const mainSectionHeight = mainContent.offsetHeight;
-            formPanel.style.height = `${mainSectionHeight}px`;
-        }
-
-        const editButton = document.querySelector('.edit-option');
-        if (editButton) {
-            editButton.addEventListener('click', openEditPanel);
-        } else {
-            console.error('Nút sửa không tìm thấy!');
-        }
-  
-
-
-        closePanelButton.addEventListener("click", function () {
-            console.log("Đang đóng form...");
-            formPanel.classList.remove("show");
-            mainContent.classList.remove("panel-active");
-        });
-
-
-        document.querySelector('.btn-save').addEventListener('click', () => {
-            alert('Lưu thành công!');
-        });
-
-
-        document.querySelector('.btn-delete').addEventListener('click', () => {
-            alert('Đã xóa!');
-        });
-    });
-    function loadUpdateForm(nhanVien) {
-        document.getElementById("updateMaNhanVien").value = nhanVien.MaNhanVien || '';
-        document.getElementById("updateHoTen").value = nhanVien.HoTen || '';
-        document.getElementById("updateMaPhongBan").value = nhanVien.MaPhongBan || '';
-        document.getElementById("updateMaTrinhDo").value = nhanVien.MaTrinhDo || '';
-        document.getElementById("updateMaChucVu").value = nhanVien.MaChucVu || '';
-        document.getElementById("updateCCCD").value = nhanVien.CCCD || '';
-        document.getElementById("updateNgaySinh").value = nhanVien.NgaySinh || '';
-        document.getElementById("updateGioiTinh").value = nhanVien.GioiTinh || '';
-        document.getElementById("updateDiaChi").value = nhanVien.DiaChi || '';
-        document.getElementById("updateEmail").value = nhanVien.Email || '';
-        document.getElementById("updateSoDienThoai").value = nhanVien.SoDienThoai || '';
-        document.getElementById("updateNgayBatDauLam").value = nhanVien.NgayBatDauLam || '';
-        document.getElementById("updateTenTaiKhoan").value = nhanVien.TenTaiKhoan || '';
-    }
-
-
-
-</script>
-=======
-                <select id="noisinhedit" name="noisinh" class="input-select">
-                    <option value="" selected>Chọn tỉnh/thành phố</option>
-                </select>
-                <input type="text" id="sodienthoai" name="sodienthoai" class="input-control" placeholder="Số điện thoại" aria-label="Số điện thoại">
-                <select id="dantocedit" name="dantoc" class="input-select">
-                    <option value="" selected>Chọn dân tộc</option>
-                </select>
-
-                <input type="date" id="ngayvaolamedit" name="ngayvaolam" class="input-control datepicker-input" placeholder="Ngày bắt đầu làm"
-                       aria-label="Ngày bắt đầu làm" />
-                <select id="trinhdoedit" name="trinhdo" class="input-select">
-                    <option selected>Trình độ học vấn</option>
-                </select>
-                <select id="chucvuedit" name="chucvu" class="input-select">
-                    <option selected>Chức vụ</option>
-
-                </select>
-                <input id="emailedit" type="email" name="email" class="input-control" placeholder="Email" aria-label="Email">
-            </div>
-
-            <div class="panel-footer d-flex justify-content-between">
-                <button id="saveedit" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
-                <button id="xoaedit" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
-            </div>
-        </form>
-
-    </aside>
-
-    <!-- panel chi tiết -->
-    <aside class="details-panel" id="detailPanel">
-        <div class="panel-header d-flex justify-content-between align-items-center">
-            <h3>Chi tiết thông tin</h3>
-            <div class="panel-controls">
-                <button id="menuButton" type="button" class="btn-menu" aria-label="Menu">
-                    <i class="fas fa-ellipsis-v"></i> 
-                </button>
-                <button id="closeDetailPanel" type="button" class="btn-close" aria-label="Close">
-                    <i class="fas fa-times"></i> 
-                </button>
-            </div>
-            <ul class="dropdown-menu panel-detail-menu" style="display: none;">
-                <li><a href="#" class="edit-option" onclick="openEditPanel(event)">Sửa</a></li>
-                <li><a href="#" class="delete-option">Xóa</a></li>
-            </ul>
-        </div>
-        <div class="panel-content">
-            <div class="profile-image">
-                <img src="~/Content/img/cute.jpg" alt="Profile Picture" class="profile-pic">
-            </div>
-            <div class="employee-info">
-                <span class="manv">NV01</span>
-                <h2 class="ten">Trần Lan Nhi</h2>
-                <div class="employee-department">
-                    <span class="department">Khoa tự nhiên</span>
-                    <span class="position">Giảng viên</span>
-                </div>
-            </div>
-            <div class="detail-group">
-                <div class="detail-item">
-                    <label for="cccd">CCCD</label>
-                    <span id="cccd">123456789</span>
-                </div>
-                <div class="detail-item">
-                    <label for="ngaysinh">Ngày sinh</label>
-                    <span id="ngaysinh">12/06/2002</span>
-                </div>
-                <div class="detail-item">
-                    <label for="gioitinh">Giới tính</label>
-                    <span id="gioitinh">Nữ</span>
-                </div>
-                <div class="detail-item">
-                    <label for="noisinhsinh">Nơi sinh</label>
-                    <span id="noisinhsinh">Quảng Trị</span>
-                </div>
-                <div class="detail-item">
-                    <label for="sodienthoai">Số điện thoại</label>
-                    <span id="sodienthoai">0356854289</span>
-                </div>
-                <div class="detail-item">
-                    <label for="email">Email</label>
-                    <span id="email">lannhi126@gmail.com</span>
-                </div>
-                <div class="detail-item">
-                    <label for="dantoc">Dân tộc</label>
-                    <span id="dantoc">Kinh</span>
-                </div>
-                <div class="detail-item">
-                    <label for="ngayvaolam">Ngày bắt đầu làm</label>
-                    <span id="ngayvaolam">20/11/2023</span>
-                </div>
-                <div class="detail-item">
-                    <label for="trinhdo">Trình độ học vấn</label>
-                    <span id="trinhdo">Đại học</span>
-                </div>
-                <div class="detail-item">
-                    <label for="chucvu">Chức vụ</label>
-                    <span id="chucvu">Hiệu trưởng</span>
-                </div>
-            </div>
-        </div>
-    </aside>
-
-    <!-- panel lọc -->
-    <aside class="filter-panel" id="filterPanel">
-        <div class="panel-header d-flex justify-content-between align-items-center">
-            <h3>Bộ lọc</h3>
-            <button id="closeFilterPanel" type="button" class="btn-close" aria-label="Close">
-                <i class="fas fa-times"></i>
+            <button id="SubmitFilterPanel" type="button" class="btn btn-ok" aria-label="ok">
+                Xác nhận
+                <i class="fa-solid fa-check"></i>
             </button>
         </div>
-        <div class="panel-content">
-            <div class="filter-section">
-                <label for="time-filter">Thời gian</label>
-                <div class="filter-options ">
-                    <div class="filter-option" onclick="selectFilter(this, '1-week')">Dưới 1 tuần</div>
-                    <div class="filter-option" onclick="selectFilter(this, '1-month')">Dưới 1 tháng</div>
-                    <div class="filter-option" onclick="selectFilter(this, '1-year')">Dưới 1 năm</div>
-                </div>
-            </div>
-
-            <div class="filter-section">
-                <label for="gender-filter">Giới tính</label>
-                <div class="filter-options" id="gender-filter">
-                    <div class="filter-option" onclick="selectFilter(this, 'male')">Nam</div>
-                    <div class="filter-option" onclick="selectFilter(this, 'female')">Nữ</div>
-                    <div class="filter-option" onclick="selectFilter(this, 'other')">Khác</div>
-                </div>
-            </div>
-
-            <div class="filter-section">
-                <label for="department-filter">Phòng ban</label>
-                <select id="department-filter">
-                    <option value="all">Tất cả</option>
-                    <option value="natural-sciences">Khoa tự nhiên</option>
-                    <option value="social-sciences">Khoa xã hội</option>
-                    <option value="foreign-languages">Khoa ngoại ngữ</option>
-                </select>
-            </div>
-
-            <div class="filter-section">
-                <label for="position-filter">Chức vụ</label>
-                <select id="position-filter">
-                    <option value="all">Tất cả</option>
-                    <option value="teacher">Giáo viên</option>
-                    <option value="head">Hiệu trưởng</option>
-                    <option value="vice-head">Phó hiệu trưởng</option>
-                </select>
-            </div>
-
-            <div class="filter-section">
-                <label for="age-range">Độ tuổi</label>
-                <div class="age-range">
-                    <input type="number" id="age-min" min="18" max="62" value="18" oninput="updateAgeRange()">
-                    <span>-</span>
-                    <input type="number" id="age-max" min="18" max="62" value="62" oninput="updateAgeRange()">
-                </div>
-            </div>
-
-            <div class="filter-section">
-                <label>Tình trạng</label>
-                <div class="filter-options">
-                    <label><input type="radio" name="status" value="working" checked> Đang làm</label>
-                    <label><input type="radio" name="status" value="quit" checked> Đã nghỉ việc</label>
-                </div>
-            </div>
-            <div class="panel-footer d-flex justify-content-between">
-                <button id="SubmitFilterPanel" type="button" class="btn btn-ok" aria-label="ok">
-                    Xác nhận
-                    <i class="fa-solid fa-check"></i>
-                </button>
-            </div>
-        </div>
-    </aside>
+    </div>
+</aside>
 
 
 @Scripts.Render("~/bundles/main")
->>>>>>> 371dec59cd8c6900a6f81af80e0156c6c0f95fcd
