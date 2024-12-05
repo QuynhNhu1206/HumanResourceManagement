@@ -1,5 +1,6 @@
-﻿
+
 const openPanelButton = document.getElementById("openPanel");
+
 const closePanelButton = document.getElementById("closePanel");
 const rightPanel = document.getElementById("rightPanel");
 const mainContent = document.querySelector(".main-section");
