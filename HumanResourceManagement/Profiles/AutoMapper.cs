@@ -8,7 +8,7 @@ namespace HumanResourceManagement.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<HumanResourceManagement.Models.NhanVien, HumanResourceManagement.App_Data.NhanVien>()
+            CreateMap<HumanResourceManagement.Models.NhanVienModels, HumanResourceManagement.App_Data.NhanVien>()
                 .ForMember(dest => dest.MaNhanVien, opt => opt.MapFrom(src => src.MaNhanVien))
                 .ForMember(dest => dest.HoTen, opt => opt.MapFrom(src => src.HoTen))
                 .ForMember(dest => dest.NgaySinh, opt => opt.MapFrom(src => src.NgaySinh))

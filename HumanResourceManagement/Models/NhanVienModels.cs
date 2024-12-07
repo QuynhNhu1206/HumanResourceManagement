@@ -5,7 +5,7 @@ using System.Web;
 
 namespace HumanResourceManagement.Models
 {
-    public class NhanVien
+    public class NhanVienModels
     {
         public string MaNhanVien { get; set; }
         public string HoTen { get; set; }
