@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9139cbe23e72494887440b68443beaa4" Name="Diagram1">
+        <EntityTypeShape EntityType="HumanResourceManagementModel.BaoHiem" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HumanResourceManagementModel.ChucVu" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HumanResourceManagementModel.HopDong" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HumanResourceManagementModel.LichLamViec" Width="1.5" PointX="7.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HumanResourceManagementModel.Luong" Width="1.5" PointX="7.5" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="HumanResourceManagementModel.NhanVien" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HumanResourceManagementModel.PhanQuyen" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HumanResourceManagementModel.PhongBan" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HumanResourceManagementModel.PhuCap" Width="1.5" PointX="9.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HumanResourceManagementModel.TaiKhoan" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HumanResourceManagementModel.TrinhDo" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <AssociationConnector Association="HumanResourceManagementModel.FK__BaoHiem__MaNhanV__7B5B524B" ManuallyRouted="false" />
+        <AssociationConnector Association="HumanResourceManagementModel.FK__ChucVu__TrangTha__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="HumanResourceManagementModel.FK__NhanVien__MaChuc__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="HumanResourceManagementModel.FK__HopDong__MaNhanV__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="HumanResourceManagementModel.FK__LichLamVi__MaNha__7E37BEF6" ManuallyRouted="false" />
+        <AssociationConnector Association="HumanResourceManagementModel.FK__Luong__MaNhanVie__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="HumanResourceManagementModel.FK_PhuCap_Luong" ManuallyRouted="false" />
+        <AssociationConnector Association="HumanResourceManagementModel.FK__NhanVien__MaPhon__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="HumanResourceManagementModel.FK__NhanVien__MaTrin__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="HumanResourceManagementModel.FK_TaiKhoan_NhanVien" />
+        <EntityTypeShape EntityType="HumanResourceManagementModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

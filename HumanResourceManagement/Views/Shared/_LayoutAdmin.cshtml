@@ -47,7 +47,10 @@
                         <img src="~/Content/img/mdi_bell-outline.png" alt="Notification Icon" class="nav-icon">
                         <div class="user-profile">
                             <div class="user-info" id="userProfile">
-                                <span class="user-name">Trần Lan Nhi</span>
+                                @{
+                                    var user = (HumanResourceManagement.App_Data.TaiKhoan)HttpContext.Current.Session["user"];
+                                    <span class="user-name"> @user.NhanVien.HoTen</span>
+                                }
                                 <p class="user-detail">Xem hồ sơ chi tiết</p>
                             </div>
                             <img src="~/Content/img/cute.jpg" alt="Avatar" class="user-avatar" id="userAvatar">
@@ -85,7 +88,7 @@
                                     </li>
                                 </ul>
                                 <div class="logout-item">
-                                    <a href="#">
+                                    <a href="MyHome\Login\Logout">
                                         <i class="fa-solid fa-sign-out-alt icon"></i> Đăng xuất
                                     </a>
                                 </div>
