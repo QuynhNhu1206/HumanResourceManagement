@@ -35,6 +35,7 @@ namespace HumanResourceManagement
                url: "nhanvien",  // URL /login sẽ khớp với route này
                defaults: new { controller = "Nhanvien", action = "Nhanvien" }
            );
+           
 
         }
     }

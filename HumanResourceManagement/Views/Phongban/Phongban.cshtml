@@ -1,10 +1,8 @@
-
-﻿@{
-
+@model IEnumerable<HumanResourceManagement.App_Data.PhongBan>
+﻿@{ 
     ViewBag.Title = "Phongban";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,11 +38,37 @@
                 <tr>
                     <th scope="col">Mã phòng ban</th>
                     <th scope="col">Tên phòng ban</th>
-                    <th scope="col">Tùy chọn</th>
+                    <th scope="col">Số lượng nhân viên</th>
+                    <th scope="col">Mô tả</th>
                 </tr>
             </thead>
             <tbody id="table-body">
+                @foreach (var phongBan in Model)
+                {
+                    <tr>
+                        <td>@phongBan.MaPhongBan</td>
+                        <td>@phongBan.TenPhongBan</td>
+                        <td>@phongBan.SoLuongNhanVien</td>
+                        <td>@phongBan.MoTa</td>
+                        <td>    
+                            <span class="three-dots" onclick="toggleDropdown(event)">
+                                <img src="@Url.Content("~/Content/  img/ri_more-2-fill.png")" alt="3-dot" class="icon-dot">
+                            </span>
+                            <ul class="dropdown-menu" style="display: none;">
+                                <li>
+                                    <a href="#" class="edit-option" onclick="openEditPanel(event, '@phongBan.MaPhongBan')">Sửa</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="delete-option" onclick="deleteItem(event, '@phongBan.MaPhongBan')">Xóa</a>
+                                </li>
+                            </ul>
+                        </td>
+
+                    </tr>
+                }
+
             </tbody>
+
         </table>
     </div>
     <nav aria-label="Page navigation example">
@@ -63,26 +87,28 @@
 </section>
 
 <!-- panel thêm -->
-<aside class="right-panel" id="rightPanel">
+<aside  class="right-panel" id="rightPanel">
     <div class="panel-header d-flex justify-content-between align-items-center">
         <h3>Thêm thông tin</h3>
         <button id="closePanel" type="button" class="btn-close" aria-label="Close">
             <i class="fas fa-times"></i>
         </button>
     </div>
-    <form class="panel-content">
+    <form  class="panel-content" action="/Phongban/Themmoi" method="post">
         <div class="form-group">
-            <input type="text" id="mapb" name="mapb" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
-            <input type="text" id="tenpb" name="tenpb" class="input-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban">
+            <input type="text" id="MaPhongBan" name="MaPhongBan" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
+            <input type="text" id="TenPhongBan" name="TenPhongBan" class="input-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban">
+            <input type="number" id="SoLuongNhanVien" name="SoLuongNhanVien" class="input-control" placeholder="Số lượng nhân viên" aria-label="Số lượng nhân viên">
+            <input type="text" id="MoTa" name="MoTa" class="input-control" placeholder="Mô tả" aria-label="Mô tả">
         </div>
 
         <div class="panel-footer d-flex justify-content-between">
             <button id="save" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
-            <button id="xoa" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
         </div>
     </form>
 </aside>
 <!-- panel sửa -->
+
 <aside class="form-panel" id="formPanel">
     <div class="panel-header d-flex justify-content-between align-items-center">
         <h3>Chỉnh sửa thông tin</h3>
@@ -90,15 +116,16 @@
             <i class="fas fa-times"></i>
         </button>
     </div>
-    <form class="panel-content">
+    <form class="panel-content"  action="/Phongban/Capnhat" method="post">
         <div class="form-group">
-            <input type="text" id="mapbedit" name="mapb" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
-            <input type="text" id="tenpbedit" name="tenpb" class="input-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban">
+            <input type="text" id="MaPhongBan" name="MaPhongBan" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
+            <input type="text" id="TenPhongBan" name="TenPhongBan" class="input-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban">
+            <input type="number" id="SoLuongNhanVien" name="SoLuongNhanVien" class="input-control" placeholder="Số lượng nhân viên" aria-label="Số lượng nhân viên">
+            <input type="text" id="MoTa" name="MoTa" class="input-control" placeholder="Mô tả" aria-label="Mô tả">
         </div>
 
         <div class="panel-footer d-flex justify-content-between">
             <button id="saveedit" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
-            <button id="xoaedit" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
         </div>
     </form>
 
