@@ -38,12 +38,12 @@
 
         </div>
     </div>
-    <div class="tableds">
+    <div class="tableds" >
         <table class="table table-hover" id="employeeTable">
             <thead class="truong">
                 <tr>
                     <th scope="col">Họ và tên</th>
-                    <th scope="col">Trực thuộc bộ phận</th>
+                    <th scope="col">Phòng ban</th>
                     <th scope="col">Vị trí</th>
                     <th scope="col">Tình trạng</th>
                     <th scope="col">Tùy chọn</th>
@@ -108,6 +108,12 @@
 
             </select>
             <input id="email" type="email" name="email" class="input-control" placeholder="Email" aria-label="Email">
+            <select id="tinhtrang" name="tinhtrang" class="input-select">
+                <option selected>Tình trạng</option>
+                <option value="1">Đang làm việc</option>
+                <option value="2">Nghỉ việc</option>
+
+            </select>
         </div>
 
         <div class="panel-footer d-flex justify-content-between">
@@ -142,10 +148,10 @@
                 <option value="1">Nam</option>
                 <option value="2">Nữ</option>
             </select>
-            <select id="noisinhedit" name="noisinh" class="input-select">
+            <select id="noisinhedit" name="noisinhedit" class="input-select">
                 <option value="" selected>Chọn tỉnh/thành phố</option>
             </select>
-            <input type="text" id="sodienthoai" name="sodienthoai" class="input-control" placeholder="Số điện thoại" aria-label="Số điện thoại">
+            <input type="text" id="sodienthoaiedit" name="sodienthoaiedit" class="input-control" placeholder="Số điện thoại" aria-label="Số điện thoại">
             <select id="dantocedit" name="dantoc" class="input-select">
                 <option value="" selected>Chọn dân tộc</option>
             </select>
@@ -160,6 +166,12 @@
 
             </select>
             <input id="emailedit" type="email" name="email" class="input-control" placeholder="Email" aria-label="Email">
+            <select id="tinhtrangedit" name="tinhtrangedit" class="input-select">
+                <option selected>Tình trạng</option>
+                <option value="1">Đang làm việc</option>
+                <option value="2">Nghỉ việc</option>
+
+            </select>
         </div>
 
         <div class="panel-footer d-flex justify-content-between">
@@ -183,7 +195,7 @@
             </button>
         </div>
         <ul class="dropdown-menu panel-detail-menu" style="display: none;">
-            <li><a href="#" class="edit-option" onclick="openEditPanel(event)">Sửa</a></li>
+            <li><a href="#" class="edit-option" onclick="openEditPanel(e)">Sửa</a></li>
             <li><a href="#" class="delete-option">Xóa</a></li>
         </ul>
     </div>
@@ -192,53 +204,53 @@
             <img src="~/Content/img/cute.jpg" alt="Profile Picture" class="profile-pic">
         </div>
         <div class="employee-info">
-            <span class="manv">NV01</span>
-            <h2 class="ten">Trần Lan Nhi</h2>
+            <span class="manv"></span>
+            <h2 class="ten"></h2>
             <div class="employee-department">
-                <span class="department">Khoa tự nhiên</span>
-                <span class="position">Giảng viên</span>
+                <span class="department"></span>
+                <span class="position"></span>
             </div>
         </div>
         <div class="detail-group">
             <div class="detail-item">
-                <label for="cccd">CCCD</label>
-                <span id="cccd">123456789</span>
+                <label for="cccd"></label>
+                <span id="cccd"></span>
             </div>
             <div class="detail-item">
-                <label for="ngaysinh">Ngày sinh</label>
-                <span id="ngaysinh">12/06/2002</span>
+                <label for="ngaysinh"></label>
+                <span id="ngaysinh"></span>
             </div>
             <div class="detail-item">
-                <label for="gioitinh">Giới tính</label>
-                <span id="gioitinh">Nữ</span>
+                <label for="gioitinh">h</label>
+                <span id="gioitinh"></span>
             </div>
             <div class="detail-item">
-                <label for="noisinhsinh">Nơi sinh</label>
-                <span id="noisinhsinh">Quảng Trị</span>
+                <label for="noisinhsinh"></label>
+                <span id="noisinhsinh"></span>
             </div>
             <div class="detail-item">
                 <label for="sodienthoai">Số điện thoại</label>
-                <span id="sodienthoai">0356854289</span>
+                <span id="sodienthoai"></span>
             </div>
             <div class="detail-item">
                 <label for="email">Email</label>
-                <span id="email">lannhi126@gmail.com</span>
+                <span id="email"></span>
             </div>
             <div class="detail-item">
-                <label for="dantoc">Dân tộc</label>
-                <span id="dantoc">Kinh</span>
+                <label for="dantoc"></label>
+                <span id="dantoc"></span>
             </div>
             <div class="detail-item">
-                <label for="ngayvaolam">Ngày bắt đầu làm</label>
-                <span id="ngayvaolam">20/11/2023</span>
+                <label for="ngayvaolam"></label>
+                <span id="ngayvaolam"></span>
             </div>
             <div class="detail-item">
-                <label for="trinhdo">Trình độ học vấn</label>
-                <span id="trinhdo">Đại học</span>
+                <label for="trinhdo"></label>
+                <span id="trinhdo"></span>
             </div>
             <div class="detail-item">
-                <label for="chucvu">Chức vụ</label>
-                <span id="chucvu">Hiệu trưởng</span>
+                <label for="chucvu"></label>
+                <span id="chucvu"></span>
             </div>
         </div>
     </div>

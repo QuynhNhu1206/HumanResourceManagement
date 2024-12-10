@@ -1,0 +1,183 @@
+﻿
+@{
+    ViewBag.Title = "LichLamViec";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/Css/styleLLV.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Thêm jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Thêm jQuery UI -->
+
+    <title>LỊCH LÀM VIỆC</title>
+</head>
+
+    <section class="main-section">
+        <div class="Tieude">
+            <h2>Danh sách lịch làm việc</h2>
+            <div class="right-tools">
+
+                <button class="loc" id="openFilter">
+                    <img src="~/Content/img/Vectorloc.png" alt="loc" class="icon-nav">
+                </button>
+
+                <button class="Them" id="openPanel">
+                    Thêm
+                    <img src="~/Content/img/Vectorthem.png" alt="icon-them">
+                </button>
+
+            </div>
+        </div>
+        <div class="tableds">
+            <table class="table table-hover" id="employeeTable">
+                <thead class="truong">
+                    <tr>
+                        <th scope="col">Mã làm việc</th>
+                        <th scope="col">Mã nhân viên</th>
+                        <th scope="col">Ngày làm việc</th>
+                        <th scope="col">Số giờ làm việc</th>
+                        <th scope="col">Số giờ làm thêm</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Chú thích</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+                <li class="page-item disabled">
+                    <a class="page-link">Trước</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Tiếp theo</a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+    <!-- panel thêm -->
+    <aside class="right-panel" id="rightPanel">
+        <div class="panel-header d-flex justify-content-between align-items-center">
+            <h3>Thêm thông tin</h3>
+            <button id="closePanel" type="button" class="btn-close" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <form class="panel-content">
+            <div class="form-group">
+                <input type="text" id="malv" name="malv" class="input-control" placeholder="Mã làm việc" aria-label="Mã làm việc">
+                <input type="text" id="manv" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+                <input type="date" id="ngaylamviec" class="input-control datepicker-input" placeholder="Ngày làm việc"
+                       aria-label="Ngày làm việc">
+                <input type="text" id="sogiolamviec" name="sogiolamviec" class="input-control" placeholder="Số giờ làm việc" aria-label="Số giờ làm việc">
+                <input type="text" id="sogiolamthem" name="sogiolamthem" class="input-control" placeholder="Số giờ làm thêm" aria-label="Số giờ làm thêm">
+
+                <select id="trangthai" name="trangthai" class="input-select">
+                    <option selected>Trạng thái</option>
+                    <option value="1">Còn làm việc</option>
+                    <option value="2">Đã nghỉ việc</option>
+                </select>
+                <input type="text" id="chuthich" name="chuthich" class="input-control" placeholder="Chú thích" aria-label="Chú thích">
+               
+            </div>
+
+            <div class="panel-footer d-flex justify-content-between">
+                <button id="save" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+                <button id="xoa" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+            </div>
+        </form>
+
+
+    </aside>
+
+    <!-- panel sửa -->
+    <aside class="form-panel" id="formPanel">
+        <div class="panel-header d-flex justify-content-between align-items-center">
+            <h3>Chỉnh sửa lịch làm việc</h3>
+            <button id="closePanel1" type="button" class="btn-close" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <form class="panel-content">
+            <div class="form-group">
+                <input type="text" id="malvedit" name="malv" class="input-control" placeholder="Mã làm việc" aria-label="Mã làm việc">
+                <input type="text" id="manvedit" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+
+                <input type="date" id="ngaylamviecedit" class="input-control datepicker-input" placeholder="Ngày làm việc"
+                       aria-label="Ngày làm việc">
+                
+                <input type="text" id="sogiolamviecedit" name="sogiolamviec" class="input-control" placeholder="Số giờ làm việc" aria-label="Số giờ làm việc">
+                <input type="text" id="sogiolamthemedit" name="sogiolamthem" class="input-control" placeholder="Số giờ làm thêm" aria-label="Số giờ làm thêm">
+                <select id="trangthaiedit" name="trangthai" class="input-select">
+                    <option selected>Trạng thái</option>
+                    <option value="1">Còn làm việc</option>
+                    <option value="2">Đã nghỉ việc</option>
+                </select>
+                <input type="text" id="chuthich" name="chuthich" class="input-control" placeholder="Chú thích" aria-label="Chú thích">
+            </div>
+
+            <div class="panel-footer d-flex justify-content-between">
+                <button id="saveedit" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+                <button id="xoaedit" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+            </div>
+        </form>
+
+    </aside>
+
+    <!-- panel lọc -->
+    <aside class="filter-panel" id="filterPanel">
+        <div class="panel-header d-flex justify-content-between align-items-center">
+            <h3>Bộ lọc</h3>
+            <button id="closeFilterPanel" type="button" class="btn-close" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="panel-content">
+            <!--
+            <div class="filter-section">
+                <label for="EmployeeId-filter">Mã nhân viên</label>
+                <input type="text" id="filterEmployeeId" placeholder="Nhập mã nhân viên...">
+            </div>
+            -->
+            <div class="filter-section">
+                <label for="filterSpecificDat">Ngày làm việc cụ thể</label>
+                <input type="date" id="filterSpecificDate">
+            </div>
+            
+            <div class="filter-section">
+                <label for="overtime-range">Khoảng giờ làm thêm</label>
+                <div class="overtime-range">
+                     <input type="number" id="minOvertime" placeholder="Số giờ tối thiểu" min="0">
+                     <span> - </span>
+                     <input type="number" id="maxOvertime" placeholder="Số giờ tối đa" min="0">
+                 </div>
+            </div>
+
+            <div class="filter-section">
+                <label>Trạng thái</label>
+                <div class="filter-options">
+                    <label><input type="radio" name="status" value="working" checked> Còn làm việc</label>
+                    <label><input type="radio" name="status" value="quit" checked> Đã nghỉ việc</label>
+                </div>
+            </div>
+
+            <div class="panel-footer d-flex justify-content-between">
+                <button id="SubmitFilterPanel" type="button" class="btn btn-ok" aria-label="ok">
+                    Xác nhận
+                    <i class="fa-solid fa-check"></i>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+@Scripts.Render("~/bundles/llv")

@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace HumanResourceManagement.Controllers
 {
-    public class PhongbanController : BaseController
+    public class LichLamViecController : BaseController
     {
-        // GET: Phongban
-        public ActionResult Phongban()
+        // GET: LichLamViec
+        public ActionResult LichLamViec()
         {
             return View();
         }
