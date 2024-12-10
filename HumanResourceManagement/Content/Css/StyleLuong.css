@@ -24,7 +24,6 @@ body {
 }
 
 
-
 .Tieude {
     display: flex;
     justify-content: space-between;
@@ -57,7 +56,6 @@ th, td {
 
 .three-dots {
     display: flex;
-    position: relative;
     justify-content: center;
     align-items: center;
     font-size: 18px;
@@ -72,14 +70,14 @@ th, td {
     padding: 0;
     margin: 0;
     position: absolute;
-
     background-color: white;
     border: 1px solid #ddd;
     display: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
     .dropdown-menu li {
-        padding: 0;
+        padding: 5px 10px;
         cursor: pointer;
     }
 
@@ -100,9 +98,6 @@ th, td {
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
-
-
-
 
 .show {
     display: block;
@@ -152,7 +147,6 @@ td:empty .three-dots {
     z-index: 1;
 }
 
-
     .Them img {
         width: 18px;
         height: 18px;
@@ -175,7 +169,6 @@ td:empty .three-dots {
     height: 40px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 
     .loc img {
         width: 20px;
@@ -527,7 +520,7 @@ form.panel-content .form-group {
     .menu-options button {
         display: block;
         padding: 10px;
-        width: 100%;
+        width: 80%;
         border: none;
         background: none;
         cursor: pointer;
@@ -746,23 +739,11 @@ form.panel-content .form-group .input-select:focus {
         background: linear-gradient(90deg, #5CA020 0%, #186E00 100%);
     }
 
-#filterSpecificDate {
-    width: 250px;
-    padding: 10px;
-    font-size: 14px;
-    color: #333;
-    background-color: #f0f6ff;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    outline: none;
-    transition: border-color 0.3s ease;
+#formPanel {
+    transition: height 0.3s ease;
 }
 
-
-    #filterSpecificDate:focus {
-        border-color: #3b82f6;
-        box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
-    }
-
-
-
+#formPanel {
+    height: auto;
+    overflow: auto; /* Đảm bảo nội dung không bị tràn ra ngoài */
+}

@@ -8,8 +8,8 @@ namespace HumanResourceManagement.Controllers
 {
     public class LichLamViecController : Controller
     {
-        // GET: LichLamViec
-        public ActionResult Index()
+        
+        public ActionResult LichLamViec()
         {
             return View();
         }
