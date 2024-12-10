@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="HumanResourceManagementModel.NhanVien" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="HumanResourceManagementModel.PhanQuyen" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="HumanResourceManagementModel.PhongBan" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HumanResourceManagementModel.PhuCap" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HumanResourceManagementModel.PhuCap" Width="1.5" PointX="9.875" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="HumanResourceManagementModel.TaiKhoan" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="HumanResourceManagementModel.TrinhDo" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
         <AssociationConnector Association="HumanResourceManagementModel.FK__BaoHiem__MaNhanV__29572725" ManuallyRouted="false" />
