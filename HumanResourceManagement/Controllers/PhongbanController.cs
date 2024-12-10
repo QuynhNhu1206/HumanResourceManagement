@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace HumanResourceManagement.Controllers
 {
-    public class PhongbanController : Controller
+    public class PhongbanController : BaseController
     {
         // GET: Phongban
         public ActionResult Phongban()

@@ -37,7 +37,7 @@
     <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>5</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -382,6 +382,8 @@
     <Compile Include="App_Data\ChucVu.cs">
       <DependentUpon>HumanResourceManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HopDongController.cs" />
     <Compile Include="Controllers\LichLamViecController.cs" />
@@ -438,22 +440,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-grid.rtl.css" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
-    <Content Include="Content\bootstrap-utilities.css" />
-    <Content Include="Content\bootstrap-utilities.min.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\bootstrap.rtl.css" />
-    <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Css\globals.css" />
     <Content Include="Content\Css\style.css" />
     <Content Include="Content\Css\styleAdmin.css" />
@@ -468,6 +454,14 @@
     <Content Include="Content\img\a.png" />
     <Content Include="Content\img\anhmyhome.png" />
     <Content Include="Content\img\cute.jpg" />
+    <Content Include="Content\img\default-avt.jpg" />
+    <Content Include="Content\img\EmployeeImages\1f63573a-6d87-4641-b0e1-77b627dfb07a.jpg" />
+    <Content Include="Content\img\EmployeeImages\20241210182057_cute.jpg" />
+    <Content Include="Content\img\EmployeeImages\20241210183845_cute.jpg" />
+    <Content Include="Content\img\EmployeeImages\20241210184804_cute.jpg" />
+    <Content Include="Content\img\EmployeeImages\49993556-f51b-439e-b346-412ceeded424.jpg" />
+    <Content Include="Content\img\EmployeeImages\cute.jpg" />
+    <Content Include="Content\img\EmployeeImages\♡.jpg" />
     <Content Include="Content\img\Group 9.png" />
     <Content Include="Content\img\Hide.png" />
     <Content Include="Content\img\image1.png" />
@@ -485,6 +479,7 @@
     <Content Include="Content\img\Vectortick.png" />
     <Content Include="Content\js\admin.js" />
     <Content Include="Content\js\llv.js" />
+    <Content Include="Content\js\login.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\hd.js" />
     <Content Include="Content\js\phongban.js" />
@@ -515,22 +510,6 @@
     <Content Include="App_Data\HumanResourceManagement.edmx.diagram">
       <DependentUpon>HumanResourceManagement.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\bootstrap.rtl.min.css.map" />
-    <Content Include="Content\bootstrap.rtl.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
-    <Content Include="Content\bootstrap-utilities.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -583,7 +562,10 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Admin\" />
+    <Folder Include="Views\Base\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

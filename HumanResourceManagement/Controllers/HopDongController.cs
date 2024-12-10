@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace HumanResourceManagement.Controllers
 {
-    public class HopDongController : Controller
+    public class HopDongController : BaseController
     {
         // GET: HopDong
-        public ActionResult Index()
+        public ActionResult HopDong()
         {
             return View();
         }

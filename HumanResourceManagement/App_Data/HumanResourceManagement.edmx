@@ -75,13 +75,13 @@
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="SoDienThoai" Type="nvarchar" MaxLength="20" />
           <Property Name="NgayBatDauLam" Type="date" />
-          <Property Name="HinhAnh" Type="image" />
           <Property Name="TenTaiKhoan" Type="nvarchar" MaxLength="50" />
           <Property Name="MaChucVu" Type="nvarchar" MaxLength="20" />
           <Property Name="MaPhongBan" Type="nvarchar" MaxLength="20" />
           <Property Name="MaTrinhDo" Type="nvarchar" MaxLength="20" />
           <Property Name="TinhTrang" Type="nvarchar" MaxLength="50" />
           <Property Name="DanToc" Type="nvarchar" MaxLength="50" />
+          <Property Name="HinhAnh" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="PhanQuyen">
           <Key>
@@ -230,6 +230,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PhuCap_Luong">
+          <End Role="Luong" Type="Self.Luong" Multiplicity="1" />
+          <End Role="PhuCap" Type="Self.PhuCap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Luong">
+              <PropertyRef Name="MaLuong" />
+            </Principal>
+            <Dependent Role="PhuCap">
+              <PropertyRef Name="MaLuong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HumanResourceManagementModelStoreContainer">
           <EntitySet Name="BaoHiem" EntityType="Self.BaoHiem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChucVu" EntityType="Self.ChucVu" Schema="dbo" store:Type="Tables" />
@@ -277,6 +289,10 @@
           <AssociationSet Name="FK__NhanVien__TenTai__20C1E124" Association="Self.FK__NhanVien__TenTai__20C1E124">
             <End Role="TaiKhoan" EntitySet="TaiKhoan" />
             <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhuCap_Luong" Association="Self.FK_PhuCap_Luong">
+            <End Role="Luong" EntitySet="Luong" />
+            <End Role="PhuCap" EntitySet="PhuCap" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -345,6 +361,7 @@
           <Property Name="LuongThucNhan" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="MaNhanVien" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="NhanVien" Relationship="Self.FK__Luong__MaNhanVie__267ABA7A" FromRole="Luong" ToRole="NhanVien" />
+          <NavigationProperty Name="PhuCaps" Relationship="HumanResourceManagementModel.FK_PhuCap_Luong" FromRole="Luong" ToRole="PhuCap" />
         </EntityType>
         <EntityType Name="NhanVien">
           <Key>
@@ -359,7 +376,7 @@
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="SoDienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="NgayBatDauLam" Type="DateTime" Precision="0" />
-          <Property Name="HinhAnh" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="HinhAnh" Type="String" />
           <Property Name="TenTaiKhoan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MaChucVu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="MaPhongBan" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -401,6 +418,7 @@
           <Property Name="MaLuong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LoaiPhuCap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SoTien" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Luong" Relationship="HumanResourceManagementModel.FK_PhuCap_Luong" FromRole="PhuCap" ToRole="Luong" />
         </EntityType>
         <EntityType Name="TaiKhoan">
           <Key>
@@ -574,7 +592,23 @@
             <End Role="TaiKhoan" EntitySet="TaiKhoan" />
             <End Role="NhanVien" EntitySet="NhanVien" />
           </AssociationSet>
+          <AssociationSet Name="FK_PhuCap_Luong" Association="HumanResourceManagementModel.FK_PhuCap_Luong">
+            <End Role="Luong" EntitySet="Luong" />
+            <End Role="PhuCap" EntitySet="PhuCap" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_PhuCap_Luong">
+          <End Type="HumanResourceManagementModel.Luong" Role="Luong" Multiplicity="1" />
+          <End Type="HumanResourceManagementModel.PhuCap" Role="PhuCap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Luong">
+              <PropertyRef Name="MaLuong" />
+            </Principal>
+            <Dependent Role="PhuCap">
+              <PropertyRef Name="MaLuong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

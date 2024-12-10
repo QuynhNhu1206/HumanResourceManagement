@@ -17,8 +17,13 @@ namespace HumanResourceManagement.Models
         public string SoDienThoai { get; set; }
         public DateTime NgayBatDauLam { get; set; }
         public string MaChucVu { get; set; }
+        public string TenChucVu { get; set; }
         public string MaPhongBan { get; set; }
+        public string TenPhongBan { get; set; }
         public string MaTrinhDo { get; set; }
+        public string TenTrinhDo { get; set; }
         public string TinhTrang { get; set; }
+        public string DanToc {  get; set; }
+        public string HinhAnh { get; set; }
     }
 }
