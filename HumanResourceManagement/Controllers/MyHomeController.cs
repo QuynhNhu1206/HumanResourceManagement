@@ -15,6 +15,8 @@ namespace HumanResourceManagement.Controllers
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["HumanResourceManagementEntities"].ConnectionString;
         // GET: MyHome
+        private string connectionString = ConfigurationManager.ConnectionStrings["HumanResourceManagementEntities"].ConnectionString;
+
         public ActionResult MyHome()
         {
             return View();
@@ -27,47 +29,7 @@ namespace HumanResourceManagement.Controllers
         [HttpPost]
         public ActionResult Login(string user, string pass)
         {
-            if (string.IsNullOrEmpty(user) && string.IsNullOrEmpty(pass))
-            {
-                ViewBag.Message = "Vui lòng nhập Tên đăng nhập và Mật khẩu!";
-                return View();
-            }
-
-            if (string.IsNullOrEmpty(user))
-            {
-                ViewBag.Message = "Chưa nhập Tên đăng nhập.";
-                return View();
-            }
-
-            if (string.IsNullOrWhiteSpace(user))
-            {
-                ViewBag.Message = "Tên đăng nhập không nhập ký tự trắng!";
-                return View();
-            }
-
-            if (string.IsNullOrEmpty(pass))
-            {
-                ViewBag.Message = "Chưa nhập Mật khẩu.";
-                return View();
-            }
-
-            string checkResult = ValidateUser(user, pass);
-
-            if (checkResult == "WrongUsername")
-            {
-                ViewBag.Message = "Nhập sai Tên đăng nhập. Vui lòng nhập lại!";
-                return View();
-            }
-
-            if (checkResult == "WrongPassword")
-            {
-                ViewBag.Message = "Nhập sai Mật khẩu. Vui lòng nhập lại!";
-                return View();
-            }
-
-            if (checkResult == "Success")
-            {
-                Session["User"] = user;
+            if(user == "admin" && pass == "admin") {
                 return RedirectToAction("MyHome");
             }
 
@@ -114,12 +76,6 @@ namespace HumanResourceManagement.Controllers
             catch (Exception ex)
             {
 
-                return "Error: " + ex.Message;
-            }
-        }
-        
-
-          
         public ActionResult UpdateInfo()
         {
 
