@@ -11,12 +11,12 @@ const openFilterButton = document.getElementById('openFilter');
 const closeFilterButton = document.getElementById('closeFilterPanel');
 
 
-const data = [
-    { name: "Trần Lan Nhi", department: "Khoa ngoại ngữ", position: "Trưởng khoa", status: "Đang làm" },
-    { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" },
-    { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" },
-    { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" }
-];
+//const data = [
+//    { name: "Trần Lan Nhi", department: "Khoa ngoại ngữ", position: "Trưởng khoa", status: "Đang làm" },
+ //   { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" },
+ //   { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" },
+ //   { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" }
+//];
 
 // Cập nhật chiều cao của panel dựa trên nội dung chính
 function updatePanelHeight() {
@@ -50,7 +50,68 @@ openFilterButton.addEventListener("click", () => {
     if (rightPanel) {
         rightPanel.classList.remove("show");  
     }
-    updatePanelHeight();
+
+    
+    function isValidDate(dateString) {
+        const date = new Date(dateString);
+        return !isNaN(date.getTime()); 
+    }
+
+    // Lấy giá trị từ form
+    const ngaySinhInput = document.getElementById("ngaysinh").value;
+    const ngayVaoLamInput = document.getElementById("ngayvaolam").value;
+
+    // Kiểm tra các trường bắt buộc
+    const formData = {
+        MaNhanVien: document.getElementById("manv").value.trim(),
+        HoTen: document.getElementById("ten").value.trim(),
+        CCCD: document.getElementById("cccd").value.trim(),
+        MaPhongBan: document.getElementById("phongban").value.trim(),
+        DiaChi: document.getElementById("noisinh").value.trim(),
+        NgaySinh: ngaySinhInput,
+        GioiTinh: document.getElementById("gioitinh").value.trim(),
+        SoDienThoai: document.getElementById("sodienthoai").value.trim(),
+        DanToc: document.getElementById("dantoc").value.trim(),
+        NgayBatDauLam: ngayVaoLamInput,
+        MaTrinhDo: document.getElementById("trinhdo").value.trim(),
+        MaChucVu: document.getElementById("chucvu").value.trim(),
+        Email: document.getElementById("email").value.trim(),
+        TinhTrang: document.getElementById("tinhtrang").value.trim()
+
+
+    };
+    console.log(formData);
+    // Gửi dữ liệu lên server
+    fetch("/Nhanvien/LuuNhanVien", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                alert("Lưu thành công!");
+                renderTable(data);
+                resetForm();
+            } else {
+                alert("Lưu thất bại: " + data.message);
+            }
+        })
+        .catch((error) => {
+            console.error("Lỗi khi lưu dữ liệu:", error);
+            alert("Có lỗi xảy ra, vui lòng thử lại.");
+        });
+});
+
+
+
+
+// Sự kiện xóa form
+document.getElementById("xoa").addEventListener("click", function (event) {
+    event.preventDefault();
+    resetForm(); // Đặt lại form
 });
 
 closePanelButton.addEventListener("click", () => {
@@ -70,7 +131,7 @@ function renderTable(data) {
         data.forEach((item) => {
             const row = document.createElement('tr');
             row.classList.add('table-row');
-            row.id = `data-manv-${item.manv}`;
+            row.setAttribute('data-manv', item.MaNhanVien); 
             row.innerHTML = `
                 <td>${item.name}</td>
                 <td>${item.department}</td>
@@ -82,17 +143,51 @@ function renderTable(data) {
                     </span>
                     <ul class="dropdown-menu" style="display: none;">
                         <li><a href="#" class="edit-option" onclick="openEditPanel(event)">Sửa</a></li>
-                        <li><a href="#" class="delete-option">Xóa</a></li>
+                        <li><a href="#" class="delete-option" onclick="deleteEmployee(event, '${item.MaNhanVien}')">Xóa</a></li>
                     </ul>
                 </td>
             `;
+
+            // Ngừng sự kiện click trên menu options để không đóng dropdown
+            row.querySelector('.three-dots').addEventListener('click', (event) => {
+                event.stopPropagation(); 
+                toggleDropdown(event); 
+            });
+
+            row.querySelectorAll('.dropdown-menu li a').forEach(item => {
+                item.addEventListener('click', (event) => {
+                    event.stopPropagation(); 
+                });
+            });
+
             
-            row.addEventListener('click', () => {
-                showDetailPanel(item);
+            row.addEventListener('click', function () {
+                const manv = this.getAttribute('data-manv'); 
+                showDetailPanel(manv);
             });
             tableBody.appendChild(row);
         });
     }
+}
+
+
+
+function fetchEmployees() {
+    $.ajax({
+        url: '/Nhanvien/GetNhanVien',
+        method: 'GET',
+        success: function (data) {
+            console.log('Dữ liệu nhận được:', data);  
+            if (data.error) {
+                console.error('Lỗi từ server:', data.error);  
+            } else {
+                renderTable(data);  
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Lỗi khi gọi API:', error);
+        }
+    });
 }
 
 // Hàm toggle menu dropdown
@@ -122,6 +217,52 @@ function toggleDropdown(event) {
         dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
     }
 }
+//Xoa nhan vien
+function deleteEmployee(event, maNhanVien) {
+    event.stopPropagation();
+
+    if (!maNhanVien) {
+        console.error("Mã nhân viên không hợp lệ!");
+        alert("Mã nhân viên không hợp lệ!");
+        return;
+    }
+
+    if (confirm("Bạn có chắc chắn muốn xóa nhân viên này?")) {
+        fetch(`/NhanvienController/DeleteNhanVien?maNhanVien=${encodeURIComponent(maNhanVien)}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+
+        })
+
+
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("Nhân viên đã được xóa thành công!");
+                    // Xóa dòng dữ liệu khỏi bảng
+                    const row = document.getElementById(`data-manv-${maNhanVien}`);
+                    if (row) {
+                        row.remove();
+                    }
+                } else {
+                    alert(`Không thể xóa: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Có lỗi xảy ra trong quá trình xóa nhân viên.");
+            });
+        console.log(`/NhanvienController/DeleteNhanVien?maNhanVien=${encodeURIComponent(maNhanVien)}`);
+
+    }
+}
 
 
 document.addEventListener('click', (event) => {
@@ -131,31 +272,38 @@ document.addEventListener('click', (event) => {
         }
     });
 });
-document.getElementById("employeeTable").addEventListener("click", function (event) {
-    const clickedRow = event.target.closest("tr");
-    if (clickedRow) {
-        const manv = clickedRow.getAttribute("data-manv");
-        showDetailPanel(manv);
-    }
-});
+
 
 function showDetailPanel(manv) {
-    // Gọi API để lấy thông tin chi tiết của nhân viên
-    fetch(`/Nhanvien/GetEmployeeDetail?manv=${manv}`)
+    const imageUrl = "/Content/img/EmployeeImages/" + data.HinhAnh;
+    // Call the API to get the employee's detailed information
+    fetch(`/Nhanvien/GetEmployeeDetail?employeeId=${manv}`)
         .then(response => response.json())
         .then(data => {
+            console.log(data);  
+
+            if (!data || data.error) {
+                console.error('Error fetching data:', data ? data.error : 'Unknown error');
+                return;
+            }
+
             const detailPanel = document.getElementById('detailPanel');
             detailPanel.classList.add('show');
 
-           
+            
             detailPanel.innerHTML = `
                 <div class="panel-header">
                     <h3>Chi tiết thông tin</h3>
-                    <button id="closeDetailPanel" class="btn-close">X</button>
+                    <button id="menuButton" type="button" class="btn-menu" aria-label="Menu">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                     <button id="closeDetailPanel" type="button" class="btn-close" aria-label="Close">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
                 <div class="panel-content">
                     <div class="profile-image">
-                        <img src="~/Content/img/cute.jpg" alt="Profile Picture" class="profile-pic">
+                        <img src="${imageUrl || '/Content/img/default-avt.jpg'}" alt="Profile Picture" class="profile-pic">
                     </div>
                     <div class="employee-info">
                         <span class="employee-id">${data.manv}</span>
@@ -178,10 +326,8 @@ function showDetailPanel(manv) {
                     </div>
                 </div>
             `;
-            document.querySelector('.edit-option').addEventListener('click', (event) => {
-                openEditPanel(event); 
-            });
-            
+
+            // Add event listener for closing the panel
             document.getElementById('closeDetailPanel').addEventListener('click', () => {
                 detailPanel.classList.remove('show');
             });
@@ -195,13 +341,113 @@ function openEditPanel(event) {
     formPanel.classList.add('show');
     mainContent.classList.add("panel-active");
     updatePanelHeight();
-    if (rightPanel) {
-        rightPanel.classList.remove('show');
-    }
-    if (filterPanel) {
-        filterPanel.classList.remove('show');
-    }
+    const employeeId = event.target.closest('.table-row').id.replace('data-manv-', '');
+
+    
+    fetch('/Nhanvien/GetDanhSach')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Lỗi khi gọi API danh sách!');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Cập nhật các select options với dữ liệu phòng ban, chức vụ, trình độ
+            updateSelectOptions(document.getElementById('phongbanedit'), data.phongBan, 'MaPhongBan', 'TenPhongBan');
+            updateSelectOptions(document.getElementById('chucvuedit'), data.chucVu, 'MaChucVu', 'TenChucVu');
+            updateSelectOptions(document.getElementById('trinhdoedit'), data.trinhDo, 'MaTrinhDo', 'TenTrinhDo');
+
+            // Lấy thông tin nhân viên từ API
+            return fetch(`/NhanVien/GetEmployee?employeeId=${employeeId}`);
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Lỗi khi gọi API lấy thông tin nhân viên!');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Kiểm tra dữ liệu trả về
+            if (data.MaNhanVien) {
+                // Điền các thông tin vào các form
+                document.getElementById('manvedit').value = data.MaNhanVien || '';
+                document.getElementById('tenedit').value = data.HoTen || '';
+                document.getElementById('cccdedit').value = data.CCCD || '';
+                document.getElementById('phongbanedit').value = data.MaPhongBan || '';
+                document.getElementById('ngaysinhedit').value = data.NgaySinh || '';
+                document.getElementById('noisinhedit').value = data.DiaChi || '';  
+                document.getElementById('sodienthoaiedit').value = data.SoDienThoai || '';
+                document.getElementById('dantocedit').value = data.DanToc || '';
+                document.getElementById('ngayvaolamedit').value = data.NgayBatDauLam || '';
+                document.getElementById('trinhdoedit').value = data.MaTrinhDo || '';
+                document.getElementById('chucvuedit').value = data.MaChucVu || '';
+                document.getElementById('emailedit').value = data.Email || '';
+                document.getElementById('tinhtrangedit').value = data.TinhTrang || '';
+
+                document.getElementById('gioitinhedit').value = data.GioiTinh === "Nam" ? "1" : "2";
+                document.getElementById('tinhtrangedit').value = data.TinhTrang === "Đang làm việc" ? "1" : "2";
+
+                // Hiển thị form
+               
+            } else {
+                console.error('Không tìm thấy dữ liệu nhân viên.');
+                alert('Không tìm thấy thông tin nhân viên.');
+            }
+        })
+        .catch(error => {
+            console.error('Lỗi khi gọi API:', error);
+            alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+        })
+        .finally(() => {
+          
+           // document.getElementById('formPanel').classList.remove('loading);
+        });
 }
+
+
+document.getElementById("saveedit").addEventListener("click", function (event) {
+    event.preventDefault(); 
+
+    
+    const model = {
+        MaNhanVien: document.getElementById('manvedit').value,
+        HoTen: document.getElementById('tenedit').value,
+        CCCD: document.getElementById('cccdedit').value,
+        MaPhongBan: document.getElementById('phongbanedit').value,
+        DiaChi: document.getElementById('noisinhedit').value,
+        NgaySinh: document.getElementById('ngaysinhedit').value,
+        GioiTinh: document.getElementById('gioitinhedit').value === "1" ? "Nam" : "Nữ", 
+        SoDienThoai: document.getElementById('sodienthoaiedit').value,
+        DanToc: document.getElementById('dantocedit').value,
+        NgayBatDauLam: document.getElementById('ngayvaolamedit').value,
+        MaTrinhDo: document.getElementById('trinhdoedit').value,
+        MaChucVu: document.getElementById('chucvuedit').value,
+        Email: document.getElementById('emailedit').value,
+        TinhTrang: document.getElementById('tinhtrangedit').value === "1" ? "Đang làm việc" : "Nghỉ làm"
+    };
+
+    // Gửi dữ liệu lên server (thực hiện Post request tới UpdateNhanVien)
+    fetch('/Nhanvien/UpdateNhanVien', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(model) 
+    })
+        .then(response => response.json())  
+        .then(data => {
+            if (data.success) {
+                alert(data.message);  
+            } else {
+                alert(data.message);  
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Có lỗi xảy ra trong quá trình lưu thông tin.");
+        });
+});
+
 
 // Đóng form panel
 document.getElementById("closePanel1").addEventListener("click", function () {
@@ -283,6 +529,26 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         console.error('Các phần tử select không tìm thấy.');
     }
+});
+// Filterpanel
+openFilterButton.addEventListener("click", () => {
+    filterPanel.classList.add("show");
+    mainContent.classList.add("panel-active");
+    if (formPanel) {
+        formPanel.classList.remove('show');
+    }
+    if (rightPanel) {
+        rightPanel.classList.remove('show');
+    }
+    if (detailPanel) {
+        detailPanel.classList.remove('show');
+    }
+    updatePanelHeight();
+});
+
+closeFilterButton.addEventListener("click", () => {
+    filterPanel.classList.remove("show");
+    mainContent.classList.remove("panel-active");
 });
 
 //filter-panle-content

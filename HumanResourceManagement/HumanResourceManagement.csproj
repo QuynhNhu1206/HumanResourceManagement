@@ -428,6 +428,7 @@
     <Compile Include="App_Data\PhuCap.cs">
       <DependentUpon>HumanResourceManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PhongBanModels.cs" />
     <Compile Include="Profiles\AutoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Data\TaiKhoan.cs">

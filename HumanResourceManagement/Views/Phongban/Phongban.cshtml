@@ -20,14 +20,14 @@
 <section class="main-section">
     <div class="Tieude">
         <h2>Danh sách phòng ban</h2>
-        <div class="right-tools" ">
+        <div class="right-tools" >
             <button class="loc" id="openFilter">
-                <img src="~/Content/img/Vectorloc.png" alt="loc" class="icon-nav">
+                <img src="/Content/img/Vectorloc.png" alt="loc" class="icon-nav">
             </button>
 
             <button class="Them" id="openPanel">
                 Thêm
-                <img src="~/Content/img/Vectorthem.png" alt="icon-them">
+                <img src="/Content/img/Vectorthem.png" alt="icon-them">
             </button>
 
         </div>
@@ -38,6 +38,8 @@
                 <tr>
                     <th scope="col">Mã phòng ban</th>
                     <th scope="col">Tên phòng ban</th>
+                    <th scope="col">Số lượng nhân viên</th>
+                    <th scope="col">Mô tả</th>
                     <th scope="col">Tùy chọn</th>
                 </tr>
             </thead>
@@ -72,6 +74,7 @@
         <div class="form-group">
             <input type="text" id="mapb" name="mapb" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
             <input type="text" id="tenpb" name="tenpb" class="input-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban">
+            <input type="text" id="mota" name="mota" class="input-control" placeholder="Mô tả" aria-label="Mô tả phòng ban">
         </div>
 
         <div class="panel-footer d-flex justify-content-between">
@@ -92,6 +95,8 @@
         <div class="form-group">
             <input type="text" id="mapbedit" name="mapb" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
             <input type="text" id="tenpbedit" name="tenpb" class="input-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban">
+            <input type="text" id="soluong" name="soluong" class="input-control" placeholder="Số lượng nhân viên" aria-label="Số lượng nhân viên" disabled>
+            <input type="text" id="motaedit" name="mota" class="input-control" placeholder="Mô tả" aria-label="Mô tả phòng ban">
         </div>
 
         <div class="panel-footer d-flex justify-content-between">

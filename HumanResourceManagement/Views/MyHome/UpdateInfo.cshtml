@@ -28,10 +28,9 @@
                     <label for="cccd">CCCD</label>
                     <input type="text" id="cccd">
                     <label for="phongban">Phòng ban</label>
-                    <select id="phongban">
-                        <option value="" selected>Chọn phòng ban</option>
-                        <option>Khoa tự nhiên</option>
-                        <option>Khoa Ngoại ngữ</option>
+                    <select id="phongban" name="MaPhongBan">
+                        <option value="PB1" @(Model.MaPhongBan == "PB1" ? "selected" : "")>Khoa ngoại ngữ</option>
+                        <option value="PB2" @(Model.MaPhongBan == "PB2" ? "selected" : "")>Khoa tự nhiên</option>
                     </select>
                     <label for="gioitinh">Giới tính</label>
                     <select id="gioitinh">
@@ -89,3 +88,6 @@
     </aside>
 </div>
 @Scripts.Render("~/bundles/updateInfor")
+<script type="text/javascript">
+    var updateInfoUrl = '@Url.Action("UpdateInfo", "MyHome")';
+</script>
