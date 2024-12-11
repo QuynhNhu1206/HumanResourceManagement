@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace HumanResourceManagement.Controllers
 {
-    public class LichLamViecController : BaseController
+    public class AdminController : BaseController
     {
-        // GET: LichLamViec
-        public ActionResult Index()
+        // GET: Admin
+        public ActionResult _LayoutAdmin()
         {
             return View();
         }

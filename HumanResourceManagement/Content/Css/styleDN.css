@@ -54,7 +54,7 @@ body {
 
 
     .custom-dangnhap .highlight {
-        background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
+        background: linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%);
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;

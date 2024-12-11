@@ -1,0 +1,160 @@
+﻿
+@{
+    ViewBag.Title = "Luong";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/Css/styleLuong.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Thêm jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Thêm jQuery UI -->
+
+    <title>LƯƠNG</title>
+</head>
+
+    <section class="main-section">
+        <div class="Tieude">
+            <h2>Danh sách quản lý lương</h2>
+            <div class="right-tools">
+                <button class="loc" id="openFilter">
+                    <img src="~/Content/img/Vectorloc.png" alt="loc" class="icon-nav">
+                </button>
+
+                <button class="Them" id="openPanel">
+                    Thêm
+                    <img src="~/Content/img/Vectorthem.png" alt="icon-them">
+                </button>
+
+            </div>
+        </div>
+        <div class="tableds">
+            <table class="table table-hover" id="employeeTable">
+                <thead class="truong">
+                    <tr>
+                        <th scope="col">Mã lương</th>
+                        <th scope="col">Mã nhân viên</th>
+                        <th scope="col">Lương cơ bản</th>
+                        <th scope="col">Hệ số lương</th>
+                        <th scope="col">Phụ cấp chức vụ</th>
+                        <th scope="col">Phụ cấp trình độ</th>
+                        <th scope="col">Thâm niên công tác</th>
+                        <th scope="col">Lương</th>
+                        <th scope="col">BHYT</th>
+                        <th scope="col">BHXH</th>
+                        <th scope="col">lương thực tế</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+                <li class="page-item disabled">
+                    <a class="page-link">Trước</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Tiếp theo</a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+    <!-- panel thêm -->
+    <aside class="right-panel" id="rightPanel">
+        <div class="panel-header d-flex justify-content-between align-items-center">
+            <h3>Thêm thông tin</h3>
+            <button id="closePanel" type="button" class="btn-close" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <form class="panel-content">
+            <div class="form-group">
+
+                <input type="text" id="maluong" name="maluong" class="input-control" placeholder="Mã lương" aria-label="Mã lương">
+                <input type="text" id="manv" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+                <input type="text" id="luongcoban" name="luongcoban" class="input-control" placeholder="Lương cơ bản" aria-label="Lương cơ bản">
+                <input type="text" id="hesoluong" name="hesoluong" class="input-control" placeholder="Hệ số lương" aria-label="Hệ số lương">
+                <input type="text" id="phucapchucvu" name="phucapchucvu" class="input-control" placeholder="Phụ cấp chức vụ" aria-label="Phụ cấp chức vụ">
+                <input type="text" id="phucaptrinhdo" name="phucaptrinhdo" class="input-control" placeholder="Phụ cấp trình độ" aria-label="Phụ cấp trình độ">
+                <input type="text" id="thamniencongtac" name="thamniencongtac" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+                <input type="text" id="luong" name="luong" class="input-control" placeholder="Lương" aria-label="Lương">
+                <input type="text" id="bhyt" name="bhyt" class="input-control" placeholder="BHYT" aria-label="BHYT">
+                <input type="text" id="bhxh" name="bhxh" class="input-control" placeholder="BHXH" aria-label="BHXH">
+                <input type="text" id="luongthucte" name="luongthucte" class="input-control" placeholder="lương thực tế" aria-label="Lương thực tế">
+                
+            </div>
+
+            <div class="panel-footer d-flex justify-content-between">
+                <button id="save" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+                <button id="xoa" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+            </div>
+        </form>
+
+
+    </aside>
+
+    <!-- panel sửa -->
+    <aside class="form-panel" id="formPanel">
+        <div class="panel-header d-flex justify-content-between align-items-center">
+            <h3>Chỉnh sửa thông tin</h3>
+            <button id="closePanel1" type="button" class="btn-close" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <form class="panel-content">
+            <div class="form-group">
+                <input type="text" id="maluongedit" name="maluong" class="input-control" placeholder="Mã lương" aria-label="Mã lương">
+                <input type="text" id="manvedit" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+                <input type="text" id="luongcobanedit" name="luongcoban" class="input-control" placeholder="Lương cơ bản" aria-label="Lương cơ bản">
+                <input type="text" id="hesoluongedit" name="hesoluong" class="input-control" placeholder="Hệ số lương" aria-label="Hệ số lương">
+                <input type="text" id="phucapchucvuedit" name="phucapchucvu" class="input-control" placeholder="Phụ cấp chức vụ" aria-label="Phụ cấp chức vụ">
+                <input type="text" id="phucaptrinhdoedit" name="phucaptrinhdo" class="input-control" placeholder="Phụ cấp trình độ" aria-label="Phụ cấp trình độ">
+                <input type="text" id="thamniencongtacedit" name="thamniencongtac" class="input-control" placeholder="Thâm niên công tác" aria-label="Thâm niên công tác">
+                <input type="text" id="luongedit" name="luong" class="input-control" placeholder="Lương" aria-label="Lương">
+                <input type="text" id="bhytedit" name="bhyt" class="input-control" placeholder="BHYT" aria-label="BHYT">
+                <input type="text" id="bhxhedit" name="bhxh" class="input-control" placeholder="BHXH" aria-label="BHXH">
+                <input type="text" id="luongthucteedit" name="luongthucte" class="input-control" placeholder="Lương thực tế" aria-label="Lương thực tế">
+            </div>
+
+            <div class="panel-footer d-flex justify-content-between">
+                <button id="saveedit" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+                <button id="xoaedit" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+            </div>
+        </form>
+
+    </aside>
+
+    <!-- panel lọc -->
+    <aside class="filter-panel" id="filterPanel">
+        <div class="panel-header d-flex justify-content-between align-items-center">
+            <h3>Bộ lọc</h3>
+            <button id="closeFilterPanel" type="button" class="btn-close" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="panel-content">
+            <div class="filter-section">
+                <label for="EmployeeId-filter">Mã nhân viên</label>
+                <input type="text" id="filterEmployeeId" placeholder="Nhập mã nhân viên...">
+            </div>
+
+            <div class="panel-footer d-flex justify-content-between">
+                <button id="SubmitFilterPanel" type="button" class="btn btn-ok" aria-label="ok">
+                    Xác nhận
+                    <i class="fa-solid fa-check"></i>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+
+@Scripts.Render("~/bundles/luong")

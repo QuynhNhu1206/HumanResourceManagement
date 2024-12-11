@@ -32,7 +32,7 @@ namespace HumanResourceManagement.App_Data
         public string Email { get; set; }
         public string SoDienThoai { get; set; }
         public Nullable<System.DateTime> NgayBatDauLam { get; set; }
-        public byte[] HinhAnh { get; set; }
+        public string HinhAnh { get; set; }
         public string TenTaiKhoan { get; set; }
         public string MaChucVu { get; set; }
         public string MaPhongBan { get; set; }
