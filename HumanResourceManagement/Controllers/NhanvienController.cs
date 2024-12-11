@@ -14,7 +14,6 @@ namespace HumanResourceManagement.Controllers
     public class NhanvienController : BaseController
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["HumanResourceManagementEntities"].ConnectionString;
-        private readonly HumanResourceManagementEntities db = new HumanResourceManagementEntities();
 
         // GET: Nhanvien
         public ActionResult NhanVien()

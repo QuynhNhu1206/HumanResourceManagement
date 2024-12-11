@@ -1,4 +1,4 @@
-﻿const openPanelButton = document.getElementById("openPanel");
+const openPanelButton = document.getElementById("openPanel");
 const closePanelButton = document.getElementById("closePanel");
 const rightPanel = document.getElementById("rightPanel");
 const mainContent = document.querySelector(".main-section");
@@ -14,12 +14,6 @@ const chucVuSelect = document.getElementById('chucvu');
 const trinhDoSelect = document.getElementById('trinhdo');
 
 
-//const data = [
-//    { name: "Trần Lan Nhi", department: "Khoa ngoại ngữ", position: "Trưởng khoa", status: "Đang làm" },
- //   { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" },
- //   { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" },
- //   { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" }
-//];
 
 // Cập nhật chiều cao của panel dựa trên nội dung chính
 function updatePanelHeight() {
@@ -103,6 +97,7 @@ document.getElementById("save").addEventListener("click", function (event) {
         const date = new Date(dateString);
         return !isNaN(date.getTime()); 
     }
+
 
     // Lấy giá trị từ form
     const ngaySinhInput = document.getElementById("ngaysinh").value;
@@ -259,11 +254,6 @@ function fetchEmployees() {
 }
 
 
-$(document).ready(function () {
-    fetchEmployees();
-});
-
-
 // Hàm toggle menu dropdown
 function toggleDropdown(event) {
     event.stopPropagation();
@@ -346,13 +336,7 @@ document.addEventListener('click', (event) => {
         }
     });
 });
-document.getElementById("employeeTable").addEventListener("click", function (event) {
-    const clickedRow = event.target.closest("tr");
-    if (clickedRow) {
-        const manv = clickedRow.getAttribute("data-manv");
-        showDetailPanel(manv);
-    }
-});
+
 
 function showDetailPanel(manv) {
     const imageUrl = "/Content/img/EmployeeImages/" + data.HinhAnh;
@@ -620,6 +604,26 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         console.error('Các phần tử select không tìm thấy.');
     }
+});
+// Filterpanel
+openFilterButton.addEventListener("click", () => {
+    filterPanel.classList.add("show");
+    mainContent.classList.add("panel-active");
+    if (formPanel) {
+        formPanel.classList.remove('show');
+    }
+    if (rightPanel) {
+        rightPanel.classList.remove('show');
+    }
+    if (detailPanel) {
+        detailPanel.classList.remove('show');
+    }
+    updatePanelHeight();
+});
+
+closeFilterButton.addEventListener("click", () => {
+    filterPanel.classList.remove("show");
+    mainContent.classList.remove("panel-active");
 });
 
 //filter-panle-content
