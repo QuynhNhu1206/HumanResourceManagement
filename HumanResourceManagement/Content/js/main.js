@@ -11,12 +11,12 @@ const openFilterButton = document.getElementById('openFilter');
 const closeFilterButton = document.getElementById('closeFilterPanel');
 
 
-const data = [
-    { name: "Trần Lan Nhi", department: "Khoa ngoại ngữ", position: "Trưởng khoa", status: "Đang làm" },
-    { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" },
-    { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" },
-    { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" }
-];
+//const data = [
+//    { name: "Trần Lan Nhi", department: "Khoa ngoại ngữ", position: "Trưởng khoa", status: "Đang làm" },
+//    { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" },
+//    { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" },
+//    { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" }
+//];
 
 // Cập nhật chiều cao của panel dựa trên nội dung chính
 function updatePanelHeight() {

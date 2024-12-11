@@ -17,13 +17,13 @@ namespace HumanResourceManagement.App_Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PhanQuyen()
         {
-            this.ChucVus = new HashSet<ChucVu>();
+            this.ChucVu = new HashSet<ChucVu>();
         }
     
         public string MaQuyen { get; set; }
         public string TenQuyen { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChucVu> ChucVus { get; set; }
+        public virtual ICollection<ChucVu> ChucVu { get; set; }
     }
 }

@@ -18,7 +18,5 @@ namespace HumanResourceManagement.App_Data
         public string MaLuong { get; set; }
         public string LoaiPhuCap { get; set; }
         public Nullable<decimal> SoTien { get; set; }
-    
-        public virtual Luong Luong { get; set; }
     }
 }

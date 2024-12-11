@@ -17,7 +17,7 @@ namespace HumanResourceManagement.App_Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PhongBan()
         {
-            this.NhanViens = new HashSet<NhanVien>();
+            this.NhanVien = new HashSet<NhanVien>();
         }
     
         public string MaPhongBan { get; set; }
@@ -26,6 +26,6 @@ namespace HumanResourceManagement.App_Data
         public string MoTa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NhanVien> NhanViens { get; set; }
+        public virtual ICollection<NhanVien> NhanVien { get; set; }
     }
 }

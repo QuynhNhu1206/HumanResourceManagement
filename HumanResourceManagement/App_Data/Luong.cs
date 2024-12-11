@@ -14,12 +14,6 @@ namespace HumanResourceManagement.App_Data
     
     public partial class Luong
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Luong()
-        {
-            this.PhuCaps = new HashSet<PhuCap>();
-        }
-    
         public string MaLuong { get; set; }
         public Nullable<decimal> LuongCoBan { get; set; }
         public Nullable<decimal> HeSoLuongg { get; set; }
@@ -32,7 +26,5 @@ namespace HumanResourceManagement.App_Data
         public string MaNhanVien { get; set; }
     
         public virtual NhanVien NhanVien { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PhuCap> PhuCaps { get; set; }
     }
 }

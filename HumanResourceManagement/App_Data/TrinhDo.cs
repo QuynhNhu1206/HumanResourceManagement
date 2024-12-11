@@ -17,13 +17,13 @@ namespace HumanResourceManagement.App_Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TrinhDo()
         {
-            this.NhanViens = new HashSet<NhanVien>();
+            this.NhanVien = new HashSet<NhanVien>();
         }
     
         public string MaTrinhDo { get; set; }
         public string TenTrinhDo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NhanVien> NhanViens { get; set; }
+        public virtual ICollection<NhanVien> NhanVien { get; set; }
     }
 }

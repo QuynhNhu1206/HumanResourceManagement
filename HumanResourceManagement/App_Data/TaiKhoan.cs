@@ -14,10 +14,16 @@ namespace HumanResourceManagement.App_Data
     
     public partial class TaiKhoan
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TaiKhoan()
+        {
+            this.NhanVien = new HashSet<NhanVien>();
+        }
+    
         public string TenTaiKhoan { get; set; }
         public string MatKhau { get; set; }
-        public string MaNhanVien { get; set; }
     
-        public virtual NhanVien NhanVien { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhanVien> NhanVien { get; set; }
     }
 }

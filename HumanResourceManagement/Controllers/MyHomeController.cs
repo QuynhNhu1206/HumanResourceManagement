@@ -29,22 +29,12 @@ namespace HumanResourceManagement.Controllers
         [HttpPost]
         public ActionResult Login(string user, string pass)
         {
-            HumanResourceManagementEntities db = new HumanResourceManagementEntities();
-            var TaiKhoan = db.TaiKhoans.SingleOrDefault(m=>m.TenTaiKhoan.ToLower() == user.ToLower()&& m.MatKhau == pass);
-            if(TaiKhoan != null)
-            {
-                Session["user"] = TaiKhoan;
-               
-                return RedirectToAction("MyHome");
-            }
-            else
-            {
-                TempData["error"] = "Tên tài khoản hoặc mật khẩu không chính xác";
-                return View();
+            //HumanResourceManagementEntities db = new HumanResourceManagementEntities();
+            //var TaiKhoan = db.TaiKhoans.SingleOrDefault(m=>m.TenTaiKhoan.ToLower() == user.ToLower()&& m.MatKhau == pass);
+            //if(TaiKhoan != null)
+            //{
+            //    Session["user"] = TaiKhoan;
 
-            }
-            //if (user == "admin" && pass == "admin") {
-            //    Session["user"] = "admin";
             //    return RedirectToAction("MyHome");
             //}
             //else
@@ -53,6 +43,17 @@ namespace HumanResourceManagement.Controllers
             //    return View();
 
             //}
+            if (user == "admin" && pass == "admin")
+            {
+                Session["user"] = "admin";
+                return RedirectToAction("MyHome");
+            }
+            else
+            {
+                TempData["error"] = "Tên tài khoản hoặc mật khẩu không chính xác";
+                return View();
+
+            }
         }
         public ActionResult Logout()
         {
