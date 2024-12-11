@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace HumanResourceManagement.Controllers
 {
-    public class MyHomeController : Controller
+    public class MyHomeController : BaseController
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["HumanResourceManagementEntities"].ConnectionString;
         // GET: MyHome
@@ -23,15 +23,103 @@ namespace HumanResourceManagement.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Login(string user, string pass)
         {
-            if(user == "admin" && pass == "admin") {
+            if (string.IsNullOrEmpty(user) && string.IsNullOrEmpty(pass))
+            {
+                ViewBag.Message = "Vui lòng nhập Tên đăng nhập và Mật khẩu!";
+                return View();
+            }
+
+            if (string.IsNullOrEmpty(user))
+            {
+                ViewBag.Message = "Chưa nhập Tên đăng nhập.";
+                return View();
+            }
+
+            if (string.IsNullOrWhiteSpace(user))
+            {
+                ViewBag.Message = "Tên đăng nhập không nhập ký tự trắng!";
+                return View();
+            }
+
+            if (string.IsNullOrEmpty(pass))
+            {
+                ViewBag.Message = "Chưa nhập Mật khẩu.";
+                return View();
+            }
+
+            string checkResult = ValidateUser(user, pass);
+
+            if (checkResult == "WrongUsername")
+            {
+                ViewBag.Message = "Nhập sai Tên đăng nhập. Vui lòng nhập lại!";
+                return View();
+            }
+
+            if (checkResult == "WrongPassword")
+            {
+                ViewBag.Message = "Nhập sai Mật khẩu. Vui lòng nhập lại!";
+                return View();
+            }
+
+            if (checkResult == "Success")
+            {
+                Session["User"] = user;
                 return RedirectToAction("MyHome");
             }
+
+            ViewBag.Message = "Thông tin đăng nhập không hợp lệ. Vui lòng thử lại!";
             return View();
         }
 
+        private string ValidateUser(string username, string password)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT MatKhau FROM TaiKhoan WHERE LOWER(TenTaiKhoan) = @TenTaiKhoan";
+                    using (SqlCommand command = new SqlCommand(query, conn))
+                    {
+                        
+                        command.Parameters.AddWithValue("@TenTaiKhoan", username.ToLower());
+                        object dbPassword = command.ExecuteScalar();
+
+                      
+                        if (dbPassword == null)
+                        {
+                            return "WrongUsername";
+                        }
+
+                        
+                        if (!string.Equals(dbPassword.ToString(), password, StringComparison.Ordinal))
+                        {
+                            return "WrongPassword";
+                        }
+
+                        
+                        return "Success";
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+
+                return "DatabaseError: " + sqlEx.Message;
+            }
+            catch (Exception ex)
+            {
+
+                return "Error: " + ex.Message;
+            }
+        }
+        
+
+          
         public ActionResult UpdateInfo()
         {
 

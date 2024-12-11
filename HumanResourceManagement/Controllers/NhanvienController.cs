@@ -11,9 +11,10 @@ using System.Web.Mvc;
 
 namespace HumanResourceManagement.Controllers
 {
-    public class NhanvienController : Controller
+    public class NhanvienController : BaseController
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["HumanResourceManagementEntities"].ConnectionString;
+
         // GET: Nhanvien
         public ActionResult NhanVien()
         {

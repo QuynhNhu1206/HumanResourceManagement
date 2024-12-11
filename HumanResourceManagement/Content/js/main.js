@@ -1,4 +1,4 @@
-﻿const openPanelButton = document.getElementById("openPanel");
+const openPanelButton = document.getElementById("openPanel");
 const closePanelButton = document.getElementById("closePanel");
 const rightPanel = document.getElementById("rightPanel");
 const mainContent = document.querySelector(".main-section");
@@ -9,14 +9,11 @@ const closedetailPanel = document.getElementById('closeDetailPanel');
 const filterPanel = document.getElementById('filterPanel');
 const openFilterButton = document.getElementById('openFilter');
 const closeFilterButton = document.getElementById('closeFilterPanel');
+const phongBanSelect = document.getElementById('phongban');
+const chucVuSelect = document.getElementById('chucvu');
+const trinhDoSelect = document.getElementById('trinhdo');
 
 
-//const data = [
-//    { name: "Trần Lan Nhi", department: "Khoa ngoại ngữ", position: "Trưởng khoa", status: "Đang làm" },
- //   { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" },
- //   { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" },
- //   { name: "Nguyễn Lan", department: "Khoa Tin học", position: "Giảng viên", status: "Đang làm" }
-//];
 
 // Cập nhật chiều cao của panel dựa trên nội dung chính
 function updatePanelHeight() {
@@ -24,31 +21,75 @@ function updatePanelHeight() {
     rightPanel.style.height = `${mainSectionHeight}px`;
     formPanel.style.height = `${mainSectionHeight}px`;
     filterPanel.style.height = `${mainSectionHeight}px`;
+    detailPanel.style.height = `${mainSectionHeight}px`;
 }
 
 // Mở và đóng panel bên phải
 openPanelButton.addEventListener("click", () => {
+    // Hiển thị panel
     rightPanel.classList.add("show");
     mainContent.classList.add("panel-active");
-    if (formPanel) {
-        formPanel.classList.remove('show');
-    }
-    if (filterPanel) {
-        filterPanel.classList.remove('show');
-    }
+
+    // Gọi API lấy danh sách phòng ban, chức vụ, trình độ
+    fetch('/Nhanvien/GetDanhSach') // URL phải đúng với API backend
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Lỗi khi gọi API!');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Đổ dữ liệu vào các dropdown
+            updateSelectOptions(phongBanSelect, data.phongBan, 'MaPhongBan', 'TenPhongBan');
+            updateSelectOptions(chucVuSelect, data.chucVu, 'MaChucVu', 'TenChucVu');
+            updateSelectOptions(trinhDoSelect, data.trinhDo, 'MaTrinhDo', 'TenTrinhDo');
+        })
+        .catch(error => console.error('Lỗi khi lấy dữ liệu:', error));
+
+    // Ẩn các panel khác nếu đang mở
+    if (formPanel) formPanel.classList.remove('show');
+    if (filterPanel) filterPanel.classList.remove('show');
+    if (detailPanel) detailPanel.classList.remove('show');
+
     updatePanelHeight();
 });
 
+// Hàm cập nhật các tùy chọn (options) cho select
+function updateSelectOptions(selectElement, data, valueField, textField) {
+    // Xóa tất cả các option cũ
+    selectElement.innerHTML = '';
+
+    // Tạo option mặc định
+    const defaultOption = document.createElement('option');
+    defaultOption.text = `Chọn ${selectElement.name}`;
+    defaultOption.selected = true;
+    defaultOption.disabled = true;
+    selectElement.appendChild(defaultOption);
+
+    // Thêm các option từ dữ liệu API
+    data.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item[valueField];
+        option.text = item[textField];
+        selectElement.appendChild(option);
+    });
+}
+
+// Sự kiện lưu thông tin nhân viên
+document.getElementById("save").addEventListener("click", function (event) {
+    event.preventDefault();
+
+    //kiểm tra trước khi đưa vào formData
+
+    const manv = document.getElementById("manv").value.trim();
+    const ten = document.getElementById("ten").value.trim();
+    const sodienthoai = document.getElementById("sodienthoai").value.trim();
+    //...... Thêm các trường khác vào nữa 
 
 
-openFilterButton.addEventListener("click", () => {
-    filterPanel.classList.add("show");
-    mainContent.classList.add("panel-active");  
-    if (formPanel) {
-        formPanel.classList.remove("show");  
-    }
-    if (rightPanel) {
-        rightPanel.classList.remove("show");  
+    if (!manv || !ten || !sodienthoai || !email) {
+        alert("Vui lòng điền đầy đủ các trường bắt buộc.");
+        return;
     }
 
     
@@ -56,6 +97,7 @@ openFilterButton.addEventListener("click", () => {
         const date = new Date(dateString);
         return !isNaN(date.getTime()); 
     }
+
 
     // Lấy giá trị từ form
     const ngaySinhInput = document.getElementById("ngaysinh").value;
@@ -114,6 +156,25 @@ document.getElementById("xoa").addEventListener("click", function (event) {
     resetForm(); // Đặt lại form
 });
 
+
+
+// Hàm đặt lại form về trạng thái ban đầu
+function resetForm() {
+    document.getElementById("manv").value = '';
+    document.getElementById("ten").value = '';
+    document.getElementById("cccd").value = '';
+    document.getElementById("phongban").value = '';
+    document.getElementById("ngaysinh").value = '';
+    document.getElementById("gioitinh").value = '';
+    document.getElementById("sodienthoai").value = '';
+    document.getElementById("dantoc").value = '';
+    document.getElementById("ngayvaolam").value = '';
+    document.getElementById("trinhdo").value = '';
+    document.getElementById("chucvu").value = '';
+    document.getElementById("email").value = '';
+    document.getElementById("tinhtrang").value = '';
+}
+
 closePanelButton.addEventListener("click", () => {
     rightPanel.classList.remove("show");
     mainContent.classList.remove("panel-active");
@@ -124,7 +185,8 @@ closeFilterButton.addEventListener("click", () => {
 });
 // Hàm render bảng nội dung
 function renderTable(data) {
-    tableBody.innerHTML = '';  
+    const tableBody = document.getElementById('table-body');
+    tableBody.innerHTML = ''; // Clear previous table data
     if (data.length === 0) {
         tableBody.innerHTML = '<tr><td colspan="5">Không có dữ liệu</td></tr>';
     } else {
@@ -133,10 +195,10 @@ function renderTable(data) {
             row.classList.add('table-row');
             row.setAttribute('data-manv', item.MaNhanVien); 
             row.innerHTML = `
-                <td>${item.name}</td>
-                <td>${item.department}</td>
-                <td>${item.position}</td>
-                <td>${item.status}</td>
+                <td>${item.HoTen}</td>
+                <td>${item.TenPhongBan}</td> 
+                <td>${item.TenChucVu}</td> 
+                <td>${item.TinhTrang}</td>
                 <td>
                     <span class="three-dots" onclick="toggleDropdown(event)">
                         <img src="/Content/img/ri_more-2-fill.png" alt="3-dot" class="icon-dot">
@@ -165,6 +227,7 @@ function renderTable(data) {
                 const manv = this.getAttribute('data-manv'); 
                 showDetailPanel(manv);
             });
+
             tableBody.appendChild(row);
         });
     }
@@ -190,30 +253,31 @@ function fetchEmployees() {
     });
 }
 
+
 // Hàm toggle menu dropdown
 function toggleDropdown(event) {
-    event.stopPropagation();  
-    const isTableDropdown = event.target.closest('.three-dots');  
-    const isPanelDropdown = event.target.closest('.btn-menu'); 
+    event.stopPropagation();
+    const isTableDropdown = event.target.closest('.three-dots');
+    const isPanelDropdown = event.target.closest('.btn-menu');
 
     let dropdownMenu = null;
 
     if (isTableDropdown) {
-        
-        dropdownMenu = isTableDropdown.nextElementSibling;  
+
+        dropdownMenu = isTableDropdown.nextElementSibling;
     } else if (isPanelDropdown) {
-        
+
         dropdownMenu = document.querySelector('.dropdown-menu.panel-detail-menu');
     }
 
     if (dropdownMenu) {
-       
+
         document.querySelectorAll('.dropdown-menu').forEach(menu => {
             if (menu !== dropdownMenu) {
                 menu.style.display = 'none';
             }
         });
-        
+
         dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
     }
 }
@@ -289,6 +353,10 @@ function showDetailPanel(manv) {
 
             const detailPanel = document.getElementById('detailPanel');
             detailPanel.classList.add('show');
+            mainContent.classList.add("panel-active");
+            if (rightPanel) rightPanel.classList.remove('show');
+            if (formPanel) formPanel.classList.remove('show');
+            if (filterPanel) filterPanel.classList.remove('show');
 
             
             detailPanel.innerHTML = `
@@ -306,23 +374,23 @@ function showDetailPanel(manv) {
                         <img src="${imageUrl || '/Content/img/default-avt.jpg'}" alt="Profile Picture" class="profile-pic">
                     </div>
                     <div class="employee-info">
-                        <span class="employee-id">${data.manv}</span>
-                        <h2 class="employee-name">${data.ten}</h2>
+                        <span class="employee-id">${data.MaNhanVien}</span>
+                        <h2 class="employee-name">${data.HoTen}</h2>
                         <div class="employee-department">
-                            <span class="department">${data.phongban}</span>
-                            <span class="position"> - ${data.chucvu}</span>
+                            <span class="department">${data.TenPhongBan}</span>
+                            <span class="position"> - ${data.TenChucVu}</span>
                         </div>
                     </div>
                     <div class="detail-group">
-                        <div class="detail-item"><label>CCCD</label><span>${data.cccd}</span></div>
-                        <div class="detail-item"><label>Ngày sinh</label><span>${data.ngaysinh}</span></div>
-                        <div class="detail-item"><label>Giới tính</label><span>${data.gioitinh}</span></div>
-                        <div class="detail-item"><label>Nơi sinh</label><span>${data.noisinhsinh}</span></div>
-                        <div class="detail-item"><label>Số điện thoại</label><span>${data.sodienthoai}</span></div>
-                        <div class="detail-item"><label>Email</label><span>${data.email}</span></div>
-                        <div class="detail-item"><label>Dân tộc</label><span>${data.dantoc}</span></div>
-                        <div class="detail-item"><label>Ngày vào làm</label><span>${data.ngayvaolam}</span></div>
-                        <div class="detail-item"><label>Trình độ học vấn</label><span>${data.trinhdo}</span></div>
+                        <div class="detail-item"><label>CCCD</label><span>${data.CCCD}</span></div>
+                        <div class="detail-item"><label>Ngày sinh</label><span>${data.NgaySinh}</span></div>
+                        <div class="detail-item"><label>Giới tính</label><span>${data.GioiTinh}</span></div>
+                        <div class="detail-item"><label>Nơi sinh</label><span>${data.DiaChi}</span></div>
+                        <div class="detail-item"><label>Số điện thoại</label><span>${data.SoDienThoai}</span></div>
+                        <div class="detail-item"><label>Email</label><span>${data.Email}</span></div>
+                        <div class="detail-item"><label>Dân tộc</label><span>${data.DanToc}</span></div>
+                        <div class="detail-item"><label>Ngày vào làm</label><span>${data.NgayBatDauLam}</span></div>
+                        <div class="detail-item"><label>Trình độ học vấn</label><span>${data.TenTrinhDo}</span></div>
                     </div>
                 </div>
             `;
@@ -330,16 +398,30 @@ function showDetailPanel(manv) {
             // Add event listener for closing the panel
             document.getElementById('closeDetailPanel').addEventListener('click', () => {
                 detailPanel.classList.remove('show');
+                mainContent.classList.remove("panel-active");
             });
         })
         .catch(error => console.error('Error fetching employee data:', error));
 }
 
+
+
+
 // Mở Edit Panel
 function openEditPanel(event) {
     event.preventDefault();
-    formPanel.classList.add('show');
+    document.getElementById('formPanel').classList.add('show');
     mainContent.classList.add("panel-active");
+    if (mainContent) mainContent.classList.add("panel-active");
+
+    const rightPanel = document.getElementById('right-panel');
+    if (rightPanel) rightPanel.classList.remove('show');
+
+    const filterPanel = document.getElementById('filter-panel');
+    if (filterPanel) filterPanel.classList.remove('show');
+    if (detailPanel) detailPanel.classList.remove('show');
+
+
     updatePanelHeight();
     const employeeId = event.target.closest('.table-row').id.replace('data-manv-', '');
 
@@ -458,15 +540,8 @@ document.getElementById("closePanel1").addEventListener("click", function () {
 window.addEventListener("resize", updatePanelHeight);
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    renderTable(data);  
-    updatePanelHeight();
-});
 
 
-document.querySelector('.btn-save').addEventListener('click', () => {
-    alert('Lưu thành công!');
-});
 
 document.querySelector('.btn-delete').addEventListener('click', () => {
     alert('Đã xóa!');
@@ -558,7 +633,7 @@ function selectFilter(element, value) {
 
     options.forEach(option => option.classList.remove('active'));
 
-   
+
     element.classList.add('active');
 
     console.log(`Filter selected: ${value}`);
@@ -569,7 +644,7 @@ function updateAgeRange() {
     const ageMin = document.getElementById('age-min').value;
     const ageMax = document.getElementById('age-max').value;
 
-   
+
     if (parseInt(ageMin) > parseInt(ageMax)) {
         document.getElementById('age-min').value = ageMax;
     }

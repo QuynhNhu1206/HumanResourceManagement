@@ -19,8 +19,6 @@ namespace HumanResourceManagement.Controllers
 
             if (string.IsNullOrEmpty(userName))
             {
-                
-                ViewBag.ErrorMessage = "Vui lòng đăng nhập!";
 
                 return;
             }

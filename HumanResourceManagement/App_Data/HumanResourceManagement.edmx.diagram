@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b26cd3cf521443cda7d5cce51b713782" Name="Diagram1" ZoomLevel="74">
+      <Diagram DiagramId="b26cd3cf521443cda7d5cce51b713782" Name="Diagram1" ZoomLevel="97">
         <EntityTypeShape EntityType="HumanResourceManagementModel.BaoHiem" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="HumanResourceManagementModel.ChucVu" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HumanResourceManagementModel.HopDong" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />

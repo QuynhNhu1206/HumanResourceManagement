@@ -1,3 +1,4 @@
+﻿
 ﻿* {
     margin: 0;
     padding: 0;
@@ -18,7 +19,7 @@ body {
     transition: margin-right 0.3s ease;
     margin-top: 20px;
     padding-right: 40px;
-    height:fit-content;
+    height: fit-content;
 }
 
 .Tieude {
@@ -95,6 +96,7 @@ th, td {
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
+
 .show {
     display: block;
 }
@@ -173,6 +175,7 @@ td:empty .three-dots {
         height: 20px;
         background: none;
     }
+
 .icon-nav {
     width: 40px;
     height: 40px;
@@ -291,7 +294,7 @@ form.panel-content .form-group {
     flex-direction: column;
 }
 
-    form.panel-content .form-group .input-control{
+    form.panel-content .form-group .input-control {
         margin-bottom: 8px;
         background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
         position: relative;
@@ -309,13 +312,13 @@ form.panel-content .form-group {
     }
 
 
-        form.panel-content .form-group .input-control:focus{
+        form.panel-content .form-group .input-control:focus {
             border-color: #86b7fe;
             box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
             outline: none;
         }
 
-        
+
 
 .panel-footer {
     margin-top: 20px;
@@ -326,7 +329,7 @@ form.panel-content .form-group {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px; 
+    gap: 30px;
     padding: 8px 16px;
     border-radius: 6px;
     font-size: 14px;
@@ -395,6 +398,7 @@ form.panel-content .form-group {
 .btn-delete i {
     font-size: 16px;
 }
+
 .icon-dot {
     width: 20px;
     height: 20px;

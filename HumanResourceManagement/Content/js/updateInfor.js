@@ -17,6 +17,8 @@ uploadImageInput.addEventListener('change', function (event) {
         uploadedImage.src = ''; 
     }
 });
+document.getElementById("save").addEventListener("click", function (event) {
+    event.preventDefault();
 
     let formData = new FormData(document.querySelector("form"));
 
@@ -39,7 +41,10 @@ uploadImageInput.addEventListener('change', function (event) {
 document.addEventListener('DOMContentLoaded', function () {
     const dantocSelect = document.getElementById('dantoc');
     const noisinhSelect = document.getElementById('noisinh');
+    
 
+
+    
     if (dantocSelect && noisinhSelect) {
         const danTocs = [
             "Kinh", "Tày", "Ê Đê", "Hoa", "Mường", "Khơ-me", "Nùng", "Thái", "H’mông", "Chăm",
@@ -59,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
             "Thái Nguyên", "Thanh Hóa", "Thừa Thiên-Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang", "Vĩnh Long",
             "Vĩnh Phúc", "Yên Bái"
         ];
-
+        
      
         provinces.forEach(function (province) {
             const optionElement = document.createElement('option');
