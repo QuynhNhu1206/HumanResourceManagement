@@ -1,5 +1,10 @@
-﻿using System;
+﻿using HumanResourceManagement.App_Data;
+using HumanResourceManagement.Models;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,6 +13,7 @@ namespace HumanResourceManagement.Controllers
 {
     public class MyHomeController : Controller
     {
+        private string connectionString = ConfigurationManager.ConnectionStrings["HumanResourceManagementEntities"].ConnectionString;
         // GET: MyHome
         public ActionResult MyHome()
         {

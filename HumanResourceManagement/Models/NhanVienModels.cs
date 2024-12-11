@@ -22,5 +22,8 @@ namespace HumanResourceManagement.Models
         public string TinhTrang { get; set; }
         public string DanToc {  get; set; }
         public string HinhAnh { get; set; }
+        public string TenPhongBan { get; set; }
+        public string TenTrinhDo { get; set; }
+        public string TenChucVu { get; set; }
     }
 }

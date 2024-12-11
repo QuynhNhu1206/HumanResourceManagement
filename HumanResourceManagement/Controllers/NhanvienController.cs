@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Data.Entity;
+using HumanResourceManagement.App_Data;
+using HumanResourceManagement.Models;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,6 +13,7 @@ namespace HumanResourceManagement.Controllers
 {
     public class NhanvienController : Controller
     {
+        private string connectionString = ConfigurationManager.ConnectionStrings["HumanResourceManagementEntities"].ConnectionString;
         // GET: Nhanvien
         public ActionResult NhanVien()
         {
