@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/Content/Css/styleHD.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Thêm jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -19,140 +21,151 @@
     <title>HỢP ĐỒNG</title>
 </head>
 
-    <section class="main-section">
-        <div class="Tieude">
-            <h2>Danh sách hợp đồng</h2>
-            <div class="right-tools">
-                <button class="loc" id="openFilter">
-                    <img src="~/Content/img/Vectorloc.png" alt="loc" class="icon-nav">
-                </button>
-
-                <button class="Them" id="openPanel">
-                    Thêm
-                    <img src="~/Content/img/Vectorthem.png" alt="icon-them">
-                </button>
-
-            </div>
-        </div>
-        <div class="tableds">
-            <table class="table table-hover" id="employeeTable">
-                <thead class="truong">
-                    <tr>
-                        <th scope="col">Mã hợp đồng</th>
-                        <th scope="col">Mã nhân viên</th>
-                        <th scope="col">Loại hợp đồng</th>
-                        <th scope="col">Ngày bắt đầu</th>
-                        <th scope="col">Ngày kết thúc</th>
-                        <th scope="col">Chi tiết</th>
-                    </tr>
-                </thead>
-                <tbody id="table-body">
-                </tbody>
-            </table>
-        </div>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-end">
-                <li class="page-item disabled">
-                    <a class="page-link">Trước</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Tiếp theo</a>
-                </li>
-            </ul>
-        </nav>
-    </section>
-    <!-- panel thêm -->
-    <aside class="right-panel" id="rightPanel">
-        <div class="panel-header d-flex justify-content-between align-items-center">
-            <h3>Thêm thông tin</h3>
-            <button id="closePanel" type="button" class="btn-close" aria-label="Close">
-                <i class="fas fa-times"></i>
+<section class="main-section">
+    <div class="Tieude">
+        <h2>Danh sách hợp đồng</h2>
+        <div class="right-tools">
+            <button class="loc" id="openFilter">
+                <img src="~/Content/img/Vectorloc.png" alt="loc" class="icon-nav">
             </button>
+
+            <button class="Them" id="openPanel">
+                Thêm
+                <img src="~/Content/img/Vectorthem.png" alt="icon-them">
+            </button>
+
         </div>
-        <form class="panel-content">
+    </div>
+    <div class="tableds">
+        <table class="table table-hover" id="employeeTable">
+            <thead class="truong">
+                <tr>
+                    <th scope="col">Mã hợp đồng</th>
+                    <th scope="col">Mã nhân viên</th>
+                    <th scope="col">Loại hợp đồng</th>
+                    <th scope="col">Ngày bắt đầu</th>
+                    <th scope="col">Ngày kết thúc</th>
+                    <th scope="col">Chi tiết</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            <li class="page-item disabled">
+                <a class="page-link">Trước</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Tiếp theo</a>
+            </li>
+        </ul>
+    </nav>
+</section>
+<!-- panel thêm -->
+<aside class="right-panel" id="rightPanel">
+    <div class="panel-header d-flex justify-content-between align-items-center">
+        <h3>Thêm thông tin</h3>
+        <button id="closePanel" type="button" class="btn-close" aria-label="Close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <form class="panel-content">
+        <div class="form-group">
+            <input type="text" id="mahd" name="mahd" class="input-control" placeholder="Mã hợp đồng" aria-label="Mã hợp đồng">
+            <input type="text" id="manv" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+
+            <select id="loaihd" onsubmit="prepareData()" name="loaihd" class="input-select">
+                <option selected>Loại hợp đồng</option>
+                <option value="long term-contract">Hợp đồng dài hạn</option>
+                <option value="short term-contract">Hợp đồng ngắn hạn</option>
+            </select>
+            <input type="date" id="ngaybatdau" class="input-control datepicker-input" placeholder="Ngày bắt đầu"
+                   aria-label="Ngày bắt đầu">
+            <input type="date" id="ngayketthuc" class="input-control datepicker-input" placeholder="Ngày kết thúc"
+                   aria-label="Ngày kết thúc">
             <div class="form-group">
-                 <input type="text" id="mahd" name="mahd" class="input-control" placeholder="Mã hợp đồng" aria-label="Mã hợp đồng">
-                <input type="text" id="manv" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
-                <select id="loaihd" name="loaihd" class="input-select">
-                    <option selected>Loại hợp đồng</option>
-                    <option value="long term-contract">Hợp đồng dài hạn</option>
-                    <option value="short term-contract">Hợp đồng ngắn hạn</option>
-                </select>
-                <input type="date" id="ngaybatdau" class="input-control datepicker-input" placeholder="Ngày bắt đầu"
-                       aria-label="Ngày bắt đầu">
-                <input type="date" id="ngayketthuc" class="input-control datepicker-input" placeholder="Ngày kết thúc"
-                       aria-label="Ngày kết thúc">
-
+                <label for="contractFile" class="file-label">Tải lên chi tiết hợp đồng:</label>
+                <input type="file" id="contractFile" name="contractFile" class="input-file" accept=".pdf,.doc,.docx">
             </div>
 
-            <div class="panel-footer d-flex justify-content-between">
-                <button id="save" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
-                <button id="xoa" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
-            </div>
-        </form>
-
-
-    </aside>
-
-    <!-- panel sửa -->
-    <aside class="form-panel" id="formPanel">
-        <div class="panel-header d-flex justify-content-between align-items-center">
-            <h3>Chỉnh sửa thông tin</h3>
-            <button id="closePanel1" type="button" class="btn-close" aria-label="Close">
-                <i class="fas fa-times"></i>
-            </button>
         </div>
-        <form class="panel-content">
+
+
+        <div class="panel-footer d-flex justify-content-between">
+            <button id="save" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+            <button id="xoa" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+        </div>
+    </form>
+
+
+</aside>
+
+<!-- panel sửa -->
+<aside class="form-panel" id="formPanel">
+    <div class="panel-header d-flex justify-content-between align-items-center">
+        <h3>Chỉnh sửa thông tin</h3>
+        <button id="closePanel1" type="button" class="btn-close" aria-label="Close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <form class="panel-content">
+        <div class="form-group">
+            <input type="text" id="mahdedit" name="mahd" class="input-control" placeholder="Mã hợp đồng" aria-label="Mã hợp đồng">
+            <input type="text" id="manvedit" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+            <select id="loaihopdongedit" name="loaihopdong" class="input-select">
+                <option selected>Loại hợp đồng</option>
+                <option value="long term-contract">Hợp đồng dài hạn</option>
+                <option value="short term-contract">Hợp đồng ngắn hạn</option>
+            </select>
+            <input type="date" id="ngaybatdauedit" class="input-control datepicker-input" placeholder="Ngày bắt đầu"
+                   aria-label="Ngày bắt đầu">
+            <input type="date" id="ngayketthucedit" class="input-control datepicker-input" placeholder="Ngày kết thúc"
+                   aria-label="Ngày kết thúc">
             <div class="form-group">
-                <input type="text" id="mahdedit" name="mahd" class="input-control" placeholder="Mã hợp đồng" aria-label="Mã hợp đồng">
-                <input type="text" id="manvedit" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
-                <select id="loaihopdongedit" name="loaihopdong" class="input-select">
-                    <option selected>Loại hợp đồng</option>
-                </select>
-                <input type="date" id="ngaybatdauedit" class="input-control datepicker-input" placeholder="Ngày bắt đầu"
-                       aria-label="Ngày bắt đầu">
-                <input type="date" id="ngayketthucedit" class="input-control datepicker-input" placeholder="Ngày kết thúc"
-                       aria-label="Ngày kết thúc">
-           
+                <label for="contractFile" class="file-label">Tải lên chi tiết hợp đồng:</label>
+                <input type="file" id="contractFileedit" name="contractFileedit" class="input-file" accept=".pdf,.doc,.docx">
             </div>
-
-            <div class="panel-footer d-flex justify-content-between">
-                <button id="saveedit" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
-                <button id="xoaedit" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
-            </div>
-        </form>
-
-    </aside>
-
-    <!-- panel lọc -->
-    <aside class="filter-panel" id="filterPanel">
-        <div class="panel-header d-flex justify-content-between align-items-center">
-            <h3>Bộ lọc</h3>
-            <button id="closeFilterPanel" type="button" class="btn-close" aria-label="Close">
-                <i class="fas fa-times"></i>
-            </button>
         </div>
-        <div class="panel-content">
-            <div class="filter-section">
-                <label for="contract-filter">Loại hợp đồng</label>
+
+        <div class="panel-footer d-flex justify-content-between">
+            <button id="saveedit" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
+            <button id="xoaedit" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
+        </div>
+    </form>
+
+</aside>
+
+<!-- panel lọc -->
+<aside class="filter-panel" id="filterPanel">
+    <div class="panel-header d-flex justify-content-between align-items-center">
+        <h3>Bộ lọc</h3>
+        <button id="closeFilterPanel" type="button" class="btn-close" aria-label="Close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="panel-content">
+        <div class="filter-section">
+            <label for="contract-filter">Loại hợp đồng</label>
             <select id="contract-filter">
                 <option value="all">Tất cả</option>
                 <option value="long term-contract">Hợp đồng dài hạn</option>
                 <option value="short term-contract">Hợp đồng ngắn hạn</option>
-            </select>    
-            </div>
-
-            <div class="panel-footer d-flex justify-content-between">
-                <button id="SubmitFilterPanel" type="button" class="btn btn-ok" aria-label="ok">
-                    Xác nhận
-                    <i class="fa-solid fa-check"></i>
-                </button>
-            </div>
+            </select>
         </div>
-    </aside>
+
+        <div class="panel-footer d-flex justify-content-between">
+            <button id="SubmitFilterPanel" type="button" class="btn btn-ok" aria-label="ok">
+                Xác nhận
+                <i class="fa-solid fa-check"></i>
+            </button>
+        </div>
+    </div>
+</aside>
 
 
 @Scripts.Render("~/bundles/hd")
