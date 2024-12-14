@@ -474,6 +474,21 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\NhanVienModels.cs" />
+
+    <Compile Include="App_Data\NhanVien.cs">
+      <DependentUpon>HumanResourceManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\PhanQuyen.cs">
+      <DependentUpon>HumanResourceManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\PhongBan.cs">
+      <DependentUpon>HumanResourceManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\PhuCap.cs">
+      <DependentUpon>HumanResourceManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PhongBanModels.cs" />
+
     <Compile Include="Profiles\AutoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

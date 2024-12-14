@@ -1,4 +1,4 @@
-﻿const openPanelButton = document.getElementById("openPanel");
+const openPanelButton = document.getElementById("openPanel");
 const closePanelButton = document.getElementById("closePanel");
 const rightPanel = document.getElementById("rightPanel");
 const mainContent = document.querySelector(".main-section");
@@ -57,6 +57,7 @@ function updatePagination() {
         pagination.appendChild(pageItem);
     }
 
+
     // Thêm nút "Tiếp theo"
     const nextButton = document.createElement('li');
     nextButton.classList.add('page-item');
@@ -99,6 +100,7 @@ function updateTable() {
     }
     let startRow = (currentPage - 1) * rowsPerPage;
     const endRow = Math.min(startRow + rowsPerPage, data.length);
+
 
     let pagedData = data.slice(startRow, endRow);
     renderTable(pagedData);
@@ -249,11 +251,35 @@ document.getElementById("save").addEventListener("click", function (event) {
                 isValid = false;
             } else {
 
+
                 errorElement.classList.remove('show-error');
                 //iconElement.classList.remove('show-icon');
                 element.classList.remove('error-background');
                 errorElement.innerHTML = '';
                // iconElement.style.display = 'none';
+
+
+    // Lấy giá trị từ form
+    const ngaySinhInput = document.getElementById("ngaysinh").value;
+    const ngayVaoLamInput = document.getElementById("ngayvaolam").value;
+
+    // Kiểm tra các trường bắt buộc
+    const formData = {
+        MaNhanVien: document.getElementById("manv").value.trim(),
+        HoTen: document.getElementById("ten").value.trim(),
+        CCCD: document.getElementById("cccd").value.trim(),
+        MaPhongBan: document.getElementById("phongban").value.trim(),
+        DiaChi: document.getElementById("noisinh").value.trim(),
+        NgaySinh: ngaySinhInput,
+        GioiTinh: document.getElementById("gioitinh").value.trim(),
+        SoDienThoai: document.getElementById("sodienthoai").value.trim(),
+        DanToc: document.getElementById("dantoc").value.trim(),
+        NgayBatDauLam: ngayVaoLamInput,
+        MaTrinhDo: document.getElementById("trinhdo").value.trim(),
+        MaChucVu: document.getElementById("chucvu").value.trim(),
+        Email: document.getElementById("email").value.trim(),
+        TinhTrang: document.getElementById("tinhtrang").value.trim()
+
 
             }
         }
@@ -490,10 +516,15 @@ function fetchEmployees() {
         }
     });
 }
+
 $(document).ready(function () {
     console.log('Trang đã tải xong, gọi fetchEmployees');
     fetchEmployees();
 });
+
+
+
+
 // Hàm toggle menu dropdown
 function toggleDropdown(event) {
     event.stopPropagation();
@@ -878,6 +909,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 // Filterpanel
 openFilterButton.addEventListener("click", () => {
+
     const phongbanSelect = document.getElementById('department-filter');
     const chucvuSelect = document.getElementById('position-filter');
     filterPanel.classList.add("show");
@@ -922,6 +954,9 @@ function updateSelectOptions1(selectElement, data, valueField, textField) {
         filterPanel.classList.remove("show");
         mainContent.classList.remove("panel-active");
     });
+
+ 
+
 
 
     //function selectFilter(element, filterType, filterValue) {

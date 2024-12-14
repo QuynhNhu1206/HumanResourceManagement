@@ -19,13 +19,7 @@ namespace HumanResourceManagement.Controllers
 
             if (string.IsNullOrEmpty(userName))
             {
-                // Nếu không có userName, có thể gán ViewBag để thông báo lỗi hoặc không thực hiện chuyển hướng ngay.
-                ViewBag.ErrorMessage = "Vui lòng đăng nhập!";
 
-                // Bạn có thể ngừng thực thi Action mà không cần chuyển hướng ngay:
-                // filterContext.Result = new ViewResult() { ViewName = "Login" };
-
-                // Tiếp tục hiển thị trang hiện tại thay vì chuyển hướng ngay lập tức
                 return;
             }
 
