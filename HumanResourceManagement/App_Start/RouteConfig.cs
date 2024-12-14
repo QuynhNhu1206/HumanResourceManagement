@@ -31,6 +31,12 @@ namespace HumanResourceManagement
             );
 
             routes.MapRoute(
+                name: "myhome",
+                url: "myhome",
+                defaults: new { controller = "MyHome", action = "MyHome" }
+            );
+
+            routes.MapRoute(
                name: "nhanvien",
                url: "nhanvien",  // URL /login sẽ khớp với route này
                defaults: new { controller = "Nhanvien", action = "Nhanvien" }

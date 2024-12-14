@@ -23,6 +23,11 @@
     <div class="Tieude">
         <h2>Danh sách nhân viên</h2>
         <div class="right-tools">
+            <select id="rowsPerPage" class="rows-per-page">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+            </select>
             <button class="quanly">
                 Quản lý
                 <i class="fa-solid fa-user icon-nav"></i>
@@ -38,7 +43,7 @@
 
         </div>
     </div>
-    <div class="tableds" >
+    <div class="tableds">
         <table class="table table-hover" id="employeeTable">
             <thead class="truong">
                 <tr>
@@ -53,19 +58,14 @@
             </tbody>
         </table>
     </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-end">
-            <li class="page-item disabled">
-                <a class="page-link">Trước</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Tiếp theo</a>
-            </li>
-        </ul>
-    </nav>
+    <div class="pagination-container">
+        <span id="pageInfo" class="page-info"></span>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end" id="pagination">
+                
+            </ul>
+        </nav>
+    </div>
 </section>
 <!-- panel thêm -->
 <aside class="right-panel" id="rightPanel">
@@ -75,52 +75,89 @@
             <i class="fas fa-times"></i>
         </button>
     </div>
-    <form class="panel-content">
-        <div class="form-group">
-            <input type="text" id="manv" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
-            <input type="text" id="ten" name="ten" class="input-control" placeholder="Họ và tên" aria-label="Họ và tên">
-            <input type="text" id="cccd" name="cccd" class="input-control" placeholder="CCCD" aria-label="CCCD">
-            <select id="phongban" name="phongban" class="input-select">
-                <option selected>Phòng ban</option>
-            </select>
-            <input type="date" id="ngaysinh" class="input-control datepicker-input" placeholder="Ngày sinh"
-                   aria-label="Ngày sinh">
-            <select id="gioitinh" name="gioitinh" class="input-select">
-                <option selected>Giới tính</option>
-                <option value="1">Nam</option>
-                <option value="2">Nữ</option>
-            </select>
-            <select id="noisinh" name="noisinh" class="input-select">
-                <option value="" selected>Chọn tỉnh/thành phố</option>
-            </select>
-            <input type="text" id="sodienthoai" name="sodienthoai" class="input-control" placeholder="Số điện thoại" aria-label="Số điện thoại">
-            <select id="dantoc" name="dantoc" class="input-select">
-                <option value="" selected>Chọn dân tộc</option>
-            </select>
+   <form class="panel-content">
+    <div class="form-group">
+        <label for="manv">Mã nhân viên</label>
+        <input type="text" id="manv" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
+        <span id="manv-error" class="error-message"><i class="fas fa-exclamation-circle error-icon"></i> <span></span></span>
 
-            <input type="date" id="ngayvaolam" name="ngayvaolam" class="input-control datepicker-input" placeholder="Ngày bắt đầu làm"
-                   aria-label="Ngày bắt đầu làm" />
-            <select id="trinhdo" name="trinhdo" class="input-select">
-                <option selected>Trình độ học vấn</option>
-            </select>
-            <select id="chucvu" name="chucvu" class="input-select">
-                <option selected>Chức vụ</option>
+        <label for="hoten">Họ và tên</label>
+        <input type="text" id="ten" name="ten" class="input-control" placeholder="Họ và tên" aria-label="Họ và tên">
+        <span id="ten-error" class="error-message"><i class="fas fa-exclamation-circle error-icon"></i> <span></span></span>
 
-            </select>
-            <input id="email" type="email" name="email" class="input-control" placeholder="Email" aria-label="Email">
-            <select id="tinhtrang" name="tinhtrang" class="input-select">
-                <option selected>Tình trạng</option>
-                <option value="1">Đang làm việc</option>
-                <option value="2">Nghỉ việc</option>
+        <label for="cccd">CCCD</label>
+        <input type="text" id="cccd" name="cccd" class="input-control" placeholder="CCCD" aria-label="CCCD">
+        <span id="cccd-error" class="error-message"><i class="fas fa-exclamation-circle error-icon"></i> <span></span></span>
 
-            </select>
-        </div>
+        <label for="phongban">Phòng ban</label>
+        <select id="phongban"  name="phongban" class="input-select" title="phòng ban">
+            <option  value="" selected>Phòng ban</option>
+        </select>
+        <span id="phongban-error" class="error-message"><i class="fas fa-exclamation-circle error-icon"></i> <span></span></span>
 
-        <div class="panel-footer d-flex justify-content-between">
-            <button id="save" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
-            <button id="xoa" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
-        </div>
-    </form>
+        <label for="ngaysinh">Ngày sinh</label>
+        <input type="date" id="ngaysinh" class="input-control datepicker-input" placeholder="Ngày sinh" aria-label="Ngày sinh">
+        <span id="ngaysinh-error" class="error-message"><i class="fas fa-exclamation-circle error-icon"></i> <span></span></span>
+
+        <label for="gioitinh">Giới tính</label>
+        <select id="gioitinh" name="gioitinh" class="input-select">
+            <option selected>Giới tính</option>
+            <option value="1">Nam</option>
+            <option value="2">Nữ</option>
+        </select>
+       <span id="gioitinh-error" class="error-message"><i class="fas fa-exclamation-circle error-icon"></i> <span></span></span>
+
+        <label for="noisinh">Nơi sinh</label>
+        <select id="noisinh" name="noisinh" class="input-select">
+            <option value="" selected>Chọn tỉnh/thành phố</option>
+        </select>
+        <span id="noisinh-error" class="error-message"><i class="fas fa-exclamation-circle error-icon"></i> <span></span></span>
+
+        <label for="sodienthoai">Số điện thoại</label>
+        <input type="text" id="sodienthoai" name="sodienthoai" class="input-control" placeholder="Số điện thoại" aria-label="Số điện thoại">
+        <span id="sodienthoai-error" class="error-message"><i class="fas fa-exclamation-circle error-icon"></i> <span></span></span>
+
+        <label for="dantoc">Dân tộc</label>
+        <select id="dantoc" name="dantoc" class="input-select">
+            <option value="" selected>Chọn dân tộc</option>
+        </select>
+        <span id="dantoc-error" class="error-message"><i class="fas fa-exclamation-circle error-icon"></i> <span></span></span>
+        
+        <label for="ngaybatdaulam">Ngày bắt đầu làm</label>
+        <input type="date" id="ngayvaolam" name="ngayvaolam" class="input-control datepicker-input" placeholder="Ngày bắt đầu làm" aria-label="Ngày bắt đầu làm">
+        <span id="ngayvaolam-error" class="error-message"><i class="fas fa-exclamation-circle error-icon"></i> <span></span></span>
+  
+        <label for="trinhdo">Trình độ</label>
+        <select id="trinhdo" name="trinhdo" class="input-select" title="trình độ">
+            <option  value="" selected>Trình độ học vấn</option>
+        </select>
+        <span id="trinhdo-error" class="error-message"><i class="fas fa-exclamation-circle error-icon"></i> <span></span></span>
+  
+        <label for="chucvu">Chức vụ</label>
+        <select id="chucvu" name="chucvu" class="input-select" title="chức vụ">
+            <option  value="" selected>Chức vụ</option>
+        </select>
+       <span id="chucvu-error" class="error-message"><i class="fas fa-exclamation-circle error-icon"></i> <span></span></span>
+   
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" class="input-control" placeholder="Email" aria-label="Email">
+        <span id="email-error" class="error-message"><i class="fas fa-exclamation-circle error-icon"></i> <span></span></span>
+    
+        <label for="tinhtrang">Tình trạng</label>
+        <select id="tinhtrang" name="tinhtrang" class="input-select">
+            <option selected>Tình trạng</option>
+            <option value="1">Đang làm việc</option>
+            <option value="2">Nghỉ việc</option>
+        </select>
+        <span id="tinhtrang-error" class="error-message"><i class="fas fa-exclamation-circle error-icon"></i> <span></span></span>
+    </div>
+
+    <div class="panel-footer d-flex justify-content-between">
+        <button id="save" name="save" class="btn btn-save">Lưu <i class="fas fa-save icon-btn"></i></button>
+        <button id="xoa" name="xoa" class="btn btn-delete">Xóa <i class="fas fa-trash-alt icon-btn"></i></button>
+    </div>
+</form>
+
 
 
 </aside>
@@ -267,39 +304,33 @@
     <div class="panel-content">
         <div class="filter-section">
             <label for="time-filter">Thời gian</label>
-            <div class="filter-options ">
-                <div class="filter-option" onclick="selectFilter(this, '1-week')">Dưới 1 tuần</div>
-                <div class="filter-option" onclick="selectFilter(this, '1-month')">Dưới 1 tháng</div>
-                <div class="filter-option" onclick="selectFilter(this, '1-year')">Dưới 1 năm</div>
+            <div class="filter-options " id="time-filter">
+                <div class="filter-option" onclick="selectFilter(this, 'time', '1-week')" data-value="1-week">Dưới 1 tuần</div>
+                <div class="filter-option" onclick="selectFilter(this, 'time', '1-month')" data-value="1-month">Dưới 1 tháng</div>
+                <div class="filter-option" onclick="selectFilter(this, 'time', '1-year')" data-value="1-year">Dưới 1 năm</div>
             </div>
         </div>
 
         <div class="filter-section">
             <label for="gender-filter">Giới tính</label>
             <div class="filter-options" id="gender-filter">
-                <div class="filter-option" onclick="selectFilter(this, 'male')">Nam</div>
-                <div class="filter-option" onclick="selectFilter(this, 'female')">Nữ</div>
-                <div class="filter-option" onclick="selectFilter(this, 'other')">Khác</div>
+                <div class="filter-option" onclick="selectFilter(this, 'gender', 'male')">Nam</div>
+                <div class="filter-option" onclick="selectFilter(this, 'gender', 'female')">Nữ</div>
+                <div class="filter-option" onclick="selectFilter(this, 'gender', 'other')">Khác</div>
             </div>
         </div>
 
         <div class="filter-section">
             <label for="department-filter">Phòng ban</label>
-            <select id="department-filter">
-                <option value="all">Tất cả</option>
-                <option value="natural-sciences">Khoa tự nhiên</option>
-                <option value="social-sciences">Khoa xã hội</option>
-                <option value="foreign-languages">Khoa ngoại ngữ</option>
+            <select id="department-filter" name="phongban" class="input-select" title="phòng ban">
+                <option value="all" selected>Tất cả</option>
             </select>
         </div>
 
         <div class="filter-section">
             <label for="position-filter">Chức vụ</label>
-            <select id="position-filter">
-                <option value="all">Tất cả</option>
-                <option value="teacher">Giáo viên</option>
-                <option value="head">Hiệu trưởng</option>
-                <option value="vice-head">Phó hiệu trưởng</option>
+            <select id="position-filter" title="chức vụ">
+                <option value="all" selected>Tất cả</option>
             </select>
         </div>
 
@@ -315,8 +346,8 @@
         <div class="filter-section">
             <label>Tình trạng</label>
             <div class="filter-options">
-                <label><input type="radio" name="status" value="working" checked> Đang làm</label>
-                <label><input type="radio" name="status" value="quit" checked> Đã nghỉ việc</label>
+                <label><input type="radio" name="status" value="working" checked> Đang làm việc</label>
+                <label><input type="radio" name="status" value="quit" > Nghỉ việc</label>
             </div>
         </div>
         <div class="panel-footer d-flex justify-content-between">

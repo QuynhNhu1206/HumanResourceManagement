@@ -214,13 +214,3 @@ body {
     height: 477.333px;
     flex-shrink: 0;
 }
-.error-notification {
-    margin-top: 15px;
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}

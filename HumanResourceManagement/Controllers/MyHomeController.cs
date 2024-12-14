@@ -1,4 +1,5 @@
-﻿using HumanResourceManagement.App_Data;
+﻿
+using HumanResourceManagement.App_Data;
 using HumanResourceManagement.Models;
 using System;
 using System.Collections.Generic;
@@ -85,23 +86,23 @@ namespace HumanResourceManagement.Controllers
                     string query = "SELECT MatKhau FROM TaiKhoan WHERE LOWER(TenTaiKhoan) = @TenTaiKhoan";
                     using (SqlCommand command = new SqlCommand(query, conn))
                     {
-                        
+
                         command.Parameters.AddWithValue("@TenTaiKhoan", username.ToLower());
                         object dbPassword = command.ExecuteScalar();
 
-                      
+
                         if (dbPassword == null)
                         {
                             return "WrongUsername";
                         }
 
-                        
+
                         if (!string.Equals(dbPassword.ToString(), password, StringComparison.Ordinal))
                         {
                             return "WrongPassword";
                         }
 
-                        
+
                         return "Success";
                     }
                 }
@@ -117,9 +118,9 @@ namespace HumanResourceManagement.Controllers
                 return "Error: " + ex.Message;
             }
         }
-        
 
-          
+
+
         public ActionResult UpdateInfo()
         {
 
@@ -138,7 +139,7 @@ namespace HumanResourceManagement.Controllers
                 NhanVienModels model = GetUserInfo(username);
                 if (model != null)
                 {
-                    
+
 
                     return View(model);
                 }
@@ -155,7 +156,7 @@ namespace HumanResourceManagement.Controllers
             }
         }
 
-        
+
         [HttpGet]
         private NhanVienModels GetUserInfo(string username)
         {
@@ -257,7 +258,7 @@ namespace HumanResourceManagement.Controllers
                             path = Path.Combine(Server.MapPath("~/Content/img/EmployeeImages/"), fileName);
                         }
 
-                        
+
                         uploadedImage.SaveAs(path);
 
 
