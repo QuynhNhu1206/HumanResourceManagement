@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/Content/Css/styleHD.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Thêm jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -35,7 +37,7 @@
             </div>
         </div>
         <div class="tableds">
-            <table class="table table-hover" id="employeeTable">
+            <table class="table table-hover" >
                 <thead class="truong">
                     <tr>
                         <th scope="col">Mã hợp đồng</th>
@@ -74,9 +76,10 @@
         </div>
         <form class="panel-content">
             <div class="form-group">
-                 <input type="text" id="mahd" name="mahd" class="input-control" placeholder="Mã hợp đồng" aria-label="Mã hợp đồng">
+                <input type="text" id="mahd" name="mahd" class="input-control" placeholder="Mã hợp đồng" aria-label="Mã hợp đồng">
                 <input type="text" id="manv" name="manv" class="input-control" placeholder="Mã nhân viên" aria-label="Mã nhân viên">
-                <select id="loaihd" name="loaihd" class="input-select">
+                
+                <select id="loaihd" onsubmit="prepareData()" name="loaihd" class="input-select">
                     <option selected>Loại hợp đồng</option>
                     <option value="long term-contract">Hợp đồng dài hạn</option>
                     <option value="short term-contract">Hợp đồng ngắn hạn</option>
@@ -85,8 +88,13 @@
                        aria-label="Ngày bắt đầu">
                 <input type="date" id="ngayketthuc" class="input-control datepicker-input" placeholder="Ngày kết thúc"
                        aria-label="Ngày kết thúc">
+                <div class="form-group">
+                    <label for="contractFile" class="file-label">Tải lên chi tiết hợp đồng:</label>
+                    <input type="file" id="contractFile" name="contractFile" class="input-file" accept=".pdf,.doc,.docx">
+                </div>
 
             </div>
+
 
             <div class="panel-footer d-flex justify-content-between">
                 <button id="save" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
@@ -116,7 +124,10 @@
                        aria-label="Ngày bắt đầu">
                 <input type="date" id="ngayketthucedit" class="input-control datepicker-input" placeholder="Ngày kết thúc"
                        aria-label="Ngày kết thúc">
-           
+                <div class="form-group">
+                    <label for="contractFile" class="file-label">Tải lên chi tiết hợp đồng:</label>
+                    <input type="file" id="contractFile" name="contractFile" class="input-file" accept=".pdf,.doc,.docx">
+                </div>
             </div>
 
             <div class="panel-footer d-flex justify-content-between">

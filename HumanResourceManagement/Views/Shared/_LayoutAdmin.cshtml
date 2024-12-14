@@ -47,17 +47,15 @@
                         <img src="~/Content/img/mdi_bell-outline.png" alt="Notification Icon" class="nav-icon">
                         <div class="user-profile">
                             <div class="user-info" id="userProfile">
-                                @{
-                                    var user = (HumanResourceManagement.App_Data.TaiKhoan)HttpContext.Current.Session["user"];
-                                    <span class="user-name"> @user.NhanVien.HoTen</span>
-                                }
+                                <span class="user-name">@ViewBag.UserName</span>
+
                                 <p class="user-detail">Xem hồ sơ chi tiết</p>
                             </div>
                             <img src="~/Content/img/cute.jpg" alt="Avatar" class="user-avatar" id="userAvatar">
                             <div class="dropdown-panel" id="dropdownPanel">
                                 <ul>
                                     <li>
-                                        <a href="/MyHome/updateinfo">
+                                        <a href="/MyHome/UpdateInfo">
                                             <i class="fa-solid fa-user icon"></i> Hồ sơ cá nhân
                                         </a>
                                     </li>
@@ -88,7 +86,7 @@
                                     </li>
                                 </ul>
                                 <div class="logout-item">
-                                    <a href="MyHome\Login\Logout">
+                                    <a href="#">
                                         <i class="fa-solid fa-sign-out-alt icon"></i> Đăng xuất
                                     </a>
                                 </div>
@@ -99,14 +97,13 @@
                 </div>
             </div>
         </div>
-
     </header>
     <div class="d-flex dashboard">
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="welcome-message">
                 <h2>Xin chào,</h2>
-                <span class="highlight">Lan Nhi!</span>
+                <span class="highlight">@ViewBag.ShortName!</span>
                 <p class="update-info">Đã cập nhật gần đây nhất</p>
             </div>
             <ul>
@@ -117,13 +114,13 @@
                     <a class="nav-link" href="/Nhanvien/Nhanvien">Nhân viên</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/Phongban/Phongban">Phòng ban</a>
+                    <a class="nav-link" href="/Phongban/phongban">Phòng ban</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Hợp đồng</a>
+                    <a class="nav-link" href="/Hopdong/hopdong">Hợp đồng</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Lịch làm việc</a>
+                    <a class="nav-link" href="/Lichlamviec/lichlamviec">Lịch làm việc</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Lương</a>
@@ -140,7 +137,6 @@
             </ul>
 
         </aside>
-
 
     </div>
     <div class="main-content">

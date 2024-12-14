@@ -21,6 +21,8 @@ namespace HumanResourceManagement
                         "~/Content/js/main.js"));
             bundles.Add(new ScriptBundle("~/bundles/option").Include(
                         "~/Content/js/option.js"));
+            bundles.Add(new ScriptBundle("~/bundles/hd").Include(
+                       "~/Content/js/hd.js"));
             bundles.Add(new ScriptBundle("~/bundles/updateInfor").Include(
                         "~/Content/js/updateInfor.js"));
             bundles.Add(new ScriptBundle("~/bundles/phongban").Include(
