@@ -32,13 +32,13 @@ namespace HumanResourceManagement.App_Data
         public string Email { get; set; }
         public string SoDienThoai { get; set; }
         public Nullable<System.DateTime> NgayBatDauLam { get; set; }
-        public byte[] HinhAnh { get; set; }
+        public string HinhAnh { get; set; }
         public string TenTaiKhoan { get; set; }
         public string MaChucVu { get; set; }
         public string MaPhongBan { get; set; }
         public string MaTrinhDo { get; set; }
-        public string TinhTrang { get; set; }
         public string DanToc { get; set; }
+        public string TinhTrang { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BaoHiem> BaoHiem { get; set; }

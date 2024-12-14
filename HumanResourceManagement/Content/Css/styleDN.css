@@ -1,6 +1,6 @@
-﻿
 
-/*CSS Đăng nhập*/
+﻿/*CSS Đăng nhập*/
+
 
 * {
     margin: 0;
@@ -54,7 +54,7 @@ body {
 
 
     .custom-dangnhap .highlight {
-        background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
+        background: linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%);
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -214,16 +214,3 @@ body {
     height: 477.333px;
     flex-shrink: 0;
 }
-
-.error-notification {
-    margin-top: 15px;
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-    

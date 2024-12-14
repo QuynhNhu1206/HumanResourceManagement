@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace HumanResourceManagement.Controllers
 {
-    public class HopDongController : Controller
+    public class HopDongController : BaseController
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["HumanResourceManagementEntities"].ConnectionString;
         private readonly HumanResourceManagementEntities db = new HumanResourceManagementEntities();

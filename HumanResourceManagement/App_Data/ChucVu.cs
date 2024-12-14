@@ -23,6 +23,7 @@ namespace HumanResourceManagement.App_Data
         public string MaChucVu { get; set; }
         public string TenChucVu { get; set; }
         public string MaQuyen { get; set; }
+        public string TrangThai { get; set; }
     
         public virtual PhanQuyen PhanQuyen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

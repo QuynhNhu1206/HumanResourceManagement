@@ -1,4 +1,5 @@
 ﻿@{
+
     ViewBag.Title = "Phongban";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
@@ -38,6 +39,8 @@
                 <tr>
                     <th scope="col">Mã phòng ban</th>
                     <th scope="col">Tên phòng ban</th>
+                    <th scope="col">Số lượng nhân viên</th>
+                    <th scope="col">Mô tả</th>
                     <th scope="col">Tùy chọn</th>
                 </tr>
             </thead>
@@ -72,6 +75,7 @@
         <div class="form-group">
             <input type="text" id="mapb" name="mapb" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
             <input type="text" id="tenpb" name="tenpb" class="input-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban">
+            <input type="text" id="mota" name="tenpb" class="input-control" placeholder="Mô tả" aria-label="Mô tả">
         </div>
 
         <div class="panel-footer d-flex justify-content-between">
@@ -90,8 +94,9 @@
     </div>
     <form class="panel-content">
         <div class="form-group">
-            <input type="text" id="mapbedit" name="mapb" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
-            <input type="text" id="tenpbedit" name="tenpb" class="input-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban">
+            <input type="text" id="mapb" name="mapb" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
+            <input type="text" id="tenpb" name="tenpb" class="input-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban">
+            <input type="text" id="mota" name="tenpb" class="input-control" placeholder="Mô tả" aria-label="Mô tả">
         </div>
 
         <div class="panel-footer d-flex justify-content-between">
@@ -115,10 +120,7 @@
         <div class="filter-section">
             <label for="department-filter">Tên phòng ban</label>
             <select id="department-filter">
-                <option value="all">Tất cả</option>
-                <option value="natural-sciences">Khoa tự nhiên</option>
-                <option value="social-sciences">Khoa xã hội</option>
-                <option value="foreign-languages">Khoa ngoại ngữ</option>
+               
             </select>
         </div>
 
