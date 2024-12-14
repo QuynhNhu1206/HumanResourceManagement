@@ -26,4 +26,11 @@ namespace HumanResourceManagement.Models
         public string DanToc {  get; set; }
         public string HinhAnh { get; set; }
     }
+    public class EmployeeFilter
+    {
+        public string MaNhanVien { get; set; }
+        public string GenderFilter { get; set; }
+        public string DepartmentFilter { get; set; }
+        public string PositionFilter { get; set; }
+    }
 }

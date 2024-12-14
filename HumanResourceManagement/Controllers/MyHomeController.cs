@@ -1,4 +1,5 @@
-﻿using HumanResourceManagement.App_Data;
+﻿
+using HumanResourceManagement.App_Data;
 using HumanResourceManagement.Models;
 using System;
 using System.Collections.Generic;

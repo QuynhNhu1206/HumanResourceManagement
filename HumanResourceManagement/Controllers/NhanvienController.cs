@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -8,13 +9,13 @@ using HumanResourceManagement.Models;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Text;
 
 namespace HumanResourceManagement.Controllers
 {
     public class NhanvienController : BaseController
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["HumanResourceManagementEntities"].ConnectionString;
-        private readonly HumanResourceManagementEntities db = new HumanResourceManagementEntities();
 
         // GET: Nhanvien
         public ActionResult NhanVien()
@@ -146,6 +147,107 @@ namespace HumanResourceManagement.Controllers
             return Json(employee, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
+        public JsonResult GetEmployeeFilter(string time = null, string gender = null, string department = null, string position = null, int? ageMin = null, int? ageMax = null, string status = null)
+        {
+            List<NhanVienModels> employees = new List<NhanVienModels>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    StringBuilder query = new StringBuilder();
+                    query.Append("SELECT nv.MaNhanVien, nv.HoTen, pb.TenPhongBan, nv.NgaySinh, nv.GioiTinh, nv.NgayBatDauLam, cv.TenChucVu, nv.TinhTrang ");
+                    query.Append("FROM NhanVien nv ");
+                    query.Append("JOIN PhongBan pb ON nv.MaPhongBan = pb.MaPhongBan ");
+                    query.Append("JOIN ChucVu cv ON nv.MaChucVu = cv.MaChucVu ");
+                    query.Append("JOIN TrinhDo td ON nv.MaTrinhDo = td.MaTrinhDo ");
+                    query.Append("WHERE 1=1 ");
+
+                    // Apply filters
+                    if (!string.IsNullOrEmpty(time))
+                    {
+                        switch (time)
+                        {
+                            case "1-week":
+                                query.Append("AND DATEDIFF(day, nv.NgayBatDauLam, GETDATE()) <= 7 ");
+                                break;
+                            case "1-month":
+                                query.Append("AND DATEDIFF(day, nv.NgayBatDauLam, GETDATE()) <= 30 ");
+                                break;
+                            case "1-year":
+                                query.Append("AND DATEDIFF(day, nv.NgayBatDauLam, GETDATE()) <= 365 ");
+                                break;
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(gender))
+                    {
+                        query.Append("AND nv.GioiTinh = @gender ");
+                    }
+                    if (!string.IsNullOrEmpty(department))
+                    {
+                        query.Append("AND nv.MaPhongBan = @department ");
+                    }
+                    if (!string.IsNullOrEmpty(position))
+                    {
+                        query.Append("AND nv.MaChucVu = @position ");
+                    }
+                    if (ageMin.HasValue && ageMax.HasValue)
+                    {
+                        query.Append("AND DATEDIFF(year, nv.NgaySinh, GETDATE()) BETWEEN @ageMin AND @ageMax ");
+                    }
+                    else if (ageMin.HasValue)
+                    {
+                        query.Append("AND DATEDIFF(year, nv.NgaySinh, GETDATE()) >= @ageMin ");
+                    }
+                    else if (ageMax.HasValue)
+                    {
+                        query.Append("AND DATEDIFF(year, nv.NgaySinh, GETDATE()) <= @ageMax ");
+                    }
+                    if (!string.IsNullOrEmpty(status))
+                    {
+                        query.Append("AND nv.TinhTrang = @status ");
+                    }
+
+                    SqlCommand cmd = new SqlCommand(query.ToString(), conn);
+                    if (!string.IsNullOrEmpty(gender)) cmd.Parameters.AddWithValue("@gender", gender);
+                    if (!string.IsNullOrEmpty(department)) cmd.Parameters.AddWithValue("@department", department);
+                    if (!string.IsNullOrEmpty(position)) cmd.Parameters.AddWithValue("@position", position);
+                    if (ageMin.HasValue) cmd.Parameters.AddWithValue("@ageMin", ageMin);
+                    if (ageMax.HasValue) cmd.Parameters.AddWithValue("@ageMax", ageMax);
+                    if (!string.IsNullOrEmpty(status)) cmd.Parameters.AddWithValue("@status", status);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            employees.Add(new NhanVienModels
+                            {
+                                MaNhanVien = reader["MaNhanVien"].ToString(),
+                                HoTen = reader["HoTen"].ToString(),
+                                TenPhongBan = reader["TenPhongBan"].ToString(),
+                                NgaySinh = DateTime.Parse(reader["NgaySinh"].ToString()),
+                                GioiTinh = reader["GioiTinh"].ToString(),
+                                NgayBatDauLam = DateTime.Parse(reader["NgayBatDauLam"].ToString()),
+                                TenChucVu = reader["TenChucVu"].ToString(),
+                                TinhTrang = reader["TinhTrang"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(employees, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpGet]
         public JsonResult GetEmployeeDetail(string employeeId)
         {
             var employee = new
@@ -191,6 +293,8 @@ namespace HumanResourceManagement.Controllers
                     {
                         if (reader.Read())
                         {
+                            var hinhAnhPath = reader["HinhAnh"].ToString(); 
+                            var hinhAnhUrl = string.IsNullOrEmpty(hinhAnhPath) ? "/Content/img/default-avt.jpg" : Url.Content(hinhAnhPath);
                             employee = new
                             {
                                 MaNhanVien = reader["MaNhanVien"].ToString(),
@@ -207,7 +311,7 @@ namespace HumanResourceManagement.Controllers
                                 TenChucVu = reader["TenChucVu"].ToString(),
                                 Email = reader["Email"].ToString(),
                                 TinhTrang = reader["TinhTrang"].ToString(),
-                                HinhAnh = Url.Content("~/Content/img/EmployeeImages/" + reader["HinhAnh"].ToString())
+                                HinhAnh = hinhAnhUrl
                             };
                         }
                     }
@@ -220,12 +324,38 @@ namespace HumanResourceManagement.Controllers
 
             return Json(employee, JsonRequestBehavior.AllowGet);
         }
-        // Lấy danh sách phòng ban
+        private string GetNewEmployeeCode()
+        {
+            string newCode = "NV1";
+            string query = "SELECT TOP 1 MaNhanVien " +
+                "FROM NhanVien " +
+                "ORDER BY CAST(SUBSTRING(MaNhanVien, 3, LEN(MaNhanVien) - 2) AS INT) " +
+                "DESC";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    var result = command.ExecuteScalar();
+                    if (result != null)
+                    {
+                        string lastCode = result.ToString();
+                        int lastNumber = int.Parse(lastCode.Replace("NV", ""));
+                        newCode = "NV" + (lastNumber + 1);
+                    }
+                }
+            }
+
+            return newCode;
+        }
+       
         public JsonResult GetDanhSach()
         {
             var phongBan = new List<dynamic>();
             var chucVu = new List<dynamic>();
             var trinhDo = new List<dynamic>();
+            string newCode = GetNewEmployeeCode();
 
             try
             {
@@ -284,7 +414,7 @@ namespace HumanResourceManagement.Controllers
                 return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new { phongBan, chucVu, trinhDo }, JsonRequestBehavior.AllowGet);
+            return Json(new { newCode, phongBan, chucVu, trinhDo }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
