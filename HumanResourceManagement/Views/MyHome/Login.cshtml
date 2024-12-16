@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     Layout = null;
 }
 
@@ -19,11 +19,17 @@
             <p>Chào mừng đã quay trở lại với <span class="highlight1">HDwebsite</span>. Đăng nhập để có những trải nghiệm tốt nhất.</p>
             <form method="post">
                 <div class="input-wrapper">
-                    <input class="custom-tdn" type="text" placeholder="Tên đăng nhập" name="user" required>
-                    <input class="custom-pass" type="password" placeholder="Mật khẩu" name="pass" required>
+                    <input class="custom-tdn" type="text" placeholder="Tên đăng nhập" name="user" value="@ViewBag.User">
+                    <input class="custom-pass" type="password" placeholder="Mật khẩu" name="pass" value="@ViewBag.Pass">
                 </div>
 
-                <a href="#">Quên mật khẩu?</a>
+                @if (!string.IsNullOrEmpty(ViewBag.Message as string))
+                {
+                    <div class="error-notification">
+                        @ViewBag.Message
+                    </div>
+                }
+                <a href="/MyHome/ChangePass">Quên mật khẩu?</a>
                 <button type="submit">Đăng nhập</button>
             </form>
         </div>
@@ -34,7 +40,7 @@
             </div>
         </div>
     </div>
-
+    @Scripts.Render("~/bundles/login")
 
 </body>
 

@@ -1,0 +1,265 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
+}
+
+.custom-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    background: #f8faff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 40px auto;
+}
+
+/*forgotpass*/
+.custom-quenmatkhau {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+    .custom-quenmatkhau h1 {
+        text-align: center;
+        font-size: 48px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        background: linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: Cambria, sans-serif;
+        font-size: 48px;
+    }
+
+
+    .custom-quenmatkhau p {
+        color: #000;
+        text-align: center;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+
+    .custom-quenmatkhau form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .custom-quenmatkhau input {
+        position: relative;
+        border-radius: 29.333px;
+        background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
+        width: 100%;
+        padding: 10px 15px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+        appearance: auto;
+        -webkit-appearance: auto;
+        -moz-appearance: auto;
+        box-sizing: border-box;
+        max-width: 300px;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    }
+
+        .custom-quenmatkhau input:focus {
+            border-radius: 29.333px;
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            outline: none;
+        }
+.button-sub {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    margin-top: 16px;
+}
+    .custom-quenmatkhau button {
+        padding: 10px 5px;
+        width: 20%;
+        font-size: 16px;
+        color: white;
+        background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
+        border: none;
+        border-radius: 29.333px;
+        cursor: pointer;
+        align-self: center;
+        cursor: pointer;
+        font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    }
+
+        .custom-quenmatkhau button:hover {
+            background: linear-gradient(90deg, #0056d6, #2eb9e6);
+        }
+/*Changepass*/
+.custom-doimatkhau {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+    .custom-doimatkhau h1 {
+        text-align: center;
+        font-size: 48px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        background: linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: Cambria, sans-serif;
+        font-size: 48px;
+    }
+
+
+    .custom-doimatkhau p {
+        color: #000;
+        text-align: center;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+
+    .custom-doimatkhau form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .custom-doimatkhau input {
+        position: relative;
+        border-radius: 29.333px;
+        background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
+        width: 100%;
+        left: 20%;
+        padding: 10px 15px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+        appearance: auto;
+        -webkit-appearance: auto;
+        -moz-appearance: auto;
+        box-sizing: border-box;
+        max-width: 300px;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+        margin-bottom:10px;
+    }
+
+        .custom-doimatkhau input:focus {
+            border-radius: 29.333px;
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            outline: none;
+        }
+.custom-doimatkhau button {
+    padding: 10px 5px;
+    width: 30%;
+    font-size: 16px;
+    color: white;
+    background: var(--2, linear-gradient(90deg, #3540B9 0%, #1746E1 50%, #0095FF 100%));
+    border: none;
+    border-radius: 29.333px;
+    cursor: pointer;
+    align-self: center;
+    cursor: pointer;
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+}
+
+    .custom-doimatkhau button:hover {
+        background: linear-gradient(90deg, #0056d6, #2eb9e6);
+    }
+.illustration-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: #f5f7ff;
+    padding: 20px;
+}
+
+.image-wrapper {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+}
+
+
+.background-image {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
+
+
+.foreground-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: auto;
+    width: 477.333px;
+    height: 477.333px;
+    flex-shrink: 0;
+}
+
+.error-notification {
+    margin-top: 15px;
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .custom-container {
+        flex-direction: column;
+    }
+
+    .illustration-section {
+        order: -1;
+    }
+
+
+    .background-image, .foreground-image {
+        max-width: 100%;
+    }
+}

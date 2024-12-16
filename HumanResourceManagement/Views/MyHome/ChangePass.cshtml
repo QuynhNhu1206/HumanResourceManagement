@@ -1,0 +1,53 @@
+﻿﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THAY ĐỔI MẬT KHẨU</title>
+    <link rel="stylesheet" href="~/Content/Css/changepass.css">
+</head>
+
+<body>
+    <div class="custom-container">
+        <div class="custom-quenmatkhau" id="forgot-password-panel">
+            <h1>LẤY LẠI MẬT KHẨU</h1>
+            <p>Nhập email hoặc tên đăng nhập của bạn để tiếp tục.</p>
+            <form method="post" onsubmit="showChangePasswordPanel(event)">
+                <div class="input-wrapper">
+                    <input class="custom-email" type="text" placeholder="Email hoặc Tên đăng nhập" name="account" required>
+                </div>
+                <div class="button-sub">
+                    <button type="submit">Xác nhận</button>
+                    <button type="button" onclick="window.location.href='@Url.Action("Login", "MyHome")'">Hủy</button>
+                </div>
+            </form>
+        </div>
+        <div class="custom-doimatkhau" id="change-password-panel" style="display: none;">
+            <h1>THAY ĐỔI MẬT KHẨU</h1>
+            <p>Nhập mật khẩu mới của bạn.</p>
+            <form method="post">
+                <div class="input-wrapper">
+                    <input class="custom-pass" type="password" placeholder="Mật khẩu mới" name="new-password" required>
+                    <input class="custom-pass" type="password" placeholder="Xác nhận mật khẩu mới" name="confirm-password" required>
+                </div>
+                <button type="submit">Cập nhật mật khẩu</button>
+            </form>
+        </div>
+        <div class="illustration-section">
+            <div class="image-wrapper">
+                <img src="~/Content/img/Rectangle 22.png" alt="Illustration" class="background-image">
+                <img src="~/Content/img/a.png" alt="a" class="foreground-image">
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/changepass")
+
+
+</body>
+
+</html>

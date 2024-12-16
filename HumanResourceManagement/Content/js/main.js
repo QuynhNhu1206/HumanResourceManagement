@@ -57,7 +57,6 @@ function updatePagination() {
         pagination.appendChild(pageItem);
     }
 
-
     // Thêm nút "Tiếp theo"
     const nextButton = document.createElement('li');
     nextButton.classList.add('page-item');
@@ -72,14 +71,12 @@ function updatePagination() {
     });
     pagination.appendChild(nextButton);
 }
-
 function changePage(page) {
     if (page < 1 || page > totalPages) return;
     currentPage = page;
     updatePageInfo();
     updateTable();
 }
-
 document.getElementById('rowsPerPage').addEventListener('change', function () {
     rowsPerPage = Math.min(parseInt(this.value));
     currentPage = 1;
@@ -100,7 +97,6 @@ function updateTable() {
     }
     let startRow = (currentPage - 1) * rowsPerPage;
     const endRow = Math.min(startRow + rowsPerPage, data.length);
-
 
     let pagedData = data.slice(startRow, endRow);
     renderTable(pagedData);
@@ -149,7 +145,6 @@ openPanelButton.addEventListener("click", () => {
 function updateSelectOptions(selectElement, data, valueField, textField) {
 
     selectElement.innerHTML = '';
-
 
     const defaultOption = document.createElement('option');
     defaultOption.text = `Chọn ${selectElement.title}`;
@@ -251,35 +246,11 @@ document.getElementById("save").addEventListener("click", function (event) {
                 isValid = false;
             } else {
 
-
                 errorElement.classList.remove('show-error');
                 //iconElement.classList.remove('show-icon');
                 element.classList.remove('error-background');
                 errorElement.innerHTML = '';
-               // iconElement.style.display = 'none';
-
-
-    // Lấy giá trị từ form
-    const ngaySinhInput = document.getElementById("ngaysinh").value;
-    const ngayVaoLamInput = document.getElementById("ngayvaolam").value;
-
-    // Kiểm tra các trường bắt buộc
-    const formData = {
-        MaNhanVien: document.getElementById("manv").value.trim(),
-        HoTen: document.getElementById("ten").value.trim(),
-        CCCD: document.getElementById("cccd").value.trim(),
-        MaPhongBan: document.getElementById("phongban").value.trim(),
-        DiaChi: document.getElementById("noisinh").value.trim(),
-        NgaySinh: ngaySinhInput,
-        GioiTinh: document.getElementById("gioitinh").value.trim(),
-        SoDienThoai: document.getElementById("sodienthoai").value.trim(),
-        DanToc: document.getElementById("dantoc").value.trim(),
-        NgayBatDauLam: ngayVaoLamInput,
-        MaTrinhDo: document.getElementById("trinhdo").value.trim(),
-        MaChucVu: document.getElementById("chucvu").value.trim(),
-        Email: document.getElementById("email").value.trim(),
-        TinhTrang: document.getElementById("tinhtrang").value.trim()
-
+                // iconElement.style.display = 'none';
 
             }
         }
@@ -338,6 +309,7 @@ document.getElementById("save").addEventListener("click", function (event) {
 
     if (isValid) {
         customAlert({
+            title: "Thông báo",
             message: data.message || "Dữ liệu hợp lệ! Thực hiện lưu thông tin.",
             type: "success",
             duration: 3000,
@@ -375,10 +347,12 @@ document.getElementById("save").addEventListener("click", function (event) {
             .then((data) => {
                 if (data.success) {
                     customAlert({
+                        title: "Thông báo",
                         message: data.message || "Lưu thành công",
                         type: "success",
                         duration: 3000,
                     });
+                    fetchEmployees();
                     resetForm();
                 } else {
                     customAlert({
@@ -391,6 +365,7 @@ document.getElementById("save").addEventListener("click", function (event) {
             .catch((error) => {
                 console.error("Lỗi khi lưu dữ liệu:", error);
                 customAlert({
+                    title: "Cảnh báo",
                     message: data.message || "Có lỗi xảy ra, vui lòng thử lại.",
                     type: "warning",
                     duration: 3000,
@@ -455,7 +430,7 @@ closeFilterButton.addEventListener("click", () => {
 // Hàm render bảng nội dung
 function renderTable(data) {
     tableBody.innerHTML = '';
-    
+
     if (data.length === 0) {
         tableBody.innerHTML = '<tr><td colspan="5">Không có dữ liệu</td></tr>';
     } else {
@@ -509,6 +484,7 @@ function fetchEmployees() {
                 updateTable();
                 updatePagination();
                 updatePageInfo();
+                renderTable(data);
             }
         },
         error: function (xhr, status, error) {
@@ -516,15 +492,10 @@ function fetchEmployees() {
         }
     });
 }
-
 $(document).ready(function () {
     console.log('Trang đã tải xong, gọi fetchEmployees');
     fetchEmployees();
 });
-
-
-
-
 // Hàm toggle menu dropdown
 function toggleDropdown(event) {
     event.stopPropagation();
@@ -575,7 +546,6 @@ function deleteEmployee(event, maNhanVien) {
 
         })
 
-
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -585,6 +555,7 @@ function deleteEmployee(event, maNhanVien) {
             .then(data => {
                 if (data.success) {
                     customAlert({
+                        title: "Thông báo",
                         message: data.message || "Nhân viên đã xóa thành công!",
                         type: "success",
                         duration: 4000
@@ -596,6 +567,7 @@ function deleteEmployee(event, maNhanVien) {
                     }
                 } else {
                     customAlert({
+                        title: "Thông báo",
                         message: data.message || "Xóa thất bại",
                         type: "error",
                         duration: 3000,
@@ -698,11 +670,8 @@ function openEditPanel(event) {
 
     const rightPanel = document.getElementById('right-panel');
     if (rightPanel) rightPanel.classList.remove('show');
-
-    const filterPanel = document.getElementById('filter-panel');
-    if (filterPanel) filterPanel.classList.remove('show');
     if (detailPanel) detailPanel.classList.remove('show');
-
+    if (filterPanel) filterPanel.classList.remove('show');
 
     updatePanelHeight();
     const employeeId = event.target.closest('.table-row').getAttribute('data-manv');
@@ -747,7 +716,6 @@ function openEditPanel(event) {
                 document.getElementById('chucvuedit').value = data.MaChucVu || '';
                 document.getElementById('emailedit').value = data.Email || '';
                 document.getElementById('tinhtrangedit').value = data.TinhTrang || '';
-
                 document.getElementById('gioitinhedit').value = data.GioiTinh === "Nam" ? "1" : "2";
                 document.getElementById('tinhtrangedit').value = data.TinhTrang === "Đang làm việc" ? "1" : "2";
 
@@ -756,6 +724,7 @@ function openEditPanel(event) {
             } else {
                 console.error('Không tìm thấy dữ liệu nhân viên.');
                 customAlert({
+                    title: "Thông báo",
                     message: "Không tìm thấy thông tin nhân viên." + data.message,
                     type: "error",
                     duration: 4000
@@ -766,8 +735,9 @@ function openEditPanel(event) {
         .catch(error => {
             console.error('Lỗi khi gọi API:', error);
             customAlert({
+                title: "Cảnh báo",
                 message: "Đã xảy ra lỗi. Vui lòng thử lại!" + data.message,
-                type: "error",
+                type: "warning",
                 duration: 4000
             });
 
@@ -780,57 +750,202 @@ function openEditPanel(event) {
 document.getElementById("saveedit").addEventListener("click", function (event) {
     event.preventDefault();
 
-
-    const model = {
-        MaNhanVien: document.getElementById('manvedit').value,
-        HoTen: document.getElementById('tenedit').value,
-        CCCD: document.getElementById('cccdedit').value,
-        MaPhongBan: document.getElementById('phongbanedit').value,
-        DiaChi: document.getElementById('noisinhedit').value,
-        NgaySinh: document.getElementById('ngaysinhedit').value,
-        GioiTinh: document.getElementById('gioitinhedit').value === "1" ? "Nam" : "Nữ",
-        SoDienThoai: document.getElementById('sodienthoaiedit').value,
-        DanToc: document.getElementById('dantocedit').value,
-        NgayBatDauLam: document.getElementById('ngayvaolamedit').value,
-        MaTrinhDo: document.getElementById('trinhdoedit').value,
-        MaChucVu: document.getElementById('chucvuedit').value,
-        Email: document.getElementById('emailedit').value,
-        TinhTrang: document.getElementById('tinhtrangedit').value === "1" ? "Đang làm việc" : "Nghỉ làm"
-    };
-
-    // Gửi dữ liệu lên server (thực hiện Post request tới UpdateNhanVien)
-    fetch('/Nhanvien/UpdateNhanVien', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
+    let isValid = true;
+    const fieldValidations = [
+        {
+            id: 'manvedit',
+            errorId: 'manvedit-error',
+            emptyMessage: 'Mã nhân viên không được để trống.',
+            validator: value => value.trim() !== ''
         },
-        body: JSON.stringify(model)
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                customAlert({
-                    message: data.message || "Cập nhật thành công!",
-                    type: "success",
-                    duration: 4000
-                });
-            } else {
-                customAlert({
-                    message: "Cập nhật thất bại!" || data.message,
-                    type: "error",
-                    duration: 4000
-                });
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            customAlert({
-                message: "Có lỗi xảy ra trong quá trình lưu thông tin." || data.message,
-                type: "error",
-                duration: 5000
-            });
-        });
+        {
+            id: 'tenedit',
+            errorId: 'tenedit-error',
+            emptyMessage: 'Họ và tên không được để trống.',
+            validator: value => value.trim() !== ''
+        },
+        {
+            id: 'cccdedit',
+            errorId: 'cccdedit-error',
+            message: 'Bạn cần nhập đúng định dạng số CCCD.',
+            emptyMessage: 'CCCD không được để trống.',
+            validator: value => /^[0-9]{12}$/.test(value.trim())
+        },
+        {
+            id: 'emailedit',
+            errorId: 'emailedit-error',
+            message: 'Email không đúng định dạng.',
+            emptyMessage: 'Email không được để trống.',
+            validator: value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())
+        },
+        {
+            id: 'ngaysinhedit',
+            errorId: 'ngaysinhedit-error',
+            emptyMessage: 'Ngày sinh không được để trống.',
+            validator: value => value.trim() !== ''
+        },
+        {
+            id: 'sodienthoaiedit',
+            errorId: 'sodienthoaiedit-error',
+            message: 'Số điện thoại không đúng định dạng.',
+            emptyMessage: 'Số điện thoại không được để trống.',
+            validator: value => /^[0-9]{10}$/.test(value.trim())
+        },
+    ];
 
+
+    fieldValidations.forEach(field => {
+        const element = document.getElementById(field.id);
+        const errorElement = document.getElementById(field.errorId);
+        const iconElement = errorElement.querySelector('.error-icon');
+
+        // Hàm kiểm tra lỗi cho mỗi trường
+        function checkError() {
+            const value = element.value.trim();
+
+
+            if (value === '' || value === field.defaultValue) {
+                errorElement.innerHTML = `<i class="fas fa-exclamation-circle error-icon"></i> ${field.emptyMessage}`;
+                errorElement.style.display = 'block';
+                errorElement.classList.add('show-error');
+                iconElement.classList.add('show-icon');
+                element.classList.add('error-background');
+                iconElement.style.display = 'inline-block';
+                isValid = false;
+            } else if (!field.validator(value)) {
+
+                errorElement.innerHTML = `<i class="fas fa-exclamation-circle error-icon"></i> ${field.message}`;
+                errorElement.style.display = 'block';
+                errorElement.classList.add('show-error');
+                iconElement.classList.add('show-icon');
+                element.classList.add('error-background');
+                iconElement.style.display = 'inline-block';
+                isValid = false;
+            } else {
+
+                errorElement.classList.remove('show-error');
+                element.classList.remove('error-background');
+                errorElement.innerHTML = '';
+
+            }
+        }
+        checkError();
+        element.addEventListener('input', checkError);
+    });
+
+    const dropdownValidations = [
+        {
+            id: 'phongbanedit', errorId: 'phongbanedit-error', defaultValue: 'Chọn phòng ban', message: 'Vui lòng chọn phòng ban.'
+        },
+        { id: 'gioitinhedit', errorId: 'gioitinhedit-error', defaultValue: 'Giới tính', message: 'Vui lòng chọn giới tính.' },
+        { id: 'noisinhedit', errorId: 'noisinhedit-error', defaultValue: '', message: 'Vui lòng chọn nơi sinh.' },
+        { id: 'dantocedit', errorId: 'dantocedit-error', defaultValue: '', message: 'Vui lòng chọn dân tộc.' },
+        { id: 'trinhdoedit', errorId: 'trinhdoedit-error', defaultValue: 'Chọn trình độ', message: 'Vui lòng chọn trình độ học vấn.' },
+        { id: 'chucvuedit', errorId: 'chucvuedit-error', defaultValue: 'Chọn chức vụ', message: 'Vui lòng chọn chức vụ.' },
+        { id: 'tinhtrangedit', errorId: 'tinhtrangedit-error', defaultValue: 'Tình trạng', message: 'Vui lòng chọn tình trạng.' },
+        { id: 'ngayvaolamedit', errorId: 'ngayvaolamedit-error', defaultValue: '', message: 'Ngày bắt đầu làm không được để trống.' }
+    ];
+
+
+    dropdownValidations.forEach(field => {
+        const element = document.getElementById(field.id);
+        const errorElement = document.getElementById(field.errorId);
+        const iconElement = errorElement.querySelector('.error-icon');
+        element.addEventListener('change', () => {
+            if (element.value === field.defaultValue || element.value.trim() === '') {
+
+                errorElement.innerHTML = `<i class="fas fa-exclamation-circle error-icon"></i> ${field.message}`;
+                errorElement.classList.add('show-error');
+                iconElement.classList.add('show-icon');
+                element.classList.add('error-background');
+                errorElement.style.display = 'block';
+                iconElement.style.display = 'inline-block';
+                isValid = false;
+            } else {
+
+                errorElement.classList.remove('show-error');
+                iconElement.classList.remove('show-icon');
+                element.classList.remove('error-background');
+                errorElement.innerHTML = '';
+                iconElement.style.display = 'none';
+                isValid = false;
+            }
+        });
+        if (element.value === field.defaultValue || element.value.trim() === '') {
+            errorElement.innerHTML = `<i class="fas fa-exclamation-circle error-icon"></i> ${field.message}`;
+            errorElement.classList.add('show-error');
+            iconElement.classList.add('show-icon');
+            element.classList.add('error-background');
+            errorElement.style.display = 'block';
+            iconElement.style.display = 'inline-block';
+        }
+    });
+    if (isValid) {
+        customAlert({
+            message: data.message || "Dữ liệu hợp lệ! Thực hiện lưu thông tin.",
+            type: "success",
+            duration: 3000,
+        });
+        const model = {
+            MaNhanVien: document.getElementById('manvedit').value,
+            HoTen: document.getElementById('tenedit').value,
+            CCCD: document.getElementById('cccdedit').value,
+            MaPhongBan: document.getElementById('phongbanedit').value,
+            DiaChi: document.getElementById('noisinhedit').value,
+            NgaySinh: document.getElementById('ngaysinhedit').value,
+            GioiTinh: document.getElementById('gioitinhedit').value === "1" ? "Nam" : "Nữ",
+            SoDienThoai: document.getElementById('sodienthoaiedit').value,
+            DanToc: document.getElementById('dantocedit').value,
+            NgayBatDauLam: document.getElementById('ngayvaolamedit').value,
+            MaTrinhDo: document.getElementById('trinhdoedit').value,
+            MaChucVu: document.getElementById('chucvuedit').value,
+            Email: document.getElementById('emailedit').value,
+            TinhTrang: document.getElementById('tinhtrangedit').value === "1" ? "Đang làm việc" : "Nghỉ làm"
+        };
+
+        // Gửi dữ liệu lên server (thực hiện Post request tới UpdateNhanVien)
+        fetch('/Nhanvien/UpdateNhanVien', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(model)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    customAlert({
+                        title: "Thông báo",
+                        message: data.message || "Cập nhật thành công!",
+                        type: "success",
+                        duration: 4000
+                    });
+                    fetchEmployees();
+                } else {
+                    customAlert({
+                        title: "Thông báo",
+                        message: "Cập nhật thất bại!" || data.message,
+                        type: "error",
+                        duration: 4000
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                customAlert({
+                    title: "Cảnh báo",
+                    message: "Có lỗi xảy ra trong quá trình lưu thông tin." || data.message,
+                    type: "warning",
+                    duration: 5000
+                });
+            });
+    } else {
+        customAlert({
+            message: data.message || "Lưu thất bại, kiểm tra lại các thông tin",
+            type: "error",
+            duration: 3000,
+        });
+    }
 
 });
 // Đóng form panel
@@ -848,7 +963,29 @@ document.querySelector('.btn-delete').addEventListener('click', () => {
         duration: 4000
     });
 });
+document.getElementById("resetedit").addEventListener("click", function () {
+    
+    const form = document.querySelector('form');
+    form.reset();  
 
+   
+    const errorElements = document.querySelectorAll('.error');
+    errorElements.forEach(error => {
+        error.classList.remove('show-error');
+        error.innerHTML = '';
+    });
+
+    const errorIcons = document.querySelectorAll('.error-icon');
+    errorIcons.forEach(icon => {
+        icon.classList.remove('show-icon');
+    });
+
+   
+    const errorFields = document.querySelectorAll('.error-background');
+    errorFields.forEach(field => {
+        field.classList.remove('error-background');
+    });
+});
 
 // dân tộc && Nơi sinh
 document.addEventListener('DOMContentLoaded', function () {
@@ -909,7 +1046,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 // Filterpanel
 openFilterButton.addEventListener("click", () => {
-
     const phongbanSelect = document.getElementById('department-filter');
     const chucvuSelect = document.getElementById('position-filter');
     filterPanel.classList.add("show");
@@ -919,10 +1055,8 @@ openFilterButton.addEventListener("click", () => {
     if (detailPanel) { detailPanel.classList.remove("show"); }
     updatePanelHeight();
     fetch('/Nhanvien/GetDanhSach')
-        .then(response =>
-        {
-            if (!response.ok)
-            {
+        .then(response => {
+            if (!response.ok) {
                 throw new Error('Lỗi khi gọi API!');
             }
             return response.json();
@@ -942,7 +1076,7 @@ function updateSelectOptions1(selectElement, data, valueField, textField) {
     defaultOption.text = `Chọn ${selectElement.title}`;
     defaultOption.selected = true;
     defaultOption.disabled = true;
-    selectElement.appendChild(defaultOption); 
+    selectElement.appendChild(defaultOption);
     data.forEach(item => {
         const option = document.createElement('option');
         option.value = item[valueField];
@@ -950,88 +1084,85 @@ function updateSelectOptions1(selectElement, data, valueField, textField) {
         selectElement.appendChild(option);
     });
 }
-    closeFilterButton.addEventListener("click", () => {
-        filterPanel.classList.remove("show");
-        mainContent.classList.remove("panel-active");
-    });
-
- 
+closeFilterButton.addEventListener("click", () => {
+    filterPanel.classList.remove("show");
+    mainContent.classList.remove("panel-active");
+});
 
 
-
-    //function selectFilter(element, filterType, filterValue) {
-    function selectFilter(element, filterType) {
-        if (!element) {
-            console.error(`Element not found for ${filterType}`);
-            return null;
-        }
-        const options = document.querySelectorAll(`#${filterType}-filter .filter-option`);  
-        options.forEach(option => {
-            option.classList.remove('selected');
-            option.classList.remove('active');
-        });  
-        element.classList.add('selected');
-        element.classList.add('active'); 
-        const selectedText = element.textContent.trim();
-        console.log(`Selected ${filterType}: ${selectedText}`);
-        return selectedText;
+//function selectFilter(element, filterType, filterValue) {
+function selectFilter(element, filterType) {
+    if (!element) {
+        console.error(`Element not found for ${filterType}`);
+        return null;
     }
-    // Cập nhật khoảng độ tuổi
-    function updateAgeRange() {
-        const minAge = document.getElementById('age-min').value;
-        const maxAge = document.getElementById('age-max').value;
-        if (parseInt(minAge) > parseInt(maxAge)) {
-            document.getElementById('age-max').value = minAge;
-        }
+    const options = document.querySelectorAll(`#${filterType}-filter .filter-option`);
+    options.forEach(option => {
+        option.classList.remove('selected');
+        option.classList.remove('active');
+    });
+    element.classList.add('selected');
+    element.classList.add('active');
+    const selectedText = element.textContent.trim();
+    console.log(`Selected ${filterType}: ${selectedText}`);
+    return selectedText;
+}
+// Cập nhật khoảng độ tuổi
+function updateAgeRange() {
+    const minAge = document.getElementById('age-min').value;
+    const maxAge = document.getElementById('age-max').value;
+    if (parseInt(minAge) > parseInt(maxAge)) {
+        document.getElementById('age-max').value = minAge;
+    }
+}
+
+document.getElementById('SubmitFilterPanel').addEventListener('click', () => {
+    const timeFilterElement = document.querySelector('#time-filter .selected');
+    const genderFilterElement = document.querySelector('#gender-filter .selected');
+    const departmentFilterElement = document.getElementById('department-filter');
+    const positionFilterElement = document.getElementById('position-filter');
+    const ageMinElement = document.getElementById('age-min');
+    const ageMaxElement = document.getElementById('age-max');
+    const statusFilterElement = document.querySelector('input[name="status"]:checked');
+
+    const timeFilterValue = timeFilterElement ? timeFilterElement.dataset.value : null;
+    const genderFilterValue = genderFilterElement ? genderFilterElement.textContent.trim() : null
+    const filters = new URLSearchParams();
+    if (timeFilterValue) filters.append('time', timeFilterValue);
+    if (genderFilterValue) {
+        console.log('Selected gender:', genderFilterValue);
+        filters.append('gender', genderFilterValue);
+    }
+    if (departmentFilterElement && departmentFilterElement.value !== 'Chọn phòng ban') filters.append('department', departmentFilterElement.value);
+    if (positionFilterElement && positionFilterElement.value !== 'Chọn chức vụ') filters.append('position', positionFilterElement.value);
+    if (ageMinElement && ageMinElement.value !== '18') filters.append('ageMin', ageMinElement.value);
+    if (ageMaxElement && ageMaxElement.value !== '62') filters.append('ageMax', ageMaxElement.value);
+    if (statusFilterElement) {
+        const statusText = statusFilterElement.closest('label').textContent.trim();
+        filters.append('status', statusText);
     }
 
-    document.getElementById('SubmitFilterPanel').addEventListener('click', () => {
-        const timeFilterElement = document.querySelector('#time-filter .selected');
-        const genderFilterElement = document.querySelector('#gender-filter .selected');
-        const departmentFilterElement = document.getElementById('department-filter');
-        const positionFilterElement = document.getElementById('position-filter');
-        const ageMinElement = document.getElementById('age-min');
-        const ageMaxElement = document.getElementById('age-max');
-        const statusFilterElement = document.querySelector('input[name="status"]:checked');
+    console.log('Filters:', filters.toString());
 
-        const timeFilterValue = timeFilterElement ? timeFilterElement.dataset.value : null;
-        const genderFilterValue = genderFilterElement ? genderFilterElement.textContent.trim() : null
-        const filters = new URLSearchParams();
-        if (timeFilterValue) filters.append('time', timeFilterValue);
-        if (genderFilterValue) {
-            console.log('Selected gender:', genderFilterValue);
-            filters.append('gender', genderFilterValue);
-        }
-        if (departmentFilterElement && departmentFilterElement.value !== 'Chọn phòng ban') filters.append('department', departmentFilterElement.value);
-        if (positionFilterElement && positionFilterElement.value !== 'Chọn chức vụ') filters.append('position', positionFilterElement.value);
-        if (ageMinElement && ageMinElement.value !== '18') filters.append('ageMin', ageMinElement.value);
-        if (ageMaxElement && ageMaxElement.value !== '62') filters.append('ageMax', ageMaxElement.value);
-        if (statusFilterElement)
-        {
-            const statusText = statusFilterElement.closest('label').textContent.trim();
-            filters.append('status', statusText);
-        }
-
-        console.log('Filters:', filters.toString());
-
-        fetch(`/Nhanvien/GetEmployeeFilter?${filters.toString()}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Filtered Data:', data);
-                if (Array.isArray(data)) {
-                    customAlert({
-                        message: data.message || "Đã tìm kiếm thành công!",
-                        type: "success",
-                        duration: 4000
-                    });
-                    resetFilter();
-                    renderTable(data); 
-                } else {
-                    console.error('Fetched data is not an array:', data);
-                }
-                })
-            .catch(error => console.error('Error fetching filtered data:', error));
-    });
+    fetch(`/Nhanvien/GetEmployeeFilter?${filters.toString()}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Filtered Data:', data);
+            if (Array.isArray(data)) {
+                customAlert({
+                    title: "Thông báo",
+                    message: data.message || "Đã tìm kiếm thành công!",
+                    type: "success",
+                    duration: 4000
+                });
+                resetFilter();
+                renderTable(data);
+            } else {
+                console.error('Fetched data is not an array:', data);
+            }
+        })
+        .catch(error => console.error('Error fetching filtered data:', error));
+});
 
 function resetFilter() {
     document.querySelectorAll('.filter-option').forEach(option => { option.classList.remove('selected', 'active'); });
@@ -1045,94 +1176,6 @@ function resetFilter() {
 }
 
 
-    function customAlert({ message, type = "info", duration = 3000 }) {
 
-        let container = document.getElementById("notification-container");
-        if (!container) {
-            container = document.createElement("div");
-            container.id = "notification-container";
-            container.style.position = "fixed";
-            container.style.top = "20px";
-            container.style.left = "50%";
-            container.style.transform = "translate(-50%)";
-            container.style.zIndex = "9999";
-            container.style.display = "flex";
-            container.style.flexDirection = "column";
-            container.style.alignItems = "center";
-            container.style.borderRadius = "8px";
-            container.style.background = "transparent";
-
-
-            document.body.appendChild(container);
-        }
-
-
-        const notification = document.createElement("div");
-        notification.className = `notification ${type}`;
-
-
-        let bgColor, textColor, iconColor, iconClass;
-        if (type === "success") {
-            bgColor = "#d4edda";
-            textColor = "#155724";
-            iconClass = "fas fa-check-circle";
-            iconColor = "#155724";
-        } else if (type === "error") {
-            bgColor = "#f8d7da";
-            textColor = "#721c24";
-            iconClass = "fas fa-times-circle";
-            iconColor = "#721c24";
-        } else if (type === "warning") {
-            bgColor = "#fff3cd";
-            textColor = "#856404";
-            iconClass = "fas fa-exclamation-circle";
-            iconColor = "#856404";
-        } else {
-            bgColor = "#cce5ff";
-            textColor = "#004085";
-            iconClass = "fas fa-info-circle";
-            iconColor = "#004085";
-        }
-
-        notification.style.backgroundColor = bgColor;
-        notification.style.color = textColor;
-        notification.style.padding = "10px 20px";
-        notification.style.marginBottom = "10px";
-        notification.style.fontSize = "16px";
-        notification.style.fontWeight = "bold";
-        notification.style.textAlign = "center";
-        notification.style.opacity = "0";
-        notification.style.transform = "translateY(-20px)";
-        notification.style.transition = "all 0.5s ease";
-        notification.style.width = "auto";
-        notification.style.wordWrap = "break-word";
-
-        notification.innerHTML = `
-        <i class="${iconClass}" style="font-size: 20px; color: ${iconColor};"></i>
-        <span>${message}</span>
-    `;
-
-        container.appendChild(notification);
-        setTimeout(() => {
-            notification.style.opacity = "1";
-            notification.style.transform = "translateY(0)";
-        }, 10);
-
-
-        setTimeout(() => {
-            notification.style.opacity = "0";
-            notification.style.transform = "translateY(-20px)";
-
-
-            setTimeout(() => {
-                notification.innerHTML = '';
-
-
-                if (container.children.length === 0) {
-                    container.remove();
-                }
-            }, 500);
-        }, duration);
-    }
 
 

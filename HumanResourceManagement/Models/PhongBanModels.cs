@@ -9,7 +9,7 @@ namespace HumanResourceManagement.Models
     {
         public string MaPhongBan { get; set; }
         public string TenPhongBan { get; set; }
-        public Nullable<int> SoLuongNhanVien { get; set; }
+        public int SoluongNhanVien { get; set; }
         public string MoTa { get; set; }
     }
 }

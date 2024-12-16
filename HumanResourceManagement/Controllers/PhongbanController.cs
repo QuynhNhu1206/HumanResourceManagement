@@ -1,8 +1,10 @@
-﻿using HumanResourceManagement.Models;
+﻿
+using HumanResourceManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -20,7 +22,7 @@ namespace HumanResourceManagement.Controllers
         public JsonResult GetPhongBan()
         {
             List<PhongBanModels> department = new List<PhongBanModels>();
-
+            Debug.WriteLine("GetPhongBan method is called.");
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -46,31 +48,33 @@ namespace HumanResourceManagement.Controllers
                     {
                         while (reader.Read())
                         {
-                            department.Add(new PhongBanModels
+                            var phongBan = new PhongBanModels
                             {
                                 MaPhongBan = reader["MaPhongBan"].ToString(),
                                 TenPhongBan = reader["TenPhongBan"].ToString(),
-                                SoLuongNhanVien = (int)reader["SoLuongNhanVien"],
+                                SoluongNhanVien = (int)reader["SoLuongNhanVien"],
                                 MoTa = reader["MoTa"].ToString(),
-                                
-                            });
+                            };
+                            department.Add(phongBan);
+                            Debug.WriteLine($"MaPhongBan: {phongBan.MaPhongBan}, TenPhongBan: {phongBan.TenPhongBan}, SoLuongNhanVien: {phongBan.SoluongNhanVien}, MoTa: {phongBan.MoTa}");
                         }
+
                     }
                 }
             }
             catch (Exception ex)
             {
-                return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet); 
+                return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
             }
 
             return Json(department, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
-        public JsonResult GetEmployeeNumber(string maPhongBan)
+        public JsonResult GetEmployeeNumber(string departmentId)
         {
             try
             {
-                if (string.IsNullOrEmpty(maPhongBan))
+                if (string.IsNullOrEmpty(departmentId))
                 {
                     return Json(new { success = false, count = 0 });
                 }
@@ -80,11 +84,11 @@ namespace HumanResourceManagement.Controllers
                     conn.Open();
                     string query = "SELECT COUNT(*) AS SoLuong FROM NhanVien WHERE MaPhongBan = @MaPhongBan";
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@MaPhongBan", maPhongBan);
+                    cmd.Parameters.AddWithValue("@MaPhongBan", departmentId);
 
                     int soLuong = (int)cmd.ExecuteScalar();
 
-                    return Json(new { success = true, count = soLuong });
+                    return Json(new { success = true, count = soLuong }, JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception ex)
@@ -242,5 +246,137 @@ namespace HumanResourceManagement.Controllers
                 return Json(new { success = false, message = ex.Message });
             }
         }
+        [HttpPost]
+        public JsonResult DeletePhongBan(string departmentId)
+        {
+            if (string.IsNullOrEmpty(departmentId))
+            {
+                return Json(new { success = false, message = "Mã phòng ban không hợp lệ!" });
+            }
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string query = @"
+                DELETE FROM PhongBan
+                WHERE MaPhongBan = @MaPhongBan";
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@MaPhongBan", departmentId);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        return Json(new { success = true, message = "Xóa thành công!" });
+                    }
+                    else
+                    {
+                        return Json(new { success = false, message = "Không tìm thấy phòng ban để xóa." });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+        [HttpGet]
+        public JsonResult FilterPhongBan(string maPhongBan)
+        {
+            List<PhongBanModels> filteredDepartments = new List<PhongBanModels>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = @"
+                SELECT 
+                    pb.MaPhongBan, 
+                    pb.TenPhongBan, 
+                    pb.MoTa, 
+                    COUNT(nv.MaNhanVien) AS SoLuongNhanVien
+                FROM 
+                    PhongBan pb
+                LEFT JOIN 
+                    NhanVien nv ON pb.MaPhongBan = nv.MaPhongBan
+                WHERE 
+                    pb.MaPhongBan LIKE @MaPhongBan
+                GROUP BY 
+                    pb.MaPhongBan, pb.TenPhongBan, pb.MoTa";
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@maPhongBan", $"%{maPhongBan}%");
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var phongBan = new PhongBanModels
+                            {
+                                MaPhongBan = reader["MaPhongBan"].ToString(),
+                                TenPhongBan = reader["TenPhongBan"].ToString(),
+                                SoluongNhanVien = reader["SoLuongNhanVien"] != DBNull.Value
+                                                  ? (int)reader["SoLuongNhanVien"]
+                                                  : 0,
+                                MoTa = reader["MoTa"].ToString()
+                            };
+
+                            filteredDepartments.Add(phongBan);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(filteredDepartments, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetDepartmentNames()
+        {
+            List<PhongBanModels> departments = new List<PhongBanModels>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = @"
+                SELECT 
+                    MaPhongBan, 
+                    TenPhongBan
+                FROM 
+                    PhongBan";
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            departments.Add(new PhongBanModels
+                            {
+                                MaPhongBan = reader["MaPhongBan"].ToString(),
+                                TenPhongBan = reader["TenPhongBan"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(departments, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

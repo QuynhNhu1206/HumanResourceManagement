@@ -1,7 +1,5 @@
 
 ﻿/*CSS Đăng nhập*/
-
-
 * {
     margin: 0;
     padding: 0;
@@ -17,8 +15,6 @@ body {
     background: linear-gradient(90deg, #E8EEFF 28.6%, #FFF 141.13%);
 }
 
-
-
 .custom-container {
     display: flex;
     flex-direction: row;
@@ -32,7 +28,6 @@ body {
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
     margin: 40px auto;
 }
-
 
 .custom-dangnhap {
     flex: 1;
@@ -213,4 +208,27 @@ body {
     width: 477.333px;
     height: 477.333px;
     flex-shrink: 0;
+}
+.error-notification {
+    margin-top: 15px;
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px) {
+    .custom-container {
+        flex-direction: column;
+    }
+    .illustration-section {
+        order: -1; 
+    }
+
+
+    .background-image, .foreground-image {
+        max-width: 100%; 
+    }
 }
