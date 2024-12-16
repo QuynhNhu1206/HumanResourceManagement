@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿﻿@{
 
     ViewBag.Title = "Phongban";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -9,6 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/Content/Css/stylePB.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- CSS cho Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Thêm jQuery (yêu cầu để Select2 hoạt động) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- JS cho Select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
     <!-- Thêm jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -21,7 +30,7 @@
 <section class="main-section">
     <div class="Tieude">
         <h2>Danh sách phòng ban</h2>
-        <div class="right-tools" >
+        <div class="right-tools">
             <button class="loc" id="openFilter">
                 <img src="/Content/img/Vectorloc.png" alt="loc" class="icon-nav">
             </button>
@@ -80,7 +89,6 @@
 
         <div class="panel-footer d-flex justify-content-between">
             <button id="save" name="save" class="btn btn-save">Lưu<i class="fas fa-save icon-btn"></i> </button>
-            <button id="xoa" name="xoa" class="btn btn-delete"> Xóa<i class="fas fa-trash-alt icon-btn"></i></button>
         </div>
     </form>
 </aside>
@@ -94,7 +102,7 @@
     </div>
     <form class="panel-content">
         <div class="form-group">
-            <input type="text" id="mapbedit" name="mapb" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban">
+            <input type="text" id="mapbedit" name="mapb" class="input-control" placeholder="Mã phòng ban" aria-label="Mã phòng ban" disabled>
             <input type="text" id="tenpbedit" name="tenpb" class="input-control" placeholder="Tên phòng ban" aria-label="Tên phòng ban">
             <input type="text" id="soluong" name="soluong" class="input-control" placeholder="Số lượng nhân viên" aria-label="Số lượng nhân viên" disabled>
             <input type="text" id="motaedit" name="mota" class="input-control" placeholder="Mô tả" aria-label="Mô tả phòng ban">
@@ -121,9 +129,10 @@
         <div class="filter-section">
             <label for="department-filter">Tên phòng ban</label>
             <select id="department-filter">
-               
+                <option value="all">Tất cả</option>  <!-- Mặc định hiển thị tất cả -->
             </select>
         </div>
+
 
         <div class="panel-footer d-flex justify-content-between">
             <button id="SubmitFilterPanel" type="button" class="btn btn-ok" aria-label="ok">
@@ -134,3 +143,4 @@
     </div>
 </aside>
 @Scripts.Render("~/bundles/phongban")
+@Scripts.Render("~/bundles/alert")

@@ -17,7 +17,6 @@ contractFileInput.addEventListener('change', function (event) {
 
     if (file) {
         const reader = new FileReader();
-
         reader.onload = function (e) {
             // Hiển thị thông tin tệp trên giao diện
             fileNameDisplay.textContent = `Tệp đã chọn: ${file.name}`;
@@ -25,15 +24,12 @@ contractFileInput.addEventListener('change', function (event) {
             // Nếu cần hiển thị nội dung hoặc xử lý thêm thông tin
             detailPanel.textContent = `Kích thước: ${file.size} bytes\nLoại tệp: ${file.type}`;
         };
-
         reader.readAsDataURL(file); // Đọc tệp dưới dạng Data URL
     } else {
         fileNameDisplay.textContent = 'Không có tệp nào được chọn.';
         detailPanel.textContent = '';
     }
 });
-
-
 
 function updatePanelHeight() {
     const mainSectionHeight = mainContent.offsetHeight;
@@ -94,8 +90,6 @@ function openEditPanel(event) {
         });
         return;
     }
-
-
     fetch(`/HopDong/Getcontract?contractId=${contractId}`)
         .then(response => {
             if (!response.ok) throw new Error(`HTTP status ${response.status}`);
@@ -133,7 +127,6 @@ function openEditPanel(event) {
         });
 }
 
-
 document.getElementById("saveedit").addEventListener("click", function (event) {
     event.preventDefault();
 
@@ -147,18 +140,6 @@ document.getElementById("saveedit").addEventListener("click", function (event) {
         ChiTietHopDong: document.getElementById('contractFileedit').value
     };
 
-    //const FormData = new FormData();
-    //for (const key in model) {
-    //    formData.append(key, model[key]);
-    //}
-
-    // Lấy file từ input file
-    // const fileInput = document.getElementById('contractFileedit');
-    //if (fileInput && fileInput.files.length > 0) {
-    ////    model.append('contractFileedit', fileInput.files[0]);
-    // }
-
-    // Gửi dữ liệu lên server (thực hiện Post request tới UpdateHD)
     fetch('/HopDong/UpdateHopDong', {
         method: 'POST',
         headers: {
@@ -183,10 +164,6 @@ document.getElementById("saveedit").addEventListener("click", function (event) {
     console.log(model);
 });
 
-
-// Đóng form panel
-
-// Đóng các panel
 closePanelButton.addEventListener("click", () => {
     rightPanel.classList.remove("show");
     mainContent.classList.remove("panel-active");
@@ -199,22 +176,6 @@ document.getElementById("closePanel1").addEventListener("click", () => {
     formPanel.classList.remove("show");
     mainContent.classList.remove("panel-active");
 });
-
-//function formatDate(dateString) {
-//    console.log('dateString:', dateString);
-//    const date = new Date(dateString);
-//    if (isNaN(date.getTime())) {
-//        console.error('Không thể parse ngày:', dateString);
-//        return 'N/A'; // Trả về "N/A" nếu không parse được ngày
-//    }
-
-//    // Chuyển đổi sang định dạng yyyy-MM-dd
-//    const day = String(date.getDate()).padStart(2, '0');
-//    const month = String(date.getMonth() + 1).padStart(2, '0');
-//    const year = date.getFullYear();
-
-//    return `${year}-${month}-${day}`;
-//}
 
 // Render bảng danh sách hợp đồng
 function convertDateFromTimestamp(timestampString) {
@@ -265,7 +226,6 @@ function renderTable(data) {
         });
     }
 }
-
 function loadContract() {
     fetch('/HopDong/GetHopDong')
         .then(response => {
@@ -296,7 +256,6 @@ function loadContract() {
         .catch(error => {
             console.error("Lỗi khi lấy dữ liệu:", error);
         });
-
 }
 loadContract();
 function toggleDropdown(event) {
@@ -318,12 +277,6 @@ document.addEventListener("click", () => {
 });
 
 window.addEventListener("resize", updatePanelHeight);
-
-// Render dữ liệu khi DOM đã sẵn sàng
-//document.addEventListener("DOMContentLoaded", () => {
-//   renderTable(contract);
-//   updatePanelHeight();
-//});
 
 // Lưu dữ liệu
 document.getElementById("save").addEventListener("click", function (event) {
@@ -350,7 +303,6 @@ document.getElementById("save").addEventListener("click", function (event) {
         alert("Ngày không hợp lệ.");
         return;
     }
-
     // Lấy dữ liệu từ form
     const formData = {
         MaHopDong: maHopDong,
@@ -388,7 +340,6 @@ document.getElementById("save").addEventListener("click", function (event) {
         });
 });
 
-
 // Sự kiện xóa form
 document.getElementById("xoa").addEventListener("click", function (event) {
     event.preventDefault();
@@ -406,7 +357,6 @@ function resetForm() {
 
     contractFileInput.value = '';
 }
-
 // Hàm cập nhật các tùy chọn (options) cho select trong hợp đồng
 function updateSelectOptions(selectElement, data, valueField, textField) {
     selectElement.innerHTML = '';
@@ -424,7 +374,6 @@ function updateSelectOptions(selectElement, data, valueField, textField) {
         selectElement.appendChild(option);
     });
 }
-
 // Hàm chuyển đổi timestamp từ dạng `/Date(timestamp)/` sang định dạng ngày đọc được
 function convertDate(dateString) {
     const match = dateString.match(/\/Date\((\d+)\)\//); // Trích xuất timestamp
@@ -435,68 +384,12 @@ function convertDate(dateString) {
     }
     return timestampString; // Nếu không đúng định dạng, trả lại giá trị gốc
 }
-
 // Lấy tất cả các ô trong bảng chứa timestamp
 document.querySelectorAll("td").forEach(cell => {
     if (cell.textContent.includes("/Date(")) {
         cell.textContent = convertDate(cell.textContent); // Cập nhật nội dung thành ngày
     }
 });
-
-
-//function viewContractDetail(contractId) {
-//    const contract = contracts.find(c => c.contractId === contractId);
-//    if (!contract) {
-//        alert("Không tìm thấy hợp đồng.");
-//        return;
-//    }
-
-//    // Hien thi thong tin chi tiet hop dong
-//    document.getElementById('contractIdDetail').textContent = contract.contractId;
-//    document.getElementById('employeeIdDetail').textContent = contract.employeeId;
-//    document.getElementById('contractTypeDetail').textContent = contract.contractType;
-//    document.getElementById('startDateDetail').textContent = contract.startDate;
-//    document.getElementById('endDateDetail').textContent = contract.endDate;
-
-//    // Neu có file hd thi hien thi link tai ve hoac ifram( neu can)
-//    if (contract.file) {
-//        const fileLink = document.createElement('a');
-//        fileLink.href = contract.file; // dg dan toi file hd
-//        fileLink.target = '_blank';
-//        fileLink.textContent = 'Tải file hợp đồng';
-//        document.getElementById('contractDetailPanel').appendChild(fileLink);
-//    }
-
-// hien thi panel cua chi tiet hd
-//    document.getElementById('contractDetailPanel').style.display = 'block';
-//}
-
-// dong panel chi tiet
-//document.getElementById('closeDetailPanel').addEventListener('click', () => {
-//    const detailPanel = document.getElementById('detailPanel');
-//    detailPanel.classList.remove('show');
-//    mainContent.classList.remove("panel-active");
-//});
-
-
-// Ngừng sự kiện click trên menu options để không đóng dropdown
-//row.querySelector('.three-dots').addEventListener('click', (event) => {
-//   event.stopPropagation();
-//    toggleDropdown(event);
-//});
-
-//row.querySelectorAll('.dropdown-menu li a').forEach(item => {
-//    item.addEventListener('click', (event) => {
-//        event.stopPropagation();
-//    });
-//});
-
-// Khi click vào dòng hợp đồng, hiển thị chi tiết hợp đồng
-//row.addEventListener('click', function () {
-//    const maHopDong = this.getAttribute('data-mahopdong');
-//       showContractDetailPanel(maHopDong);
-//});
-
 function fetchContracts() {
     $.ajax({
         url: '/HopDong/GetHopDong',

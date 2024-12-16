@@ -25,6 +25,11 @@ namespace HumanResourceManagement.Controllers
             return View();
         }
 
+        public ActionResult ChangePass()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Login(string user, string pass)
         {

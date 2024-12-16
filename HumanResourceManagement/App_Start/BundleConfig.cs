@@ -31,6 +31,12 @@ namespace HumanResourceManagement
                        "~/Content/js/llv.js"));
             bundles.Add(new ScriptBundle("~/bundles/luong").Include(
                        "~/Content/js/luong.js"));
+            bundles.Add(new ScriptBundle("~/bundles/changepass").Include(
+                       "~/Content/js/changepass.js"));
+            bundles.Add(new ScriptBundle("~/bundles/login").Include(
+                       "~/Content/js/login.js"));
+            bundles.Add(new ScriptBundle("~/bundles/alert").Include(
+                       "~/Content/js/alert.js"));
             // Các bundle hiện có
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
