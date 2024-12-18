@@ -10,7 +10,7 @@
         container.style.transform = "translate(-50%)";
         container.style.zIndex = "9999";
         container.style.display = "flex";
-        container.style.flexDirection = "column";
+        container.style.flexDirection = "column-reverse";
         container.style.alignItems = "center";
         container.style.borderRadius = "8px";
         container.style.background = "transparent";
@@ -47,6 +47,7 @@
 
     notification.style.backgroundColor = bgColor;
     notification.style.color = textColor;
+    notification.style.position = "relative";
     notification.style.padding = "10px 20px";
     notification.style.marginBottom = "10px";
     notification.style.fontSize = "16px";
@@ -58,10 +59,10 @@
     notification.style.width = "auto";
 
     notification.innerHTML = `
-    <div>
-        ${title ? `<h4 style="margin: 0; font-size: 18px; font-weight: bold;">${title}</h4>` : ''}
+    <div style="text-align: center;">
+        ${title ? `<h4 style=" margin-bottom: 5px; font-size: 18px; font-weight: bold;  order: -1; " >${title}</h4>` : ''}
     </div>
-    <div>
+    <div style="display: flex; align-items: center; justify-content: center;">
        <i class="${iconClass}" style="font-size: 20px; color: ${iconColor};"></i>
        <span>${message}</span>
     </div>
@@ -84,7 +85,7 @@
 
 
             if (container.children.length === 0) {
-                container.remove();
+                container.removeChild(notification);
             }
         }, 500);
     }, duration);

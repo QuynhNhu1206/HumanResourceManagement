@@ -29,6 +29,13 @@ namespace HumanResourceManagement.Controllers
         {
             return View();
         }
+        public ActionResult Logout()
+        {
+            
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Login");
+        }
 
         [HttpPost]
         public ActionResult Login(string user, string pass)
@@ -223,8 +230,8 @@ namespace HumanResourceManagement.Controllers
             // Kiểm tra nếu người dùng chưa đăng nhập
             if (string.IsNullOrEmpty(username))
             {
-                ViewBag.Message = "Vui lòng đăng nhập trước khi cập nhật thông tin.";
                 return RedirectToAction("Login");
+
             }
 
             if (ModelState.IsValid)
@@ -240,15 +247,13 @@ namespace HumanResourceManagement.Controllers
 
                         if (!allowedExtensions.Contains(fileExtension))
                         {
-                            TempData["Message"] = "Vui lòng tải lên tệp hình ảnh hợp lệ.";
-                            return View(model);
+                            return Json(new { success = false, message = "Vui lòng tải lên tệp hình ảnh hợp lệ." });
                         }
 
 
                         if (uploadedImage.ContentLength > 5 * 1024 * 1024)
                         {
-                            ViewBag.Message = "Kích thước tệp hình ảnh vượt quá giới hạn cho phép (5MB).";
-                            return View(model);
+                            return Json(new { success = false, message = "Kích thước tệp hình ảnh vượt quá giới hạn cho phép (5MB)." });
                         }
 
 
@@ -338,19 +343,17 @@ namespace HumanResourceManagement.Controllers
                         cmd.ExecuteNonQuery();
                     }
 
-                    TempData["Message"] = "Cập nhật thông tin thành công";
-                    return RedirectToAction("UpdateInfo");
+                    return Json(new { success = true, message = "Cập nhật thông tin thành công"});
+                
                 }
                 catch (Exception ex)
                 {
-                    TempData["Message"] = "Lỗi khi cập nhật thông tin: " + ex.Message;
-                    return View(model);
+                    return Json(new { success = false, message = "Lỗi khi cập nhật thông tin: " + ex.Message });
                 }
             }
 
             // Nếu model không hợp lệ, trả lại form cùng thông báo lỗi
-            TempData["Message"] = "Vui lòng kiểm tra lại thông tin nhập vào.";
-            return View(model);
+            return Json(new { success = false, message = "Vui lòng kiểm tra lại thông tin nhập vào." });
         }
 
 

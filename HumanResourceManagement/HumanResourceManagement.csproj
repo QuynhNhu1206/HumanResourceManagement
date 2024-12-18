@@ -483,39 +483,6 @@
     <Content Include="Content\img\a.png" />
     <Content Include="Content\img\anhmyhome.png" />
     <Content Include="Content\img\cute.jpg" />
-    <Content Include="Content\img\EmployeeImages\109a13d7-51e2-41c2-bc42-ef246cf92f68.jpg" />
-    <Content Include="Content\img\EmployeeImages\1f63573a-6d87-4641-b0e1-77b627dfb07a.jpg" />
-    <Content Include="Content\img\EmployeeImages\2.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241210182057_cute.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241210183845_cute.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241210184804_cute.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241210191915_109a13d7-51e2-41c2-bc42-ef246cf92f68.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241210195957_♡.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241210212938_1f63573a-6d87-4641-b0e1-77b627dfb07a.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241210213330_38ce89a3-2771-4279-a32e-ae89a5e9da83.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241210214636_♡.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241210214838_♡.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241210221320_♡.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241210224247_♡.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241210224650_♡.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241210230149_1f63573a-6d87-4641-b0e1-77b627dfb07a.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241210230416_1f63573a-6d87-4641-b0e1-77b627dfb07a.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241210233523_109a13d7-51e2-41c2-bc42-ef246cf92f68.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241211004826_109a13d7-51e2-41c2-bc42-ef246cf92f68.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241211005632_cute.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241211032838_cute.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241211071857_cute.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241211105551_49993556-f51b-439e-b346-412ceeded424.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241211165248_49993556-f51b-439e-b346-412ceeded424.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241211165255_49993556-f51b-439e-b346-412ceeded424.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241212081526_1f63573a-6d87-4641-b0e1-77b627dfb07a.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241212082327_♡.jpg" />
-    <Content Include="Content\img\EmployeeImages\20241212082703_cute.jpg" />
-    <Content Include="Content\img\EmployeeImages\291e2b65-1eaa-4ca3-ae33-73a3aad3b027.jpg" />
-    <Content Include="Content\img\EmployeeImages\38ce89a3-2771-4279-a32e-ae89a5e9da83.jpg" />
-    <Content Include="Content\img\EmployeeImages\49993556-f51b-439e-b346-412ceeded424.jpg" />
-    <Content Include="Content\img\EmployeeImages\cute.jpg" />
-    <Content Include="Content\img\EmployeeImages\♡.jpg" />
     <Content Include="Content\img\Group 9.png" />
     <Content Include="Content\img\Hide.png" />
     <Content Include="Content\img\image1.png" />
@@ -599,6 +566,7 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\img\EmployeeImages\" />
     <Folder Include="Content\UploadContract\" />
   </ItemGroup>
   <ItemGroup>

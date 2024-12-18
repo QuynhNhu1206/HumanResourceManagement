@@ -2,7 +2,7 @@
 //upload ảnh
 const uploadImageInput = document.getElementById('uploadImage');
 const uploadedImage = document.getElementById('uploadedImage');
-
+const imagePathInput = document.getElementById('CurrentImagePath');
 uploadImageInput.addEventListener('change', function (event) {
     const file = event.target.files[0];
 
@@ -29,16 +29,30 @@ document.getElementById("save").addEventListener("click", function (event) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-
-                alert("Cập nhật thông tin thành công!");
+                customAlert({
+                    title: "Thông báo",
+                    message: data.message || "Cập nhật thông tin thành công!",
+                    type: "success",
+                    duration: 4000
+                });
+               
             } else {
-
-                alert(data.message || "Có lỗi xảy ra trong quá trình cập nhật.");
+                customAlert({
+                    title: "Thông báo",
+                    message: data.message || "Có lỗi xảy ra trong quá trình cập nhật.",
+                    type: "error",
+                    duration: 4000
+                });
+               
             }
         })
         .catch(error => {
-            console.error("Error:", error);
-            alert("Cập nhật thông tin thành công!.");
+            customAlert({
+                title: "Thông báo",
+                message: data.message || "Vui lòng kiểm tra lại thông tin nhập vào.",
+                type: "error",
+                duration: 4000
+            });
         });
 });
 
@@ -94,10 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-function closeAlert() {
-    var alertMessageDiv = document.getElementById('alertMessage');
-    alertMessageDiv.style.display = 'none';
-}
+
 //reset form
 document.getElementById('xoa').addEventListener('click', function (e) {
     e.preventDefault();

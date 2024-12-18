@@ -17,11 +17,19 @@ namespace HumanResourceManagement.Controllers
         {
             string userName = (string)filterContext.HttpContext.Session["User"];
 
-            if (string.IsNullOrEmpty(userName))
-            {
+            string currentAction = filterContext.ActionDescriptor.ActionName;
+            string currentController = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
 
-                return;
+            
+            var excludedActions = new List<string> { "Login", "Logout" };
+
+            if (string.IsNullOrEmpty(userName) && !excludedActions.Contains(currentAction))
+            {
+                filterContext.Result = new RedirectToRouteResult(
+                    new RouteValueDictionary(new { controller = "MyHome", action = "Login" })
+                );
             }
+
 
             string query = "SELECT HoTen FROM NhanVien WHERE TenTaiKhoan = @TenTaiKhoan";
             string userFullName = string.Empty;
